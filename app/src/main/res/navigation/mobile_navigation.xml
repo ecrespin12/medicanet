@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_entrega_medica">
+
+
+
+    <fragment
+        android:id="@+id/nav_pac_citas"
+        android:name="com.example.medicanet.ui.paciente.citas.Citas"
+        android:label="@string/datos_medicos"
+        tools:layout="@layout/fragment_pac_citas" />
+
+    <fragment
+        android:id="@+id/nav_pac_datos_medicos"
+        android:name="com.example.medicanet.ui.paciente.datosMedicos.DatosMedicos"
+        android:label="Consultas Pendientes"
+        tools:layout="@layout/fragment_pac_datos_medicos" />
+
+    <fragment
+        android:id="@+id/nav_pac_historial_medico"
+        android:name="com.example.medicanet.ui.paciente.historialMedico.HistorialMedico"
+        android:label="@string/historial_medico"
+        tools:layout="@layout/fragment_pac_historial_medico" />
+    <fragment
+        android:id="@+id/nav_pac_medicamentos"
+        android:name="com.example.medicanet.ui.paciente.medicamentos.Medicamentos"
+        android:label="@string/medicamentos_pendientes"
+        tools:layout="@layout/fragment_pac_medicamentos" />
+
+
+
+    <fragment
+        android:id="@+id/nav_doc_consultas"
+        android:name="com.example.medicanet.ui.doctor.consultas.ConsultasPendientes"
+        android:label="@string/agregar_proxima_cita"
+        tools:layout="@layout/fragment_doc_consultas_pacientes" />
+    <fragment
+        android:id="@+id/nav_doc_pacientes"
+        android:name="com.example.medicanet.ui.doctor.pacientes.Pacientes"
+        android:label="@string/agregar_detalle_de_consulta"
+        tools:layout="@layout/fragment_doc_pacientes" />
+    <fragment
+        android:id="@+id/nav_doc_programar_consultas"
+        android:name="com.example.medicanet.ui.doctor.programarConsulta.ProgramarConsulta"
+        android:label="@string/agregar_medicamentos"
+        tools:layout="@layout/fragment_doc_programar_consultas" />
+
+
+    <fragment
+        android:id="@+id/nav_far_entregar_medicamentos"
+        android:name="com.example.medicanet.ui.farmacia.EntregaMedicamentos.EntregaMedicamentos"
+        android:label="@string/consultar_paciente"
+        tools:layout="@layout/fragment_far_entrega_medicamentos" />
+    <fragment
+        android:id="@+id/nav_far_historial_entregas"
+        android:name="com.example.medicanet.ui.farmacia.HistorialEntregas.HistorialEntrega"
+        android:label="@string/iniciar_consulta"
+        tools:layout="@layout/fragment_far_historial_entrega" />
+
+
+
+
+    <fragment
+        android:id="@+id/nav_far_historial"
+        android:name="com.example.medicanet.ui.farmacia.HistorialEntregas.HistorialEntrega"
+        android:label="@string/menu_far_historial"
+        tools:layout="@layout/fragment_far_historial_entrega" />
+    <fragment
+        android:id="@+id/nav_far_leer_receta"
+        android:name="com.example.medicanet.ui.farmacia.LeerReceta.LeerReceta"
+        android:label="@string/menu_far_leer"
+        tools:layout="@layout/fragment_far_leer_receta" />
+    <fragment
+        android:id="@+id/nav_far_pendienetes_entrega"
+        android:name="com.example.medicanet.ui.farmacia.EntregaMedicamentos.EntregaMedicamentos"
+        android:label="@string/menu_far_pendientes"
+        tools:layout="@layout/fragment_far_entrega_medicamentos" />
+    <fragment
+        android:id="@+id/nav_far_listado_paciente"
+        android:name="com.example.medicanet.ui.farmacia.listadopacientes.listado_pacientes"
+        android:label="@string/menu_far_pendientes"
+        tools:layout="@layout/fragment_far_listado_pacientes" />
+
+
+
+    <fragment
+        android:id="@+id/nav_entrega_medica"
+        android:name="com.example.medicanet.ui.entregaMedicamentos.entregaM"
+        android:label="@string/menu_entrega_medicamentos"
+        tools:layout="@layout/fragment_pac_medicamentos" />
+
+
+    <fragment
+        android:id="@+id/nav_ejemplo_fecha_hora"
+        android:name="com.example.medicanet.EjemploFechaHora"
+        android:label="@string/ejemplo_fecha_y_hora"
+        tools:layout="@layout/fragment_ejm_fecha_hora" />
+
+    <fragment
+        android:id="@+id/nav_web_services"
+        android:name="com.example.medicanet.webServices.WebService"
+        android:label="Web Services"
+        tools:layout="@layout/fragment_web" />
+
+
+    <fragment
+        android:id="@+id/nav_admin_ejemplo"
+        android:name="com.example.medicanet.fragment_admin_ejemplo"
+        android:label="ejemplo"
+        tools:layout="@layout/fragment_fragment_admin_ejemplo" />
+
+
+</navigation>

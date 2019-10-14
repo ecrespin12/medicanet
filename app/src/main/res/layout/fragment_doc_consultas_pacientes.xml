@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.doctor.pacientes.Pacientes">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/iniciarConsulta_btnDocDetallesCnsulta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_borde"
+                android:text="Detalles"
+                android:textColor="#3F51B5"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/IniciarConsulta_btnAgregarCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_borde"
+                android:text="Agregar"
+                android:textColor="#FFC107"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/IniciarConsulta_btnAgregarMedicamentos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_borde"
+                android:text="@string/agregar_medicamentos"
+                android:textColor="#009605"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tev_ConsultaPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Datos Consulta"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tev_NombrePaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Brian ALberto" />
+
+        <TextView
+            android:id="@+id/tev_RecetaMedica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Receta Medica"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tev_Receta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="10 Acetaminosfen cada 4 horas" />
+
+        <TextView
+            android:id="@+id/tev_DatosConsulta2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Receta Medica"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tex_CitasMedicasProximas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="31/12/2019" />
+
+        <Button
+            android:id="@+id/IniciarConsulta_TerminarConsulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#033500"
+            android:text="Terminar Consulta"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</FrameLayout>

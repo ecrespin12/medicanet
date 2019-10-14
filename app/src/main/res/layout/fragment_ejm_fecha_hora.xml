@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/side_nav_bar"
+    tools:context=".EjemploFechaHora">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/ejemplo_btnAgregarFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="agregar fecha" />
+
+        <EditText
+            android:id="@+id/ejemplo_edtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:ems="10"
+            android:hint="FECHA"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/ejemplo_btnAgregarHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="agregar hora" />
+
+        <EditText
+            android:id="@+id/ejemplo_edtHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:ems="10"
+            android:hint="HORA"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+</FrameLayout>
