@@ -10,10 +10,10 @@
     android:padding="7dp">
 
     <ImageView
-        android:layout_gravity="end"
-        android:id="@+id/imgCerrar_doc_modal_agregar_medicamento"
+        android:id="@+id/imgCerrar_dialog_doc_agregar_cita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:background="@drawable/ic_close" />
 
     <TextView
@@ -29,14 +29,13 @@
 
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/tvTipoMedicamento_doc_modal_agregar_medicamento_consulta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitulo_doc_modal_agregar_medicamento_consulta"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="Tipo de medicamento"
-        android:layout_marginLeft="10dp"/>
+        android:text="Tipo de cita" />
 
     <LinearLayout
 
@@ -52,7 +51,7 @@
         android:orientation="vertical">
 
         <Spinner
-            android:id="@+id/spTipo_doc_modal_agregar_medicamento"
+            android:id="@+id/spTipo_dialog_doc_agregar_cita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
