@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.medicanet.R;
 
@@ -17,6 +18,7 @@ import com.example.medicanet.R;
 public class DatosMedicos extends Fragment {
 
 
+    ListView lvDatosMedicos;
     public DatosMedicos() {
         // Required empty public constructor
     }
@@ -26,7 +28,10 @@ public class DatosMedicos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pac_datos_medicos, container, false);
+        View view =  inflater.inflate(R.layout.fragment_pac_datos_medicos, container, false);
+        lvDatosMedicos = view.findViewById(R.id.lvDatosMedicos_pac);
+        return view;
+
     }
 
 }
