@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="340dp"
+    android:layout_height="450dp"
+    android:layout_gravity="center"
+    android:background="@drawable/style_modal"
+    android:padding="7dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/btnCerrar_doc_modal_agregar_detalle_consulta"
+        android:background="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/tvTitulo_doc_modal_agregar_detalle_consulta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Agregar detalle de consulta"
+        android:textColor="#1a81ad"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:id="@+id/splinearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitulo_doc_modal_agregar_detalle_consulta"
+        android:background="@drawable/boton_cuadrado_borde"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spTipo_doc_modal_agregar_detalle_consulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+
+    <EditText
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:id="@+id/edtDescripcion_doc_modal_agregar_detalle_consulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splinearlayout"
+        android:background="@drawable/boton_cuadrado_borde"
+        android:hint="Agregue una descripción"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btnGuardar_doc_modal_agregar_detalle_consulta"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/edtDescripcion_doc_modal_agregar_detalle_consulta"
+        android:clickable="true"
+        android:text="Guardar"
+        android:textSize="14dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/boton_style_modal"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>
