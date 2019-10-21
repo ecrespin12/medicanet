@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,14 +25,14 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     Button btnGuardar;
 
     public DialogAgregarMedicamentoConsulta() {
-        // Required empty public constructor
+        this.setCancelable(false);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dialog_agregar_medicamento_consulta, container, false);
+        View view = inflater.inflate(R.layout.dialog_doc_agregar_medicamento_consulta, container, false);
 
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
