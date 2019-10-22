@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="340dp"
     android:layout_height="450dp"
@@ -17,12 +18,12 @@
         android:background="@drawable/ic_close" />
 
     <TextView
-        android:layout_gravity="center"
         android:id="@+id/tvTitulo_dialog_doc_agregar_cita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Agregar medicamento"
+        android:text="@string/agregar_proxima_cita"
         android:textColor="#1a81ad"
         android:textSize="17sp"
         android:textStyle="bold" />
@@ -31,7 +32,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitulo_doc_modal_agregar_medicamento_consulta"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:gravity="left"
@@ -42,7 +42,6 @@
         android:id="@+id/splinearlayout_dialog_doc_agregar_cita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitulo_doc_modal_agregar_medicamento_consulta"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -92,20 +91,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView8"
+        <EditText
+            android:id="@+id/edtFecha_dialog_doc_agregar_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cantidad de pastillas" />
+            android:ems="10"
+            android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edtCantidadPastillas_doc_modal_agregar_medicamento"
-            android:layout_width="100dp"
+        <ImageButton
+            android:id="@+id/btnFecha_dialog_doc_agregar_cita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            app:srcCompat="@drawable/calendario" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,31 +114,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cada" />
-
         <EditText
-            android:id="@+id/edtCantidadHoras_doc_modal_agregar_medicamento"
-            android:layout_width="100dp"
+            android:id="@+id/edtHora_dialog_doc_agregar_cita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:enabled="false"
+            android:inputType="textPersonName" />
 
-        <TextView
-            android:id="@+id/textView10"
+        <ImageButton
+            android:id="@+id/btnHora_dialog_doc_agregar_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="     horas." />
+            app:srcCompat="@drawable/reloj" />
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnGuardar_doc_modal_agregar_medicamento"
+        android:id="@+id/btnGuardar_doc_modal_agregar_cita"
         android:layout_width="280dp"
         android:layout_height="30dp"
         android:layout_gravity="center"

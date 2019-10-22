@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.doctor.consultas.ConsultasPendientes">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos Pasiente"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNombre_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Brian ALberto" />
+
+        <TextView
+            android:id="@+id/tvApellidos_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Guadron Ramirez" />
+
+        <TextView
+            android:id="@+id/tev_EdadPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="22 a;os" />
+
+        <TextView
+            android:id="@+id/tvSexo_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Masculino" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos Consulta"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTipoConsulta_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="General" />
+
+        <TextView
+            android:id="@+id/tvDescripcion_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Altas fiebres" />
+
+        <TextView
+            android:id="@+id/tvFecha_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="31/12/2019" />
+
+        <Button
+            android:id="@+id/btnHistorial_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#006FA2"
+            android:text="Ver Historial Medico"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnIniciarConsulta_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#033500"
+            android:text="Iniciar Consulta"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</FrameLayout>

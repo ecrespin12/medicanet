@@ -37,7 +37,7 @@
         android:text="Tipo de detalle" />
 
     <LinearLayout
-        android:id="@+id/splinearlayout_dialog_doc_agregar_cita"
+        android:id="@+id/splinearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
