@@ -24,6 +24,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="consulta_programada">Consultas Programadas</string>
     <string name="consultas_pendientes">Consultas Pendientes</string>
+    <string name="medicamentos_entregados">Medicamentos Entregados</string>
+    <string name="pendientes_entrega">Pendientes de Entrega</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="iniciar_sesi_n">Iniciar Sesión</string>

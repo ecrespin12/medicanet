@@ -56,10 +56,7 @@
             android:id="@+id/nav_far_historial"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="@string/menu_far_historial" />
-        <item
-            android:id="@+id/nav_far_listado_paciente"
-            android:icon="@android:drawable/ic_search_category_default"
-            android:title="@string/menu_far_listado" />
+
         <item
             android:id="@+id/nav_far_pendienetes_entrega"
             android:icon="@drawable/ic_date_range_black"
@@ -93,6 +90,10 @@
             android:id="@+id/nav_admin_ejemplo"
             android:icon="@android:drawable/ic_menu_add"
             android:title="ejemplo modal" />
+        <item
+            android:icon="@mipmap/ic_launcher"
+            android:id="@id/nav_pac_citas"
+            android:title="COnsulta Pendientes"/>
 
 
     </group>
@@ -142,7 +143,7 @@
         android:visible="false">
 
         <item
-            android:id="@+id/nav_far_entregar_medicamentos"
+            android:id="@+id/nav_far_listado_paciente"
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/menu_far_entregar_medicamentos" />
         <item

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.farmacia.listadopacientes.listado_pacientes">
+    tools:context=".ui.farmacia.consultasprogramadas.consultas_programadas">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,6 +46,16 @@
                     app:maxImageSize="50dp" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#343636"
+                android:gravity="center_horizontal"
+                android:text="@string/consulta_programada"
+                android:textColor="#FFEBEE"
+                android:textColorHint="#9575CD" />
 
             <ListView
                 android:layout_width="match_parent"

@@ -98,7 +98,7 @@ public class entregaM extends Fragment {
         nombres.add("Humberto Cañas");
 
 
-        ListView Lv1 = v.findViewById(R.id.lv_pendientes_entregas);
+        ListView Lv1 = v.findViewById(R.id.lv_pendientes_entregas_pac);
 
 
         ad = new ConsultasAdapter(R.layout.consultas_programadas_design,getContext(),nombres);

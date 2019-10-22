@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.medicanet.R;
 
@@ -17,6 +18,7 @@ import com.example.medicanet.R;
 public class HistorialMedico extends Fragment {
 
 
+    ListView lvHistorialMedico;
     public HistorialMedico() {
         // Required empty public constructor
     }
@@ -25,8 +27,10 @@ public class HistorialMedico extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pac_historial_medico, container, false);
+        lvHistorialMedico = view.findViewById(R.id.lvHistorialMedico_pac);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pac_historial_medico, container, false);
+        return view;
     }
 
 }
