@@ -9,6 +9,8 @@ android {
         applicationId "com.example.medicanet"
         minSdkVersion 19
         targetSdkVersion 29
+        multiDexEnabled true
+
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -44,6 +46,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
+
+
+    //Agregando Biblioteca multidex como dependencia
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //Agregando libreria para google places
+    implementation 'com.google.android.libraries.places:places:2.0.0'
 
 }
 repositories {
