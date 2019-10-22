@@ -22,7 +22,7 @@
             android:textColorHint="#9575CD" />
 
         <ListView
-            android:id="@+id/lv_pendientes_entregas"
+            android:id="@+id/lv_pendientes_entregas_pac"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -8,13 +8,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Consultar Paciente" />
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="Consultar Paciente">
 
-    <TextView
-        android:id="@+id/texv_DatosPaciente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="historial medicos" />
+        <TextView
+            android:id="@+id/texv_DatosPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#D6D6D6"
+            android:text="HISTORIAL MEDICO"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/lvHistorialMedico_pac"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 
 </FrameLayout>

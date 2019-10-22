@@ -12,30 +12,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ems="10"
-                android:hint="@string/id_usuario"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:foregroundGravity="center_vertical"
-                android:src="@android:drawable/ic_menu_search" />
-
-        </LinearLayout>
-
         <TextView
             android:id="@+id/TextView"
             android:layout_width="match_parent"
@@ -47,7 +23,7 @@
             android:textColorHint="#9575CD" />
 
         <ListView
-            android:id="@+id/lv_pendientes_entregas"
+            android:id="@+id/lv_pendientes_entregas_pac"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

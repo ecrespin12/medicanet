@@ -90,6 +90,10 @@
             android:id="@+id/nav_admin_ejemplo"
             android:icon="@android:drawable/ic_menu_add"
             android:title="ejemplo modal" />
+        <item
+            android:icon="@mipmap/ic_launcher"
+            android:id="@id/nav_pac_citas"
+            android:title="COnsulta Pendientes"/>
 
 
     </group>
