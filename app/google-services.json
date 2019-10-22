@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "56850838782",
+    "firebase_url": "https://medicanet-7d253.firebaseio.com",
+    "project_id": "medicanet-7d253",
+    "storage_bucket": "medicanet-7d253.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56850838782:android:e8197e9a96bb4678bce1af",
+        "android_client_info": {
+          "package_name": "com.example.medicanet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56850838782-qmk0fapfq7kga8frl0qt6tep23nlhvog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxgclMlQ3w3VBRcfdOZuPsj8cbfLEAtZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56850838782-qmk0fapfq7kga8frl0qt6tep23nlhvog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
