@@ -69,4 +69,29 @@
     <string name="menu_far_historial_entregas">Historial de Entregas</string>
 
 
+    <!-- string pacientes -->
+    <string-array name="aplicaciones">
+        <item>medicanet</item>
+        <item>medicanet</item>
+        <item>medicanet</item>
+        <item>medicanet</item>
+        <item>medicanet</item>
+    </string-array>
+
+    <string-array name="iconos">
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+    </string-array>
+    <string-array name="descripciones">
+        <item>Descripcion</item>
+        <item>Descripcion</item>
+        <item>Descripcion</item>
+        <item>Descripcion</item>
+        <item>Descripcion</item>
+    </string-array>
+
+
 </resources>
