@@ -1,25 +1,27 @@
-package com.example.medicanet.ui.farmacia.listadopacientes;
+package com.example.medicanet.ui.farmacia.consultasprogramadas;
+
 
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.medicanet.R;
+import com.example.medicanet.ui.farmacia.PendientesDeEntrega.PendientesDeEntrega;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link listado_pacientes.OnFragmentInteractionListener} interface
+ * {@link consultas_programadas.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link listado_pacientes#newInstance} factory method to
+ * Use the {@link consultas_programadas#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class listado_pacientes extends Fragment {
+
+public class consultas_programadas extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,10 +30,10 @@ public class listado_pacientes extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    PendientesDeEntrega Entrega = new PendientesDeEntrega();
     private OnFragmentInteractionListener mListener;
 
-    public listado_pacientes() {
+    public consultas_programadas() {
         // Required empty public constructor
     }
 
@@ -41,11 +43,11 @@ public class listado_pacientes extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment listado_pacientes.
+     * @return A new instance of fragment consultas_programadas.
      */
     // TODO: Rename and change types and number of parameters
-    public static listado_pacientes newInstance(String param1, String param2) {
-        listado_pacientes fragment = new listado_pacientes();
+    public static consultas_programadas newInstance(String param1, String param2) {
+        consultas_programadas fragment = new consultas_programadas();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,7 +68,7 @@ public class listado_pacientes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_far_listado_pacientes, container, false);
+        return inflater.inflate(R.layout.fragment_far_consultas_programadas, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

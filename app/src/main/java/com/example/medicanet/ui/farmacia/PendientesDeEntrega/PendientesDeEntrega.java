@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.farmacia.HistorialEntregas;
+package com.example.medicanet.ui.farmacia.PendientesDeEntrega;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.example.medicanet.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistorialEntrega extends Fragment {
+public class PendientesDeEntrega extends Fragment {
 
 
-    public HistorialEntrega() {
+    public PendientesDeEntrega() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class HistorialEntrega extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_far_historial_entrega, container, false);
+        return inflater.inflate(R.layout.fragment_far_entrega_medicamentos, container, false);
     }
 
 }

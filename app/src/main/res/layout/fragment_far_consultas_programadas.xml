@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.farmacia.HistorialEntregas.HistorialEntregas">
-
+    tools:context=".ui.farmacia.consultasprogramadas.consultas_programadas">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,58 +41,19 @@
                     android:background="@android:drawable/btn_plus"
                     android:clickable="true"
                     android:src="@android:drawable/ic_menu_search"
-                    app:backgroundTint="@color/design_default_color_primary"
-                    app:maxImageSize="40dp" />
+                    app:backgroundTint="@android:color/holo_blue_dark"
+                    app:fabSize="normal"
+                    app:maxImageSize="50dp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/edt_far_medicamentos_entregados_fecha1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="mm/dd/aaaa"
-                    android:inputType="textPersonName" />
-
-                <ImageButton
-                    android:id="@+id/imgb_far_medicamentos_entregados_fecha1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.40"
-                    android:src="@android:drawable/ic_menu_my_calendar" />
-
-                <EditText
-                    android:id="@+id/edt_far_medicamentos_entregados_fecha2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="mm/dd/aaaa"
-                    android:inputType="textPersonName" />
-
-                <ImageButton
-                    android:id="@+id/imgb_far_medicamentos_entregados_fecha2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.40"
-                    android:src="@android:drawable/ic_menu_my_calendar" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#343636"
                 android:gravity="center_horizontal"
-                android:text="@string/medicamentos_entregados"
+                android:text="@string/consulta_programada"
                 android:textColor="#FFEBEE"
                 android:textColorHint="#9575CD" />
 
