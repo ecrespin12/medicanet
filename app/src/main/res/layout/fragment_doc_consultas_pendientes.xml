@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/ConsultarPaciente_edtBuscar"
+                android:id="@+id/edtIdUsuario_fragment_doc_consultas_pendientes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -26,6 +26,7 @@
                 android:inputType="textPersonName" />
 
             <Button
+                android:id="@+id/btnBuscar_fragment_doc_consultas_pendientes"
                 android:layout_width="4dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -38,19 +39,22 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/ConsultarPaciente_tevEncabezado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="#9ECCCCCC"
-            android:text="@string/docConsultarPaciente_encabezado"
+            android:text="Consultas"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/lv_pendientes_entregas_pac"
+
+            android:id="@+id/lvConsultas_fragment_doc_consultas_pendientes"
+
+            //android:id="@+id/lv_pendientes_entregas_pac"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
