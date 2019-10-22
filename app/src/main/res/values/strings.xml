@@ -92,6 +92,7 @@
         <item>Descripcion</item>
         <item>Descripcion</item>
     </string-array>
+    <string name="title_activity_mapa">Mapa</string>
 
 
 </resources>
