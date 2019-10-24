@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -9,14 +8,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/side_nav_bar"
+        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/boton_borde"
+            android:background="@drawable/boton_redondeado_borde"
             android:orientation="vertical">
 
             <fragment
@@ -42,9 +41,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_redondeado4"
+                    android:background="@drawable/boton_redondeado_borde"
                     android:onClick="setBtnTerreno"
                     android:text="Terreno"
+                    android:textColor="#868686"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -54,9 +54,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_redondeado1"
+                    android:background="@drawable/boton_redondeado_borde"
                     android:onClick="setBtnHibrido"
                     android:text="Híbrido"
+                    android:textColor="#868686"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -66,9 +67,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_redondeado3"
+                    android:background="@drawable/boton_redondeado_borde"
                     android:onClick="setBtnSatelite"
                     android:text="Satelite"
+                    android:textColor="#868686"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -78,9 +80,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/boton_redondeado2"
+                    android:background="@drawable/boton_redondeado_borde"
                     android:onClick="setBtnNormal"
                     android:text="Normal"
+                    android:textColor="#868686"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </LinearLayout>

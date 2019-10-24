@@ -49,10 +49,10 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.places);
         mapFragment.getMapAsync(this);
 
-        btnHibrido.setBackgroundResource(R.drawable.boton_redondeado1);
-        btnNormal.setBackgroundResource(R.drawable.boton_redondeado2);
-        btnSatelite.setBackgroundResource(R.drawable.boton_redondeado3);
-        btnTerreno.setBackgroundResource(R.drawable.boton_redondeado4);
+        btnHibrido.setBackgroundResource(R.drawable.boton_redondeado_borde);
+        btnNormal.setBackgroundResource(R.drawable.boton_redondeado_borde);
+        btnSatelite.setBackgroundResource(R.drawable.boton_redondeado_borde);
+        btnTerreno.setBackgroundResource(R.drawable.boton_redondeado_borde);//aqui voy
 
         //INICIO CODIGO DE PLACES
         /**
@@ -93,11 +93,11 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
     }
 
     public void setBtnHibrido(View view){
-        btnHibrido.setBackgroundResource(R.drawable.boton_presionado);
+        btnHibrido.setBackgroundResource(R.drawable.boton_redondeado);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                btnHibrido.setBackgroundResource(R.drawable.boton_redondeado1);
+                btnHibrido.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             }
         },100);
@@ -105,11 +105,11 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
     }
 
     public void setBtnNormal(View view){
-        btnNormal.setBackgroundResource(R.drawable.boton_presionado);
+        btnNormal.setBackgroundResource(R.drawable.boton_redondeado);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                btnNormal.setBackgroundResource(R.drawable.boton_redondeado2);
+                btnNormal.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             }
         },100);
@@ -117,22 +117,22 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
     }
     public void setBtnSatelite(View view){
 
-        btnSatelite.setBackgroundResource(R.drawable.boton_presionado);
+        btnSatelite.setBackgroundResource(R.drawable.boton_redondeado);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                btnSatelite.setBackgroundResource(R.drawable.boton_redondeado3);
+                btnSatelite.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             }
         },100);
 
     }
     public void setBtnTerreno(View view){
-        btnTerreno.setBackgroundResource(R.drawable.boton_presionado);
+        btnTerreno.setBackgroundResource(R.drawable.boton_redondeado);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                btnTerreno.setBackgroundResource(R.drawable.boton_redondeado4);
+                btnTerreno.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
             }
         },100);
