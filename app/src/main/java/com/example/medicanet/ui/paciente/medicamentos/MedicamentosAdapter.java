@@ -6,20 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.example.medicanet.R;
-
 import java.util.List;
-
-import clasesResponse.HistorialModel;
+import clasesResponse.MedicamentosModel;
 
 public class MedicamentosAdapter extends BaseAdapter {
     private Context context;
-    private List<HistorialModel> list;
+    private List<MedicamentosModel> list;
     TextView txtNom;
     TextView txtDes;
 
-    public MedicamentosAdapter(Context contexto,List<HistorialModel> lista){
+    public MedicamentosAdapter(Context contexto,List<MedicamentosModel> lista){
         this.list = lista;
         this.context = contexto;
     }
@@ -52,8 +49,8 @@ public class MedicamentosAdapter extends BaseAdapter {
         txtNom = item.findViewById(R.id.tvNombreItem);
         txtDes = item.findViewById(R.id.tvDescripcionItem);
 
-        txtNom.setText(list.get(position).thm_nombre);
-        txtDes.setText(list.get(position).hem_descripcion);
+        txtNom.setText(list.get(position).mdc_nombre);
+        txtDes.setText(list.get(position).mdc_descripcion);
 
         return item;
     }
