@@ -6,12 +6,17 @@
         android:orderInCategory="100"
         android:title="Ajustes"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_search"
-        android:orderInCategory="200"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Buscar"
-        app:showAsAction="ifRoom" />
+    <group
+        android:id="@+id/grupo_item_mapa">
+        <item
+            android:id="@+id/action_search"
+            android:visible="true"
+            android:icon="@drawable/map"
+            android:orderInCategory="200"
+            android:title="Buscar"
+            app:showAsAction="ifRoom" />
+    </group>
+
     <item
         android:id="@+id/action_agregar"
         android:orderInCategory="300"

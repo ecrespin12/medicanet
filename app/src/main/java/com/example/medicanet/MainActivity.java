@@ -1,5 +1,6 @@
 package com.example.medicanet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.medicanet.ui.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -106,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Saliendo...",Toast.LENGTH_SHORT).show();
             finishAffinity();
         }else if(id==R.id.action_search){
-            Toast.makeText(getApplicationContext(),"Buscando...",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Abriendo mapa...",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), Places.class);
+            startActivity(i);
         } else if(id==R.id.action_agregar){
             Toast.makeText(getApplicationContext(),"Agregando...",Toast.LENGTH_SHORT).show();
         } else if(id==R.id.action_editar){
