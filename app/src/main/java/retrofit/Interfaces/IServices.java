@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+import clasesResponse.HistorialModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import clasesResponse.clVersion;
@@ -23,5 +24,9 @@ public interface IServices {
     @GET("version_api.php?")
     @NotNull
     Call<clItems> getConsultaVersion(@Query("id") @NotNull String id);
+
+    @GET("Historial/historial?")
+    @NotNull
+    Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
 
 }

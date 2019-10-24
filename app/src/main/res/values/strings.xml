@@ -94,5 +94,6 @@
     </string-array>
     <string name="title_activity_mapa">Mapa</string>
 
-
+    <!-- string WS -->
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IkhlbGxvIFdvcmxkISI.VzXeVJOGwyr_R_lWTM2VW1i7B24XlnxiPURkg4YxrWg</string>
 </resources>
