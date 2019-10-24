@@ -16,6 +16,7 @@ public class HistorialAdapter extends BaseAdapter {
     private List<HistorialModel> list;
     TextView txtNom;
     TextView txtDes;
+    TextView comoSea;
 
     public HistorialAdapter(Context contexto,List<HistorialModel> lista){
         this.list = lista;
@@ -43,15 +44,19 @@ public class HistorialAdapter extends BaseAdapter {
         if (convertView == null){
             LayoutInflater inflater =  (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             item = new View(context);
-            item = inflater.inflate(R.layout.item_de_listview, null);
+            item = inflater.inflate(R.layout.item_historial_medico, null);
         }else
             item = convertView;
 
-        txtNom = item.findViewById(R.id.tvNombreItem);
-        txtDes = item.findViewById(R.id.tvDescripcionItem);
+        txtNom = item.findViewById(R.id.textView12);
+        txtDes = item.findViewById(R.id.textView13);
+        comoSea = item.findViewById(R.id.textView14);
 
-        txtNom.setText(list.get(position).thm_nombre);
-        txtDes.setText(list.get(position).hem_descripcion);
+
+
+        txtNom.setText("Codigo: " +list.get(position).hme_codigo);
+        txtDes.setText("Descripcion: " +list.get(position).hme_descripcion);
+        comoSea.setText("Nombre: " +list.get(position).thm_nombre);
 
         return item;
     }
