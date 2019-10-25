@@ -34,7 +34,7 @@
                 android:background="@drawable/boton_redondeado_borde"
                 android:clickable="true"
                 android:text="@string/docConsultarPaciente_btnBuscar"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
         </LinearLayout>
 
