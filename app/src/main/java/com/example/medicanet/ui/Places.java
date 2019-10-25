@@ -52,7 +52,7 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
         btnHibrido.setBackgroundResource(R.drawable.boton_redondeado_borde);
         btnNormal.setBackgroundResource(R.drawable.boton_redondeado_borde);
         btnSatelite.setBackgroundResource(R.drawable.boton_redondeado_borde);
-        btnTerreno.setBackgroundResource(R.drawable.boton_redondeado_borde);//aqui voy
+        btnTerreno.setBackgroundResource(R.drawable.boton_redondeado_borde);
 
         //INICIO CODIGO DE PLACES
         /**
