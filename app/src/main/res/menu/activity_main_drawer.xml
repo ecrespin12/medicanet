@@ -4,104 +4,17 @@
     tools:showIn="navigation_view">
 
     <group
-        android:id="@+id/group_user"
-        android:visible="false">
-        <item
-            android:id="@+id/nav_consultas_pendientes"
-            android:icon="@android:drawable/ic_dialog_alert"
-            android:title="@string/consultas_pendientes" />
-        <item
-            android:id="@+id/nav_datos_medicos"
-
-            android:icon="@drawable/ic_account_circle_black"
-            android:title="@string/datos_medicos" />
-
-        <item
-            android:id="@+id/nav_historial_medico"
-
-            android:icon="@drawable/ic_date_range_black"
-            android:title="@string/historial_medico" />
-        <item
-            android:id="@+id/nav_medicamentos_pendientes"
-
-            android:icon="@android:drawable/ic_dialog_alert"
-            android:title="@string/medicamentos_pendientes" />
-        <item
-            android:id="@+id/nav_agregar_cita_proxima"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/agregar_proxima_cita" />
-        <item
-            android:id="@+id/nav_agregar_detalle_consulta"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/agregar_detalle_de_consulta" />
-        <item
-            android:id="@+id/nav_agregar_medicamentos"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/agregar_medicamentos" />
-        <item
-            android:id="@+id/nav_consultar_paciente"
-            android:icon="@android:drawable/ic_menu_search"
-            android:title="@string/consultar_paciente" />
-        <item
-            android:id="@+id/nav_iniciar_consulta"
-            android:icon="@android:drawable/ic_input_add"
-            android:title="@string/iniciar_consulta" />
-        <item
-            android:id="@+id/nav_programar_consulta"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/programar_consulta" />
-
-
-        <item
-            android:id="@+id/nav_far_historial"
-            android:icon="@android:drawable/ic_menu_agenda"
-            android:title="@string/menu_far_historial" />
-
-        <item
-            android:id="@+id/nav_far_pendienetes_entrega"
-            android:icon="@drawable/ic_date_range_black"
-            android:title="@string/menu_far_pendientes" />
-        <item
-            android:id="@+id/nav_far_leer_receta"
-            android:icon="@android:drawable/alert_dark_frame"
-            android:title="@string/menu_far_leer" />
-
-
-
-        <item
-            android:id="@+id/nav_entrega_medica"
-            android:icon="@drawable/ic_account_circle_black"
-            android:title="@string/menu_entrega_medicamentos" />
-
-        <item
-            android:id="@+id/nav_ejemplo_fecha_hora"
-            android:title="@string/ejemplo_fecha_y_hora" />
-        <item
-            android:id="@+id/nav_web_services"
-            android:title="Web Services" />
-
-    </group>
-
-    <group
         android:id="@+id/group_admin"
         android:visible="false">
-
         <item
             android:id="@+id/nav_admin_ejemplo"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="ejemplo modal" />
-        <item
-            android:icon="@mipmap/ic_launcher"
-            android:id="@id/nav_pac_citas"
-            android:title="COnsulta Pendientes"/>
-
-
+            android:title="Ejemplo de modal" />
     </group>
 
     <group
         android:id="@+id/group_doctor"
         android:visible="false">
-
         <item
             android:id="@+id/nav_doc_consultas"
             android:icon="@android:drawable/ic_menu_add"
@@ -119,7 +32,6 @@
     <group
         android:id="@+id/group_paciente"
         android:visible="false">
-
         <item
             android:id="@+id/nav_pac_citas"
             android:icon="@android:drawable/ic_menu_add"
@@ -141,7 +53,6 @@
     <group
         android:id="@+id/group_farmacia"
         android:visible="false">
-
         <item
             android:id="@+id/nav_far_listado_paciente"
             android:icon="@android:drawable/ic_menu_add"
@@ -151,11 +62,5 @@
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/menu_far_historial_entregas" />
     </group>
-
-    <item android:title="Más">
-        <menu>
-
-        </menu>
-    </item>
 
 </menu>

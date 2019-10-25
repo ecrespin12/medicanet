@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.medicanet.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class PendientesDeEntrega extends Fragment {
 
 

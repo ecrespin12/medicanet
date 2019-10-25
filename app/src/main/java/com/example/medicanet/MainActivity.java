@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         String user = getIntent().getExtras().getString("user");
 
-        if(user.equals("doctor")){
+        if(user.equals("d")){
             navigationView.getMenu().setGroupVisible(R.id.group_doctor, true);
-        }else if(user.equals("farmacia")){
+        }else if(user.equals("f")){
             navigationView.getMenu().setGroupVisible(R.id.group_farmacia, true);
-        }else if(user.equals("paciente")){
+        }else if(user.equals("p")){
             navigationView.getMenu().setGroupVisible(R.id.group_paciente, true);
         }else {
 
@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-
-                R.id.nav_entrega_medica,
 
                 R.id.nav_pac_citas,
                 R.id.nav_pac_datos_medicos,
@@ -75,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_far_entregar_medicamentos,
                 R.id.nav_far_historial_entregas,
 
-                R.id.nav_admin_ejemplo,
-                R.id.nav_web_services)
+                R.id.nav_admin_ejemplo)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
