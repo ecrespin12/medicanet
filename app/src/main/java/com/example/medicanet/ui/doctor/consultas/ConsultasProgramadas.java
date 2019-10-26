@@ -18,20 +18,24 @@ import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.datosPaciente.DatosPaciente;
 
-public class ConsultasPendientes extends Fragment {
+public class ConsultasProgramadas extends Fragment {
 
     public static String keyImg="img";
     public static String keyNombre="nombre";
     public static String keyDescripcion="descripcion";
 
+
+
+    ListView lvLista;
+    AdaptadorGeneral adaptadorGeneral;
+
+    TypedArray imagenes;
     String [] nombres;
     String [] descripciones;
-    TypedArray imagenes;
-    Adaptador adaptador;
-    ListView lvLista;
+
     Button btnBuscar;
 
-    public ConsultasPendientes() {
+    public ConsultasProgramadas() {
         // Required empty public constructor
     }
 
@@ -39,37 +43,20 @@ public class ConsultasPendientes extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doc_consultas_pendientes, container, false);
+        View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
 
         //Codigo
-        btnBuscar=view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
+
         lvLista=view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
 
-        btnBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnBuscar.setBackgroundResource(R.drawable.boton_redondeado);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnBuscar.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        Toast.makeText(getContext(),"buscando",Toast.LENGTH_SHORT).show();
-                    }
-                },100);
-            }
-        });
+        imagenes=getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
+        nombres=getResources().getStringArray(R.array.campo1_item_list_ejemplo);
+        descripciones=getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
-        nombres=getResources().getStringArray(R.array.aplicaciones);
-        descripciones=getResources().getStringArray(R.array.descripciones);
-        imagenes=getResources().obtainTypedArray(R.array.iconos);
+        adaptadorGeneral = new AdaptadorGeneral(getContext(),imagenes,nombres,descripciones,null,null);
+        lvLista.setAdapter(adaptadorGeneral);
 
-
-        adaptador=new Adaptador(getContext(),nombres,descripciones,imagenes);
-
-
-        lvLista.setAdapter(adaptador);
-
-        final DatosPaciente detalle=new DatosPaciente();
+        final DatosPaciente datosPaciente=new DatosPaciente();
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,15 +69,30 @@ public class ConsultasPendientes extends Fragment {
                 paqueteDeDatos.putString(keyDescripcion,descripciones[position]);
 
                 //Agregamos los argumentos al fragmento
-                detalle.setArguments(paqueteDeDatos);
+                datosPaciente.setArguments(paqueteDeDatos);
 
                 // Crea el nuevo fragmento y la transacción.
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, detalle);
+                transaction.replace(R.id.nav_host_fragment, datosPaciente);
                 transaction.addToBackStack(null);
 
                 // Commit a la transacción
                 transaction.commit();
+            }
+        });
+
+        btnBuscar=view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnBuscar.setBackgroundResource(R.drawable.boton_redondeado);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnBuscar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        Toast.makeText(getContext(),"buscando",Toast.LENGTH_SHORT).show();
+                    }
+                },100);
             }
         });
         //fin codigo agregado

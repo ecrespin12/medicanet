@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_pac_historial_medico,
                 R.id.nav_pac_medicamentos,
 
-                R.id.nav_doc_consultas,
+                R.id.nav_doc_consultas_programadas,
                 R.id.nav_doc_pacientes,
                 R.id.nav_doc_programar_consultas,
 

@@ -16,9 +16,9 @@
         android:id="@+id/group_doctor"
         android:visible="false">
         <item
-            android:id="@+id/nav_doc_consultas"
+            android:id="@+id/nav_doc_consultas_programadas"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/menu_doc_consultas" />
+            android:title="Consultas programadas" />
         <item
             android:id="@+id/nav_doc_pacientes"
             android:icon="@android:drawable/ic_menu_add"

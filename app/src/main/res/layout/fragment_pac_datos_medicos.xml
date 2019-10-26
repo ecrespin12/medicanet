@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.doctor.consultas.ConsultasPendientes">
+    tools:context=".ui.paciente.datosMedicos.DatosMedicos">
 
     <LinearLayout
         android:layout_width="match_parent"

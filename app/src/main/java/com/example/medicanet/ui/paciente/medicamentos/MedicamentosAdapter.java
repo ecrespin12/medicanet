@@ -42,12 +42,12 @@ public class MedicamentosAdapter extends BaseAdapter {
         if (convertView == null){
             LayoutInflater inflater =  (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             item = new View(context);
-            item = inflater.inflate(R.layout.item_de_listview, null);
+            item = inflater.inflate(R.layout.item_list_adaptador_general, null);
         }else
             item = convertView;
 
-        txtNom = item.findViewById(R.id.tvNombreItem);
-        txtDes = item.findViewById(R.id.tvDescripcionItem);
+        txtNom = item.findViewById(R.id.tvCampo1_item_de_lista);
+        txtDes = item.findViewById(R.id.tvCampo2_item_de_lista);
 
         txtNom.setText(list.get(position).mdc_nombre);
         txtDes.setText(list.get(position).mdc_descripcion);

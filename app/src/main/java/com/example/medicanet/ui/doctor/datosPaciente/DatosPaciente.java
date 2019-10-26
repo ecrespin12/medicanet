@@ -1,6 +1,5 @@
 package com.example.medicanet.ui.doctor.datosPaciente;
 
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +22,6 @@ public class DatosPaciente extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,11 +43,11 @@ public class DatosPaciente extends Fragment {
             @Override
             public void onClick(View view) {
 
-                final Consulta detalle=new Consulta();
+                final Consulta consulta=new Consulta();
 
                 // Crea el nuevo fragmento y la transacción.
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, detalle);
+                transaction.replace(R.id.nav_host_fragment, consulta);
                 transaction.addToBackStack(null);
 
                 // Commit a la transacción

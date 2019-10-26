@@ -44,7 +44,7 @@
     <string name="programar_consulta">Programar Consulta</string>
     <string name="ejemplo_fecha_y_hora">Ejemplo Fecha y Hora</string>
     <string name="docConsultarPaciente_encabezado">Consultar Programadas</string>
-    <string name="docConsultarPaciente_edtBuscar">ID Usuario</string>
+    <string name="docConsultarPaciente_edtBuscar">Código de paciente</string>
     <string name="docConsultarPaciente_btnBuscar">Buscar</string>
     <string name="docConsultarDatosPaciente_encabezado">Datos Del Pasiente</string>
     <string name="text_prueba_1">Prueba WS 1</string>
@@ -69,29 +69,63 @@
     <string name="menu_far_historial_entregas">Historial de Entregas</string>
 
 
-    <!-- string pacientes -->
-    <string-array name="aplicaciones">
-        <item>medicanet</item>
-        <item>medicanet</item>
-        <item>medicanet</item>
-        <item>medicanet</item>
-        <item>medicanet</item>
+    <string-array name="img_item_list_ejemplo">
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
+        <item>@drawable/medicanet1</item>
     </string-array>
 
-    <string-array name="iconos">
-        <item>@drawable/medicanet1</item>
-        <item>@drawable/medicanet1</item>
-        <item>@drawable/medicanet1</item>
-        <item>@drawable/medicanet1</item>
-        <item>@drawable/medicanet1</item>
+    <string-array name="campo1_item_list_ejemplo">
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
+        <item>Código consulta</item>
     </string-array>
-    <string-array name="descripciones">
-        <item>Descripcion</item>
-        <item>Descripcion</item>
-        <item>Descripcion</item>
-        <item>Descripcion</item>
-        <item>Descripcion</item>
+
+    <string-array name="campo2_item_list_ejemplo">
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
+        <item>Nombre pasiente</item>
     </string-array>
+
+    <string-array name="campo3_item_list_ejemplo">
+        <item>Campo 3</item>
+        <item>Campo 3</item>
+        <item>Campo 3</item>
+        <item>Campo 3</item>
+        <item>Campo 3</item>
+    </string-array>
+
+    <string-array name="campo4_item_list_ejemplo">
+        <item>Campo 4</item>
+        <item>Campo 4</item>
+        <item>Campo 4</item>
+        <item>Campo 4</item>
+        <item>Campo 4</item>
+    </string-array>
+
+
+
     <string name="title_activity_mapa">Mapa</string>
     <string name="title_activity_places">Places</string>
 
