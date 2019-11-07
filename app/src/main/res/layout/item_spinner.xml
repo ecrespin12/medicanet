@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/img_item_spinner"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             app:srcCompat="@mipmap/ic_launcher" />
 
