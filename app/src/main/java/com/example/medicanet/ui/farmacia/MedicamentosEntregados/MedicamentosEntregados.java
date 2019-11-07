@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.medicanet.R;
-import com.example.medicanet.metodos.MetodosDavid;
+import com.example.medicanet.metodos.Metodos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,13 +41,13 @@ private ImageButton imgB1, imgB2;
         imgB1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MetodosDavid.fecha(getContext(), edt1);
+                Metodos.fecha(getContext(), edt1);
             }
         });
         imgB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MetodosDavid.fecha(getContext(), edt2);
+                Metodos.fecha(getContext(), edt2);
             }
         });
         // Inflate the layout for this fragment

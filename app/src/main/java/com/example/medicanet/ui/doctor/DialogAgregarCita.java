@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
-import com.example.medicanet.metodos.MetodosDavid;
+import com.example.medicanet.metodos.Metodos;
 
 public class DialogAgregarCita extends DialogFragment {
 
@@ -72,14 +72,14 @@ public class DialogAgregarCita extends DialogFragment {
         btnFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MetodosDavid.fecha(getContext(),edtFecha);
+                Metodos.fecha(getContext(),edtFecha);
             }
         });
 
         btnHora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MetodosDavid.hora(getContext(),edtHora);
+                Metodos.hora(getContext(),edtHora);
             }
         });
 

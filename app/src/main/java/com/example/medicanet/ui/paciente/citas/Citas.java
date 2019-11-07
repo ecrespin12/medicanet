@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.medicanet.R;
-import com.example.medicanet.metodos.MetodosDavid;
+import com.example.medicanet.metodos.Metodos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,14 +43,14 @@ public class Citas extends Fragment  {
 
             @Override
             public void onClick(View view) {
-                MetodosDavid.fecha(getContext(), fechaI);
+                Metodos.fecha(getContext(), fechaI);
             }
         });
 
         obtenetFechaF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MetodosDavid.fecha(getContext(), fechaF);
+                Metodos.fecha(getContext(), fechaF);
             }
         });
 

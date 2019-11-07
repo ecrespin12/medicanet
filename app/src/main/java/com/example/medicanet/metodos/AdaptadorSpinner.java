@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor.consultas;
+package com.example.medicanet.metodos;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.example.medicanet.R;
 
-public class AdaptadorGeneral extends ArrayAdapter {
+public class AdaptadorSpinner extends ArrayAdapter {
+
     public Context contexto;
     public TypedArray imagenes;
     public String [] vectorCampo1;
@@ -28,14 +29,17 @@ public class AdaptadorGeneral extends ArrayAdapter {
     TextView tvCampo3;
     TextView tvCampo4;
 
-    public AdaptadorGeneral(@NonNull Context context,
+    View view;
+
+    public AdaptadorSpinner(@NonNull Context context,
                             TypedArray imagenes,
+
                             String [] vectorCampo1,
                             String [] vectorCampo2,
                             String [] vectorCampo3,
                             String [] vectorCampo4) {
 
-        super(context, R.layout.item_list_adaptador_general,vectorCampo1);
+        super(context, R.layout.item_spinner,vectorCampo1);
 
         this.contexto=context;
         this.imagenes=imagenes;
@@ -45,19 +49,17 @@ public class AdaptadorGeneral extends ArrayAdapter {
         this.vectorCampo4=vectorCampo4;
     }
 
-    View view;
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflar = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflar.inflate(R.layout.item_list_adaptador_general,parent,false);
+        view = inflar.inflate(R.layout.item_spinner,parent,false);
         //enlazando vistas
-        imagen=view.findViewById(R.id.img_item_de_lista);
-        tvCampo1=view.findViewById(R.id.tvCampo1_item_de_lista);
-        tvCampo2=view.findViewById(R.id.tvCampo2_item_de_lista);
-        tvCampo3=view.findViewById(R.id.tvCampo3_item_de_lista);
-        tvCampo4=view.findViewById(R.id.tvCampo4_item_de_lista);
+        imagen=view.findViewById(R.id.img_item_spinner);
+        tvCampo1=view.findViewById(R.id.tvCampo1_item_spinner);
+        tvCampo2=view.findViewById(R.id.tvCampo2_item_spinner);
+        tvCampo3=view.findViewById(R.id.tvCampo3_item_spinner);
+        tvCampo4=view.findViewById(R.id.tvCampo4_item_spinner);
 
         //seteando vistas
         if (imagenes==null){
@@ -98,4 +100,3 @@ public class AdaptadorGeneral extends ArrayAdapter {
         return view;
     }
 }
-

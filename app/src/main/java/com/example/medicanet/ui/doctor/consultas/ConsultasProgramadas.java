@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
+import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.ui.doctor.datosPaciente.DatosPaciente;
 
 public class ConsultasProgramadas extends Fragment {
@@ -27,7 +28,7 @@ public class ConsultasProgramadas extends Fragment {
 
 
     ListView lvLista;
-    AdaptadorGeneral adaptadorGeneral;
+    AdaptadorListView adaptadorListView;
 
     TypedArray imagenes;
     String [] nombres;
@@ -53,8 +54,8 @@ public class ConsultasProgramadas extends Fragment {
         nombres=getResources().getStringArray(R.array.campo1_item_list_ejemplo);
         descripciones=getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
-        adaptadorGeneral = new AdaptadorGeneral(getContext(),imagenes,nombres,descripciones,null,null);
-        lvLista.setAdapter(adaptadorGeneral);
+        adaptadorListView = new AdaptadorListView(getContext(),imagenes,nombres,descripciones,null,null);
+        lvLista.setAdapter(adaptadorListView);
 
         final DatosPaciente datosPaciente=new DatosPaciente();
 

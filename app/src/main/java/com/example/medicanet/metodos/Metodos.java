@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MetodosDavid {
+public class Metodos {
     public static void fecha(final Context context, final EditText edt){
         int dia,mes, anio;
         String fecha="";
