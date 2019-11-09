@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+import clasesResponse.ConsultaModel;
 import clasesResponse.HistorialModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
@@ -28,5 +29,8 @@ public interface IServices {
     @GET("Historial/historial?")
     @NotNull
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
+
+    @GET("Consulta/consulta?")
+    Call<List<ConsultaModel>> getConsultas(@Query("per") int per, @Query("per") int doc, @Query("per") int cod);
 
 }

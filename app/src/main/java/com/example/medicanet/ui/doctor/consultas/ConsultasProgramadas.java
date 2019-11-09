@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +19,34 @@ import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.ui.doctor.datosPaciente.DatosPaciente;
+import com.example.medicanet.ui.paciente.historialMedico.HistorialAdapter;
+
+import java.text.DateFormat;
+import java.util.List;
+
+import clasesResponse.ConsultaModel;
+import clasesResponse.HistorialModel;
+import retrofit.Interfaces.IServices;
+import retrofit.RetrofitClientInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConsultasProgramadas extends Fragment {
 
-    public static String keyImg="img";
-    public static String keyNombre="nombre";
-    public static String keyDescripcion="descripcion";
+    public static String keyImg = "img";
+    public static String keyNombre = "nombre";
+    public static String keyDescripcion = "descripcion";
 
-
+    RetrofitClientInstance ret = new RetrofitClientInstance();
+    private IServices servicio;
 
     ListView lvLista;
     AdaptadorListView adaptadorListView;
 
     TypedArray imagenes;
-    String [] nombres;
-    String [] descripciones;
+    String[] nombres;
+    String[] descripciones;
 
     Button btnBuscar;
 
@@ -45,19 +59,20 @@ public class ConsultasProgramadas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
+        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
 
         //Codigo
 
-        lvLista=view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
+        lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
 
-        imagenes=getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
-        nombres=getResources().getStringArray(R.array.campo1_item_list_ejemplo);
-        descripciones=getResources().getStringArray(R.array.campo2_item_list_ejemplo);
+        imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
+        nombres = getResources().getStringArray(R.array.campo1_item_list_ejemplo);
+        descripciones = getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
-        adaptadorListView = new AdaptadorListView(getContext(),imagenes,nombres,descripciones,null,null);
+        adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
         lvLista.setAdapter(adaptadorListView);
 
-        final DatosPaciente datosPaciente=new DatosPaciente();
+        final DatosPaciente datosPaciente = new DatosPaciente();
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,9 +80,9 @@ public class ConsultasProgramadas extends Fragment {
 
                 //creando bundle para pasar datos al fragmento
                 Bundle paqueteDeDatos = new Bundle();
-                paqueteDeDatos.putInt(keyImg,imagenes.getResourceId(position,-1));
-                paqueteDeDatos.putString(keyNombre,nombres[position]);
-                paqueteDeDatos.putString(keyDescripcion,descripciones[position]);
+                paqueteDeDatos.putInt(keyImg, imagenes.getResourceId(position, -1));
+                paqueteDeDatos.putString(keyNombre, nombres[position]);
+                paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
 
                 //Agregamos los argumentos al fragmento
                 datosPaciente.setArguments(paqueteDeDatos);
@@ -82,7 +97,7 @@ public class ConsultasProgramadas extends Fragment {
             }
         });
 
-        btnBuscar=view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
+        btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,13 +106,55 @@ public class ConsultasProgramadas extends Fragment {
                     @Override
                     public void run() {
                         btnBuscar.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        Toast.makeText(getContext(),"buscando",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "buscando", Toast.LENGTH_SHORT).show();
                     }
-                },100);
+                }, 100);
             }
         });
         //fin codigo agregado
-
+        getConsultas(view);
         return view;
+    }
+
+    private void getConsultas(final View view) {
+        Log.d("JTDebug", "Entra Metodo consulta");
+        Call<List<ConsultaModel>> call = servicio.getConsultas(0, 2, 0);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<ConsultaModel>>() {
+            @Override
+            public void onResponse(Call<List<ConsultaModel>> call, Response<List<ConsultaModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        List<ConsultaModel> resp = response.body();
+                        String[] arrTit = new String[resp.size()];
+                        String[] arrFec = new String[resp.size()];
+                        String[] arrHora = new String[resp.size()];
+                        int c = 0;
+                        for (ConsultaModel item : resp) {
+                            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+                            arrTit[c] = item.per_nombre;
+                            arrFec[c] = dateFormat.format(item.cme_fecha_hora);
+                            arrHora[c] = dateFormat.format(item.cme_fecha_hora);
+                            c++;
+                        }
+                        AdaptadorListView ha = new AdaptadorListView(getContext(), null, arrTit, arrFec, arrHora, null);
+                        lvLista.setAdapter(ha);
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ConsultaModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 }
