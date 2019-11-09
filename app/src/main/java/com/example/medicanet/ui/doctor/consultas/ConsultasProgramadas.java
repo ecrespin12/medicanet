@@ -128,6 +128,7 @@ public class ConsultasProgramadas extends Fragment {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         List<ConsultaModel> resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp.size());
                         String[] arrTit = new String[resp.size()];
                         String[] arrFec = new String[resp.size()];
                         String[] arrHora = new String[resp.size()];
