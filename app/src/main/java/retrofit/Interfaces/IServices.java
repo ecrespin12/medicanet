@@ -31,6 +31,7 @@ public interface IServices {
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
 
     @GET("Consulta/consulta?")
-    Call<List<ConsultaModel>> getConsultas(@Query("per") int per, @Query("per") int doc, @Query("per") int cod);
+    @NotNull
+    Call<List<ConsultaModel>> getConsultas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
 
 }
