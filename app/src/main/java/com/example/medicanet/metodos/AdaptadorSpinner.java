@@ -1,6 +1,7 @@
 package com.example.medicanet.metodos;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,39 @@ import androidx.annotation.Nullable;
 
 import com.example.medicanet.R;
 
-import java.util.ArrayList;
-
-public class AdaptadorSpinner  extends ArrayAdapter<ItemSpinner>{
+public class AdaptadorSpinner extends ArrayAdapter{
 
     public Context contexto;
+    public TypedArray imagenes;
+    public String [] vectorCampo1;
+    public String [] vectorCampo2;
+    public String [] vectorCampo3;
+    public String [] vectorCampo4;
+
+    ImageView imagen;
+    TextView tvCampo1;
+    TextView tvCampo2;
+    TextView tvCampo3;
+    TextView tvCampo4;
+
     View view;
 
-    public AdaptadorSpinner(Context context, ArrayList<ItemSpinner> listaDeItem){
-        super(context,0,listaDeItem);
+    public AdaptadorSpinner(
+            @NonNull Context context,
+            TypedArray imagenes,
+            String [] vectorCampo1,
+            String [] vectorCampo2,
+            String [] vectorCampo3,
+            String [] vectorCampo4){
+
+        super(context, R.layout.item_spinner,vectorCampo1);
+
         this.contexto=context;
+        this.imagenes=imagenes;
+        this.vectorCampo1=vectorCampo1;
+        this.vectorCampo2=vectorCampo2;
+        this.vectorCampo3=vectorCampo3;
+        this.vectorCampo4=vectorCampo4;
     }
 
     @NonNull
@@ -37,27 +61,51 @@ public class AdaptadorSpinner  extends ArrayAdapter<ItemSpinner>{
     }
 
     private View iniciarVista(int position, View convertView, ViewGroup parent){
-        if (convertView==null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_spinner,parent,false);
-        }
-
+        LayoutInflater inflar = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflar.inflate(R.layout.item_spinner,parent,false);
         //enlazando vistas
-        ImageView imagen=convertView.findViewById(R.id.img_item_spinner);
-        TextView tvCampo1=convertView.findViewById(R.id.tvCampo1_item_spinner);
-        TextView tvCampo2=convertView.findViewById(R.id.tvCampo2_item_spinner);
-        TextView tvCampo3=convertView.findViewById(R.id.tvCampo3_item_spinner);
-        TextView tvCampo4=convertView.findViewById(R.id.tvCampo4_item_spinner);
+        imagen=view.findViewById(R.id.img_item_spinner);
+        tvCampo1=view.findViewById(R.id.tvCampo1_item_spinner);
+        tvCampo2=view.findViewById(R.id.tvCampo2_item_spinner);
+        tvCampo3=view.findViewById(R.id.tvCampo3_item_spinner);
+        tvCampo4=view.findViewById(R.id.tvCampo4_item_spinner);
 
-        ItemSpinner itemSpinner = getItem(position);
-
-        if (itemSpinner!=null){
-            imagen.setImageResource(itemSpinner.getImg());
-            tvCampo1.setText(itemSpinner.getCampo1());
-            tvCampo2.setText(itemSpinner.getCampo2());
-            tvCampo3.setText(itemSpinner.getCampo3());
-            tvCampo4.setText(itemSpinner.getCampo4());
+        //seteando vistas
+        if (imagenes==null){
+            imagen.setImageResource(R.drawable.medicanet1);
+            imagen.setVisibility(View.GONE);
+        }else{
+            imagen.setImageResource(imagenes.getResourceId(position,-1));
         }
 
-        return convertView;
+        if (vectorCampo1==null){
+            tvCampo1.setText("");
+            tvCampo1.setVisibility(View.GONE);
+        }else{
+            tvCampo1.setText(vectorCampo1[position]);
+        }
+
+        if (vectorCampo2==null){
+            tvCampo2.setText("");
+            tvCampo2.setVisibility(View.GONE);
+        }else{
+            tvCampo2.setText(vectorCampo2[position]);
+        }
+
+        if (vectorCampo3==null){
+            tvCampo3.setText("");
+            tvCampo3.setVisibility(View.GONE);
+        }else{
+            tvCampo3.setText(vectorCampo3[position]);
+        }
+
+        if (vectorCampo4==null){
+            tvCampo4.setText("");
+            tvCampo4.setVisibility(View.GONE);
+        }else{
+            tvCampo4.setText(vectorCampo4[position]);
+        }
+
+        return view;
     }
 }

@@ -1,10 +1,10 @@
 package com.example.medicanet.metodos;
 
-public class ItemSpinner {
+public class ItemSpinnerAdd {
     private int img;
     private String campo1,campo2,campo3,campo4;
 
-    public ItemSpinner(int img, String campo1, String campo2, String campo3, String campo4){
+    public ItemSpinnerAdd(int img, String campo1, String campo2, String campo3, String campo4){
         this.img=img;
         this.campo1=campo1;
         this.campo2=campo2;

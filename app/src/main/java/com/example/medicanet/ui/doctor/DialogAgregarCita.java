@@ -14,41 +14,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
-import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.AdaptadorSpinner;
-import com.example.medicanet.metodos.ItemSpinner;
 import com.example.medicanet.metodos.Metodos;
 
 import java.util.ArrayList;
 
 public class DialogAgregarCita extends DialogFragment {
 
-    Spinner spTipoCita;
+    Spinner             spTipoCita;
+    AdaptadorSpinner    adaptadorSpinner;
 
-    EditText edtDescripcion;
-    EditText edtFecha;
-    EditText edtHora;
+    EditText            edtDescripcion;
+    EditText            edtFecha;
+    EditText            edtHora;
 
-    ImageView imgCerrar;
+    ImageView           imgCerrar;
 
-    Button btnGuardar;
+    Button              btnGuardar;
 
-    ImageButton btnFecha;
-    ImageButton btnHora;
+    ImageButton         btnFecha;
+    ImageButton         btnHora;
 
-    private ArrayList<ItemSpinner> listaDeItem;
-    private AdaptadorSpinner adaptadorSpinner;
-
-    AdaptadorListView adaptadorListView;
-
-    TypedArray imagenes;
-    String [] nombres;
-    String [] descripciones;
+    TypedArray          imagenes;
+    String []           nombres;
+    String []           descripciones;
 
     public DialogAgregarCita() {
         // Required empty public constructor
@@ -78,13 +71,8 @@ public class DialogAgregarCita extends DialogFragment {
         nombres=getResources().getStringArray(R.array.campo1_item_list_ejemplo);
         descripciones=getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
-        adaptadorListView = new AdaptadorListView(getContext(),imagenes,nombres,descripciones,null,null);
-        spTipoCita.setAdapter(adaptadorListView);
-
-        //Inicializando la lista del spinner
-        //inicializarSpinner();
-        //adaptadorSpinner = new AdaptadorSpinner(getContext(), listaDeItem);
-        //spTipoCita.setAdapter(adaptadorSpinner);
+        adaptadorSpinner = new AdaptadorSpinner(getContext(),imagenes,nombres,descripciones,null,null);
+        spTipoCita.setAdapter(adaptadorSpinner);
 
         edtHora.setEnabled(false);
         edtFecha.setEnabled(false);
@@ -119,10 +107,4 @@ public class DialogAgregarCita extends DialogFragment {
 
         return view;
     }
-
-    public void inicializarSpinner(){
-        listaDeItem = new ArrayList<>();
-        listaDeItem.add(new ItemSpinner(R.drawable.medicanet1,"cam1","cam2","cam3",null));
-    }
-
 }
