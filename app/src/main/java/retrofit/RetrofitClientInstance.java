@@ -1,6 +1,10 @@
 package retrofit;
 
 import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,9 +64,12 @@ public class RetrofitClientInstance {
     }
 
     public RetrofitClientInstance() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
         this.httpClient = new OkHttpClient.Builder();
         this.builder = new retrofit2.Retrofit.Builder();
-        this.builder.baseUrl(this.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+        this.builder.baseUrl(this.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
         this.retrofit2 = this.builder.build();
     }
 }

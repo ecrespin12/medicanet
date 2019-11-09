@@ -135,10 +135,11 @@ public class ConsultasProgramadas extends Fragment {
                         String[] arrHora = new String[resp.size()];
                         int c = 0;
                         for (ConsultaModel item : resp) {
+                            Log.d("JTDebug", "Conteo de arr " + c);
                             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
                             arrTit[c] = item.per_nombre;
-                            arrFec[c] = dateFormat.format(item.cme_fecha_hora);
-                            arrHora[c] = dateFormat.format(item.cme_fecha_hora);
+                            arrFec[c] = dateFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
+                            arrHora[c] = dateFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
                             c++;
                         }
                         AdaptadorListView ha = new AdaptadorListView(getContext(), null, arrTit, arrFec, arrHora, null);
