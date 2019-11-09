@@ -98,5 +98,55 @@ public class AdaptadorListView extends ArrayAdapter {
 
         return view;
     }
+
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflar = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflar.inflate(R.layout.item_list_view,parent,false);
+        //enlazando vistas
+        imagen=view.findViewById(R.id.img_item_list_view);
+        tvCampo1=view.findViewById(R.id.tvCampo1_item_list_view);
+        tvCampo2=view.findViewById(R.id.tvCampo2_item_list_view);
+        tvCampo3=view.findViewById(R.id.tvCampo3_item_list_view);
+        tvCampo4=view.findViewById(R.id.tvCampo4_item_list_view);
+
+        //seteando vistas
+        if (imagenes==null){
+            imagen.setImageResource(R.drawable.medicanet1);
+            imagen.setVisibility(View.GONE);
+        }else{
+            imagen.setImageResource(imagenes.getResourceId(position,-1));
+        }
+
+        if (vectorCampo1==null){
+            tvCampo1.setText("");
+            tvCampo1.setVisibility(View.GONE);
+        }else{
+            tvCampo1.setText(vectorCampo1[position]);
+        }
+
+        if (vectorCampo2==null){
+            tvCampo2.setText("");
+            tvCampo2.setVisibility(View.GONE);
+        }else{
+            tvCampo2.setText(vectorCampo2[position]);
+        }
+
+        if (vectorCampo3==null){
+            tvCampo3.setText("");
+            tvCampo3.setVisibility(View.GONE);
+        }else{
+            tvCampo3.setText(vectorCampo3[position]);
+        }
+
+        if (vectorCampo4==null){
+            tvCampo4.setText("");
+            tvCampo4.setVisibility(View.GONE);
+        }else{
+            tvCampo4.setText(vectorCampo4[position]);
+        }
+
+        return view;
+    }
 }
 
