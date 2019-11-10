@@ -5,8 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+import clasesResponse.CentroMedicoModel;
+import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.HistorialModel;
+import clasesResponse.MedicamentosModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import clasesResponse.clVersion;
@@ -26,12 +29,28 @@ public interface IServices {
     @NotNull
     Call<clItems> getConsultaVersion(@Query("id") @NotNull String id);
 
-    @GET("Historial/historial?")
+    @GET("CentroMedico/centro_medico")
     @NotNull
-    Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
+    Call<List<CentroMedicoModel>> getCentroMedico();
+
+    @GET("Medicamentos/catalogo")
+    @NotNull
+    Call<List<MedicamentosModel>> getMedicamentos();
 
     @GET("Consulta/consulta?")
     @NotNull
     Call<List<ConsultaModel>> getConsultas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
+
+    @GET("Consulta/detalle?")
+    @NotNull
+    Call<List<ConsultaDetalleModel>> getConsultasDetalle(@Query("cod") int cod);
+
+    @GET("Medicos/fechaEstaLibre?")
+    @NotNull
+    Call<Boolean> getFechaEstaLibre(@Query("fec") int fec, @Query("med") int med);
+
+    @GET("Historial/historial?")
+    @NotNull
+    Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
 
 }
