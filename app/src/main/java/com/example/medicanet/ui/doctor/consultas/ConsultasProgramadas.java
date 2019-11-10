@@ -23,6 +23,7 @@ import com.example.medicanet.ui.doctor.datosPaciente.DatosPaciente;
 import com.example.medicanet.ui.paciente.historialMedico.HistorialAdapter;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import clasesResponse.ConsultaModel;
@@ -134,12 +135,15 @@ public class ConsultasProgramadas extends Fragment {
                         String[] arrFec = new String[resp.size()];
                         String[] arrHora = new String[resp.size()];
                         int c = 0;
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d MMMM yyyy");
+                        SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm:ss");
+
                         for (ConsultaModel item : resp) {
                             Log.d("JTDebug", "Conteo de arr " + c);
-                            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+                            //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
                             arrTit[c] = item.per_nombre;
                             arrFec[c] = dateFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
-                            arrHora[c] = dateFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
+                            arrHora[c] = hourFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
                             c++;
                         }
                         AdaptadorListView ha = new AdaptadorListView(getContext(), null, arrTit, arrFec, arrHora, null);
