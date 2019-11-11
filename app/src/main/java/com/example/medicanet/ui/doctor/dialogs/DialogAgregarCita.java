@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor;
+package com.example.medicanet.ui.doctor.dialogs;
 
 import android.content.res.TypedArray;
 import android.graphics.Color;

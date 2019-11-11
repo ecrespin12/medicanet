@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor;
+package com.example.medicanet.ui.doctor.dialogs;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

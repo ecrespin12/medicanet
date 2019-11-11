@@ -1,10 +1,8 @@
-package com.example.medicanet.ui.doctor.consultas;
-
+package com.example.medicanet.ui.doctor.fragments;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +10,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.medicanet.R;
-import com.example.medicanet.ui.doctor.DialogAgregarCita;
-import com.example.medicanet.ui.doctor.DialogAgregarDetalleConsulta;
-import com.example.medicanet.ui.doctor.DialogAgregarMedicamentoConsulta;
+import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
+import com.example.medicanet.ui.doctor.dialogs.DialogAgregarDetalleConsulta;
+import com.example.medicanet.ui.doctor.dialogs.DialogAgregarMedicamentoConsulta;
 
-public class Consulta extends Fragment {
+public class fragmentConsulta extends Fragment {
 
     Button btnDetalles;
     Button btnAgregarCita;
     Button btnMedicamentos;
     Button btnTerminar;
 
-    public Consulta() {
+    public fragmentConsulta() {
         // Required empty public constructor
     }
 

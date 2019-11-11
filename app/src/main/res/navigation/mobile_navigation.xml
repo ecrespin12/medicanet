@@ -30,17 +30,17 @@
     //DOCTOR
     <fragment
         android:id="@+id/nav_doc_consultas_programadas"
-        android:name="com.example.medicanet.ui.doctor.consultas.ConsultasProgramadas"
+        android:name="com.example.medicanet.ui.doctor.fragments.fragmentConsultasProgramadas"
         android:label="Consultas programadas"
         tools:layout="@layout/fragment_doc_consultas_pacientes" />
     <fragment
         android:id="@+id/nav_doc_pacientes"
-        android:name="com.example.medicanet.ui.doctor.pacientes.Pacientes"
+        android:name="com.example.medicanet.ui.doctor.fragments.fragmentPacientes"
         android:label="Pacientes"
         tools:layout="@layout/fragment_doc_pacientes" />
     <fragment
         android:id="@+id/nav_doc_programar_consultas"
-        android:name="com.example.medicanet.ui.doctor.programarConsulta.ProgramarConsulta"
+        android:name="com.example.medicanet.ui.doctor.fragments.fragmentProgramarConsulta"
         android:label="Programar Consultas"
         tools:layout="@layout/fragment_doc_programar_consultas" />
 

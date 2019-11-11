@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor.programarConsulta;
+package com.example.medicanet.ui.doctor.fragments;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.example.medicanet.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProgramarConsulta extends Fragment {
+public class fragmentPacientes extends Fragment {
 
 
-    public ProgramarConsulta() {
+    public fragmentPacientes() {
         // Required empty public constructor
     }
 
@@ -25,8 +25,8 @@ public class ProgramarConsulta extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doc_programar_consultas, container, false);
+        // Inflate the lyout for this fragment
+        return inflater.inflate(R.layout.fragment_doc_pacientes, container, false);
     }
 
 }

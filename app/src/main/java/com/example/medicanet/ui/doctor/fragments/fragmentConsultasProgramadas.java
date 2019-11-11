@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor.consultas;
+package com.example.medicanet.ui.doctor.fragments;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,22 +18,18 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
-import com.example.medicanet.ui.doctor.datosPaciente.DatosPaciente;
-import com.example.medicanet.ui.paciente.historialMedico.HistorialAdapter;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import clasesResponse.ConsultaModel;
-import clasesResponse.HistorialModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConsultasProgramadas extends Fragment {
+public class fragmentConsultasProgramadas extends Fragment {
 
     public static String keyImg = "img";
     public static String keyNombre = "nombre";
@@ -52,7 +47,7 @@ public class ConsultasProgramadas extends Fragment {
 
     Button btnBuscar;
 
-    public ConsultasProgramadas() {
+    public fragmentConsultasProgramadas() {
         // Required empty public constructor
     }
 
@@ -74,7 +69,7 @@ public class ConsultasProgramadas extends Fragment {
         adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
         lvLista.setAdapter(adaptadorListView);*/
 
-        final DatosPaciente datosPaciente = new DatosPaciente();
+        final fragmentDatosPaciente fragmentDatosPaciente = new fragmentDatosPaciente();
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,11 +82,11 @@ public class ConsultasProgramadas extends Fragment {
                 paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
 
                 //Agregamos los argumentos al fragmento
-                datosPaciente.setArguments(paqueteDeDatos);
+                fragmentDatosPaciente.setArguments(paqueteDeDatos);
 
                 // Crea el nuevo fragmento y la transacción.
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, datosPaciente);
+                transaction.replace(R.id.nav_host_fragment, fragmentDatosPaciente);
                 transaction.addToBackStack(null);
 
                 // Commit a la transacción

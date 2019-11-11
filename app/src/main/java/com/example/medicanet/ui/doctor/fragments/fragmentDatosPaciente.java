@@ -1,4 +1,4 @@
-package com.example.medicanet.ui.doctor.datosPaciente;
+package com.example.medicanet.ui.doctor.fragments;
 
 import android.os.Bundle;
 
@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.medicanet.R;
-import com.example.medicanet.ui.doctor.consultas.Consulta;
+import com.example.medicanet.ui.doctor.fragments.fragmentConsulta;
 
-public class DatosPaciente extends Fragment {
+public class fragmentDatosPaciente extends Fragment {
 
     Button btnHistorial;
     Button btnIniciarConsulta;
 
-    public DatosPaciente() {
+    public fragmentDatosPaciente() {
         // Required empty public constructor
     }
 
@@ -43,11 +43,11 @@ public class DatosPaciente extends Fragment {
             @Override
             public void onClick(View view) {
 
-                final Consulta consulta=new Consulta();
+                final fragmentConsulta fragmentConsulta = new fragmentConsulta();
 
                 // Crea el nuevo fragmento y la transacción.
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, consulta);
+                transaction.replace(R.id.nav_host_fragment, fragmentConsulta);
                 transaction.addToBackStack(null);
 
                 // Commit a la transacción
