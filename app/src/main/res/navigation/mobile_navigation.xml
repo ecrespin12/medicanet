@@ -46,14 +46,14 @@
 
     //FARMACIA
     <fragment
-        android:id="@+id/nav_far_entregar_medicamentos"
+        android:id="@+id/nav_far_listado_paciente"
         android:name="com.example.medicanet.ui.farmacia.PendientesDeEntrega.PendientesDeEntrega"
-        android:label="@string/consultar_paciente"
+        android:label="Entregar medicamentos"
         tools:layout="@layout/fragment_far_entrega_medicamentos" />
     <fragment
         android:id="@+id/nav_far_historial_entregas"
         android:name="com.example.medicanet.ui.farmacia.MedicamentosEntregados.MedicamentosEntregados"
-        android:label="@string/iniciar_consulta"
+        android:label="Historial de Entregas"
         tools:layout="@layout/fragment_far_medicamentos_entregados" />
 
 

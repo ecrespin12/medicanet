@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_doc_pacientes,
                 R.id.nav_doc_programar_consultas,
 
-                R.id.nav_far_entregar_medicamentos,
+                R.id.nav_far_listado_paciente,
                 R.id.nav_far_historial_entregas,
 
                 R.id.nav_admin_ejemplo)
