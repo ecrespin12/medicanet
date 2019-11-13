@@ -13,12 +13,12 @@ import android.widget.Button;
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.fragments.fragmentConsulta;
 
-public class fragmentDatosPaciente extends Fragment {
+public class fragmentDatosConsulta extends Fragment {
 
     Button btnHistorial;
     Button btnIniciarConsulta;
 
-    public fragmentDatosPaciente() {
+    public fragmentDatosConsulta() {
         // Required empty public constructor
     }
 

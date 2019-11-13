@@ -69,7 +69,7 @@ public class fragmentConsultasProgramadas extends Fragment {
         adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
         lvLista.setAdapter(adaptadorListView);*/
 
-        final fragmentDatosPaciente fragmentDatosPaciente = new fragmentDatosPaciente();
+        final fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,11 +82,11 @@ public class fragmentConsultasProgramadas extends Fragment {
                 paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
 
                 //Agregamos los argumentos al fragmento
-                fragmentDatosPaciente.setArguments(paqueteDeDatos);
+                fragmentDatosConsulta.setArguments(paqueteDeDatos);
 
                 // Crea el nuevo fragmento y la transacción.
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, fragmentDatosPaciente);
+                transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
                 transaction.addToBackStack(null);
 
                 // Commit a la transacción
