@@ -53,7 +53,8 @@
 
             android:id="@+id/lvConsultas_fragment_doc_consultas_pendientes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#208bb9" />
 
     </LinearLayout>
 

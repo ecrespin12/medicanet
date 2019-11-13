@@ -62,12 +62,12 @@ public class fragmentConsultasProgramadas extends Fragment {
 
         lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
 
-        /*imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
+        imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
         nombres = getResources().getStringArray(R.array.campo1_item_list_ejemplo);
         descripciones = getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
         adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
-        lvLista.setAdapter(adaptadorListView);*/
+        lvLista.setAdapter(adaptadorListView);
 
         final fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
 
