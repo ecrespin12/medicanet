@@ -9,51 +9,51 @@
     <fragment
         android:id="@+id/nav_pac_citas"
         android:name="com.example.medicanet.ui.paciente.citas.Citas"
-        android:label="@string/datos_medicos"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_pac_citas" />
     <fragment
         android:id="@+id/nav_pac_datos_medicos"
         android:name="com.example.medicanet.ui.paciente.datosMedicos.DatosMedicos"
-        android:label="Consultas Pendientes"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_pac_datos_medicos" />
     <fragment
         android:id="@+id/nav_pac_historial_medico"
         android:name="com.example.medicanet.ui.paciente.historialMedico.HistorialMedico"
-        android:label="@string/historial_medico"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_pac_historial_medico" />
     <fragment
         android:id="@+id/nav_pac_medicamentos"
         android:name="com.example.medicanet.ui.paciente.medicamentos.Medicamentos"
-        android:label="@string/medicamentos_pendientes"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_pac_medicamentos" />
 
     //DOCTOR
     <fragment
         android:id="@+id/nav_doc_consultas_programadas"
         android:name="com.example.medicanet.ui.doctor.fragments.fragmentConsultasProgramadas"
-        android:label="Consultas programadas"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_doc_consultas_pacientes" />
     <fragment
         android:id="@+id/nav_doc_pacientes"
         android:name="com.example.medicanet.ui.doctor.fragments.fragmentPacientes"
-        android:label="Pacientes"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_doc_pacientes" />
     <fragment
         android:id="@+id/nav_doc_programar_consultas"
         android:name="com.example.medicanet.ui.doctor.fragments.fragmentProgramarConsulta"
-        android:label="Programar Consultas"
-        tools:layout="@layout/fragment_doc_programar_consultas" />
+        android:label="Medicanet"
+        tools:layout="@layout/fragment_doc_programar_consulta" />
 
     //FARMACIA
     <fragment
         android:id="@+id/nav_far_listado_paciente"
         android:name="com.example.medicanet.ui.farmacia.PendientesDeEntrega.PendientesDeEntrega"
-        android:label="Entregar medicamentos"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_far_entrega_medicamentos" />
     <fragment
         android:id="@+id/nav_far_historial_entregas"
         android:name="com.example.medicanet.ui.farmacia.MedicamentosEntregados.MedicamentosEntregados"
-        android:label="Historial de Entregas"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_far_medicamentos_entregados" />
 
 
@@ -61,16 +61,16 @@
     <fragment
         android:id="@+id/nav_entrega_medica"
         android:name="com.example.medicanet.ui.entregaMedicamentos.entregaM"
-        android:label="@string/menu_entrega_medicamentos"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_pac_medicamentos" />
     <fragment
         android:id="@+id/nav_web_services"
         android:name="com.example.medicanet.webServices.WebService"
-        android:label="Web Services"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_web" />
     <fragment
         android:id="@+id/nav_admin_ejemplo"
         android:name="com.example.medicanet.fragment_admin_ejemplo"
-        android:label="Ejemplo de modal"
+        android:label="Medicanet"
         tools:layout="@layout/fragment_fragment_admin_ejemplo" />
 </navigation>

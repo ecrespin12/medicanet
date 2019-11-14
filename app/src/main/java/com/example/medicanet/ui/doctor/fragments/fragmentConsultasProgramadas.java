@@ -56,6 +56,7 @@ public class fragmentConsultasProgramadas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
+
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
 
         //Codigo
@@ -69,8 +70,6 @@ public class fragmentConsultasProgramadas extends Fragment {
         adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
         lvLista.setAdapter(adaptadorListView);
 
-        final fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
-
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -81,11 +80,13 @@ public class fragmentConsultasProgramadas extends Fragment {
                 paqueteDeDatos.putString(keyNombre, nombres[position]);
                 paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
 
+                // Crea el nuevo fragmento
+                fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
                 //Agregamos los argumentos al fragmento
                 fragmentDatosConsulta.setArguments(paqueteDeDatos);
-
-                // Crea el nuevo fragmento y la transacción.
+                //Crea la transaccion
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
                 transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
                 transaction.addToBackStack(null);
 

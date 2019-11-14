@@ -83,29 +83,29 @@
     </string-array>
 
     <string-array name="campo1_item_list_ejemplo">
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
-        <item>Código consulta</item>
+        <item>Código consulta1</item>
+        <item>Código consulta2</item>
+        <item>Código consulta3</item>
+        <item>Código consulta4</item>
+        <item>Código consulta5</item>
+        <item>Código consulta6</item>
+        <item>Código consulta7</item>
+        <item>Código consulta8</item>
+        <item>Código consulta9</item>
+        <item>Código consulta0</item>
     </string-array>
 
     <string-array name="campo2_item_list_ejemplo">
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
-        <item>Nombre pasiente</item>
+        <item>Nombre pasiente1</item>
+        <item>Nombre pasiente2</item>
+        <item>Nombre pasiente3</item>
+        <item>Nombre pasiente4</item>
+        <item>Nombre pasiente5</item>
+        <item>Nombre pasiente6</item>
+        <item>Nombre pasiente7</item>
+        <item>Nombre pasiente8</item>
+        <item>Nombre pasiente9</item>
+        <item>Nombre pasiente0</item>
     </string-array>
 
     <string-array name="campo3_item_list_ejemplo">
@@ -124,7 +124,44 @@
         <item>Campo 4</item>
     </string-array>
 
+    <string-array name="img_lista_paciente_ejemplo">
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+        <item>@drawable/paciente</item>
+    </string-array>
 
+    <string-array name="campo1_lista_paciente_ejemplo">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="campo2_lista_paciente_ejemplo">
+        <item>Nombre pasiente1</item>
+        <item>Nombre pasiente2</item>
+        <item>Nombre pasiente3</item>
+        <item>Nombre pasiente4</item>
+        <item>Nombre pasiente5</item>
+        <item>Nombre pasiente6</item>
+        <item>Nombre pasiente7</item>
+        <item>Nombre pasiente8</item>
+        <item>Nombre pasiente9</item>
+        <item>Nombre pasiente10</item>
+    </string-array>
 
     <string name="title_activity_mapa">Mapa</string>
     <string name="title_activity_places">Places</string>
