@@ -1,9 +1,11 @@
 package com.example.medicanet.ui.doctor.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,6 @@ public class fragmentConsulta extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,29 +41,73 @@ public class fragmentConsulta extends Fragment {
         btnAgregarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //dialog/modal a invocar
-                DialogAgregarCita dialog = new DialogAgregarCita();
-                dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
+                btnAgregarCita.setBackgroundResource(R.drawable.boton_redondeado);
+                btnAgregarCita.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnAgregarCita.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnAgregarCita.setTextColor(Color.BLACK);
+
+                        //crear y mostrar un Dialog
+                        DialogAgregarCita dialog = new DialogAgregarCita();
+                        dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
+                    }
+                },100);
             }
         });
+
         btnDetalles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta();
-                dialog.show(getFragmentManager(),"dialog_doc_agregar_detalle");
+                btnDetalles.setBackgroundResource(R.drawable.boton_redondeado);
+                btnDetalles.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnDetalles.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnDetalles.setTextColor(Color.BLACK);
+
+                        //Crear y mostrar un Dialog
+                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta();
+                        dialog.show(getFragmentManager(),"dialog_doc_agregar_detalle");
+                    }
+                },100);
             }
         });
         btnMedicamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta();
-                dialog.show(getFragmentManager(),"dialog_doc_agregar_medicamento");
+                btnMedicamentos.setBackgroundResource(R.drawable.boton_redondeado);
+                btnMedicamentos.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnMedicamentos.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnMedicamentos.setTextColor(Color.BLACK);
+
+                        //Crear y mostrar un Dialog
+                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta();
+                        dialog.show(getFragmentManager(),"dialog_doc_agregar_medicamento");
+                    }
+                },100);
             }
         });
         btnTerminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnTerminar.setBackgroundResource(R.drawable.boton_redondeado);
+                btnTerminar.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnTerminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnTerminar.setTextColor(Color.BLACK);
 
+                        //Terminar
+
+                    }
+                },100);
             }
         });
         //fin codigo agregado

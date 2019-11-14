@@ -20,34 +20,41 @@
                 android:id="@+id/btnDetalles_fragment_doc_consulta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_borde"
                 android:text="Detalles"
-                android:textColor="#3F51B5"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/btnAgregarCita_fragment_doc_consulta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_borde"
                 android:text="Agregar cita"
-                android:textColor="#FFC107"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/btnMedicamentos_fragment_doc_consulta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/boton_redondeado_borde"
                 android:text="Medicamentos"
-                android:textColor="#009605"/>
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <TextView
@@ -104,9 +111,12 @@
             android:id="@+id/btnTerminar_fragment_doc_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#033500"
+            android:layout_margin="5dp"
+            android:background="@drawable/boton_redondeado_borde"
             android:text="Terminar Consulta"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="normal" />
     </LinearLayout>
 
 </FrameLayout>

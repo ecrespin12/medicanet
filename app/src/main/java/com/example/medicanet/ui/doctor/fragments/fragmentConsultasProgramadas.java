@@ -1,6 +1,7 @@
 package com.example.medicanet.ui.doctor.fragments;
 
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -72,26 +73,31 @@ public class fragmentConsultasProgramadas extends Fragment {
 
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                //Pausa para que haga la transicion, esto para que se note el efecto de Click sobre el listView
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //creando bundle para pasar datos al fragmento
+                        Bundle paqueteDeDatos = new Bundle();
+                        paqueteDeDatos.putInt(keyImg, imagenes.getResourceId(position, -1));
+                        paqueteDeDatos.putString(keyNombre, nombres[position]);
+                        paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
 
-                //creando bundle para pasar datos al fragmento
-                Bundle paqueteDeDatos = new Bundle();
-                paqueteDeDatos.putInt(keyImg, imagenes.getResourceId(position, -1));
-                paqueteDeDatos.putString(keyNombre, nombres[position]);
-                paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
+                        // Crea el nuevo fragmento
+                        fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
+                        //Agregamos los argumentos al fragmento
+                        fragmentDatosConsulta.setArguments(paqueteDeDatos);
+                        //Crea la transaccion
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
+                        transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
+                        transaction.addToBackStack(null);
 
-                // Crea el nuevo fragmento
-                fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
-                //Agregamos los argumentos al fragmento
-                fragmentDatosConsulta.setArguments(paqueteDeDatos);
-                //Crea la transaccion
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
-                transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
-                transaction.addToBackStack(null);
-
-                // Commit a la transacción
-                transaction.commit();
+                        // Commit a la transacción
+                        transaction.commit();
+                    }
+                },500);
             }
         });
 
@@ -100,10 +106,14 @@ public class fragmentConsultasProgramadas extends Fragment {
             @Override
             public void onClick(View view) {
                 btnBuscar.setBackgroundResource(R.drawable.boton_redondeado);
+                btnBuscar.setTextColor(Color.WHITE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         btnBuscar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnBuscar.setTextColor(Color.BLACK);
+
+                        //Codigo para logica del boton
                         Toast.makeText(getContext(), "buscando", Toast.LENGTH_SHORT).show();
                     }
                 }, 100);

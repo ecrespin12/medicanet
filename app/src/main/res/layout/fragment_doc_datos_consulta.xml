@@ -25,28 +25,28 @@
             android:id="@+id/tvNombre_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="Brian ALberto" />
 
         <TextView
             android:id="@+id/tvApellidos_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="Guadron Ramirez" />
 
         <TextView
             android:id="@+id/tev_EdadPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="22 a;os" />
 
         <TextView
             android:id="@+id/tvSexo_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="Masculino" />
 
         <TextView
@@ -61,38 +61,40 @@
             android:id="@+id/tvTipoConsulta_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="General" />
 
         <TextView
             android:id="@+id/tvDescripcion_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="Altas fiebres" />
 
         <TextView
             android:id="@+id/tvFecha_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:text="31/12/2019" />
 
         <Button
             android:id="@+id/btnHistorial_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#006FA2"
+            android:layout_margin="5dp"
+            android:background="@drawable/boton_redondeado_borde"
             android:text="Ver Historial Medico"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/btnIniciarConsulta_fragment_doc_datos_paciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#033500"
+            android:layout_margin="5dp"
+            android:background="@drawable/boton_redondeado_borde"
             android:text="Iniciar Consulta"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </LinearLayout>
 </FrameLayout>
