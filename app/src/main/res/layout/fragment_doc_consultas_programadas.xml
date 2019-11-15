@@ -32,7 +32,7 @@
                 android:id="@+id/btnFecha_fragment_doc_consultas_programadas"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/calendario_64"
+                android:background="@drawable/calendario_64_1"
                 android:clickable="true"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
