@@ -3,13 +3,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pendienteEntrega.pendiente_entregas">
+    tools:context=".ui.farmacia.PendientesDeEntrega.PendientesDeEntrega">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <EditText
+                android:id="@+id/edt_far_pendientes_entrega_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="ID"
+                android:inputType="numberSigned" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fba_far_pendientes_entrega_buscar"
+                app:backgroundTint="@color/design_default_color_primary"
+                app:maxImageSize="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:drawable/btn_plus"
+                android:clickable="true"
+                android:src="@android:drawable/ic_menu_search" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_far_pendientes_entrega_fecha1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="mm/dd/aaaa"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/imgb_far_pendientes_entrega_fecha1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:src="@android:drawable/ic_menu_my_calendar" />
+
+            <EditText
+                android:id="@+id/edt_far_pendientes_entrega_fecha2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="mm/dd/aaaa"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/imgb_far_pendientes_entrega_fecha2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:src="@android:drawable/ic_menu_my_calendar" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView2"
