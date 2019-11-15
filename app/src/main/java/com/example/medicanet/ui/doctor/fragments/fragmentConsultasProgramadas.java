@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
+import com.example.medicanet.metodos.Metodos;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,9 +49,13 @@ public class fragmentConsultasProgramadas extends Fragment {
 
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
+    List<ConsultaModel> resp;
+    ConsultaModel item;
 
-    EditText edtCodigoConsulta;
+    EditText edtFecha;
+    EditText edtNombrePaciente;
     Button btnBuscar;
+    Button btnFecha;
     ListView lvLista;
 
     AdaptadorListView adaptadorListView;
@@ -71,8 +76,10 @@ public class fragmentConsultasProgramadas extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
         //CODIGO AGREGADO////////////////////////////////////////////////
-        edtCodigoConsulta = view.findViewById(R.id.edtCodigoConsulta_fragment_doc_consultas_programadas);
+        edtFecha = view.findViewById(R.id.edtFecha_fragment_doc_consultas_programadas);
+        edtNombrePaciente = view.findViewById(R.id.edtNombrePaciente_fragment_doc_consultas_programadas);
         btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_programadas);
+        btnFecha = view.findViewById(R.id.btnFecha_fragment_doc_consultas_programadas);
         lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_programadas);
 
         //INICIALIZAR OBJETO DE LA INTERFAZ
@@ -105,7 +112,7 @@ public class fragmentConsultasProgramadas extends Fragment {
                         paqueteDeDatos.putString(keyHoras,horas[position]);
 
                         // Crea el nuevo fragmento
-                        fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
+                        fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta(resp,position);
                         //Agregamos los argumentos al fragmento
                         fragmentDatosConsulta.setArguments(paqueteDeDatos);
                         //Crea la transaccion
@@ -135,24 +142,30 @@ public class fragmentConsultasProgramadas extends Fragment {
                         Toast.makeText(getContext(), "Buscando", Toast.LENGTH_SHORT).show();
 
                         //COMENTARIAR AQUI SI SE BUSCA POR NOMBRE Y FECHA
-                        int codConsulta=-1000;//numero inventado xd
-                        try{
-                            codConsulta=Integer.valueOf(edtCodigoConsulta.getText().toString());
-                        }catch (Exception e ){
-                            System.out.println("Error al convertir codConsulta: "+e);
-                        }
-                        if (codConsulta==-1000){
-                            edtCodigoConsulta.setError("Formato incorrecto, verifique!");
-                            edtCodigoConsulta.requestFocus();
-                            return;
-                        }
+                        String nom="";//numero inventado xd
+                        nom=edtNombrePaciente.getText().toString();
 
-                        getConsultas(view,0,0,codConsulta);
+                        //getConsultas(view,0,0,codConsulta);
                     }
                 }, 100);
             }
         });
 
+        btnFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnFecha.setBackgroundResource(R.drawable.calendario_64_2);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnFecha.setBackgroundResource(R.drawable.calendario_64_1);
+
+                        //logica
+                        Metodos.fecha(getContext(),edtFecha);
+                    }
+                },100);
+            }
+        });
 
         //FIN CODIGO AGREGADO////////////////////////////////////////////////////
         return view;
@@ -198,7 +211,7 @@ public class fragmentConsultasProgramadas extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        List<ConsultaModel> resp = response.body();
+                        resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
                         imagenes = new int[resp.size()];
                         codigos = new String[resp.size()];
@@ -206,16 +219,16 @@ public class fragmentConsultasProgramadas extends Fragment {
                         fechas = new String[resp.size()];
                         horas = new String[resp.size()];
 
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d MMMM yyyy");
-                        SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm:ss");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
+                        SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
                         for (int i=0;i<resp.size();i++) {
-                            ConsultaModel item = resp.get(i);
+                            item = resp.get(i);
                             imagenes[i]=R.drawable.medicanet1;
                             codigos[i] = "Código consulta: "+item.cme_codigo;
                             nombres[i] = "Paciente: "+item.per_nombre;
-                            fechas[i] = "Fecha: "+dateFormat.format(item.cme_fecha_hora);
-                            horas[i] = "Hora: "+hourFormat.format(item.cme_fecha_hora);
+                            fechas[i] = "Fecha: "+formatoFecha.format(item.cme_fecha_hora);
+                            horas[i] = "Hora: "+formatoHora.format(item.cme_fecha_hora);
                         }
                         AdaptadorListView ha = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
                         lvLista.setAdapter(ha);

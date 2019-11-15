@@ -21,7 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="20dp"
-                android:hint="Selecciona una fecha"
+                android:hint="Seleccione una fecha"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnFecha_fragment_doc_consultas_programadas"
@@ -47,11 +47,11 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/edtCodigoConsulta_fragment_doc_consultas_programadas"
+                android:id="@+id/edtNombrePaciente_fragment_doc_consultas_programadas"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="20dp"
-                android:hint="Código de consulta"
+                android:hint="Nombre de paciente"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnBuscar_fragment_doc_consultas_programadas"

@@ -13,73 +13,110 @@
         android:orientation="vertical">
 
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Datos Pasiente"
+            android:text="Datos de paciente"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvNombre_fragment_doc_datos_paciente"
+            android:id="@+id/tvDuiPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Brian ALberto" />
+            android:text="DUI: 123456-5" />
 
         <TextView
-            android:id="@+id/tvApellidos_fragment_doc_datos_paciente"
+            android:id="@+id/tvNombresPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Guadron Ramirez" />
+            android:text="Nombre: David" />
 
         <TextView
-            android:id="@+id/tev_EdadPaciente"
+            android:id="@+id/tvFechaNPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="22 años" />
+            android:text="Fecha N: 21 de junio de 1995" />
 
         <TextView
-            android:id="@+id/tvSexo_fragment_doc_datos_paciente"
+            android:id="@+id/tvCorreoPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Masculino" />
+            android:text="Correo: davidlopez310120@gmail.com" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Datos Consulta"
+            android:text="Datos de doctor"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvTipoConsulta_fragment_doc_datos_paciente"
+            android:id="@+id/tvNombresDoctor_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="General" />
+            android:text="Nombre: Guillermo López" />
 
         <TextView
-            android:id="@+id/tvDescripcion_fragment_doc_datos_paciente"
+            android:id="@+id/tvCorreoDoctor_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Altas fiebres" />
+            android:text="Correo: guillermoantonio@gmail.com" />
 
         <TextView
-            android:id="@+id/tvFecha_fragment_doc_datos_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Datos de consulta"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCodigoConsulta_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="31/12/2019" />
+            android:text="Código consulta: 123" />
+
+        <TextView
+            android:id="@+id/tvNombreCentroM_fragment_doc_datos_consulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Centro medico: Medicanet" />
+
+        <TextView
+            android:id="@+id/tvFechaConsulta_fragment_doc_datos_consulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Fecha: 05/12/2019" />
+
+        <TextView
+            android:id="@+id/tvHoraConsulta_fragment_doc_datos_consulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Hora: 08:00" />
 
         <Button
-            android:id="@+id/btnHistorial_fragment_doc_datos_paciente"
+            android:id="@+id/btnIniciarConsulta_fragment_doc_datos_consulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/boton_redondeado_borde"
+            android:text="Iniciar Consulta"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btnVerHistorial_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -87,14 +124,7 @@
             android:text="Ver Historial Medico"
             android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/btnIniciarConsulta_fragment_doc_datos_paciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/boton_redondeado_borde"
-            android:text="Iniciar Consulta"
-            android:textColor="#000000" />
+
 
     </LinearLayout>
 </FrameLayout>
