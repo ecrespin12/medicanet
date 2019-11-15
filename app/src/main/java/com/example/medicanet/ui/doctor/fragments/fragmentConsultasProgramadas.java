@@ -1,5 +1,7 @@
 package com.example.medicanet.ui.doctor.fragments;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +25,10 @@ import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import clasesResponse.ConsultaModel;
@@ -119,16 +125,16 @@ public class fragmentConsultasProgramadas extends Fragment {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                btnBuscar.setBackgroundResource(R.drawable.boton_redondeado);
-                btnBuscar.setTextColor(Color.WHITE);
+                btnBuscar.setBackgroundResource(R.drawable.lupa_negra);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnBuscar.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnBuscar.setTextColor(Color.BLACK);
+                        btnBuscar.setBackgroundResource(R.drawable.lupa_celeste);
 
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Buscando", Toast.LENGTH_SHORT).show();
+
+                        //COMENTARIAR AQUI SI SE BUSCA POR NOMBRE Y FECHA
                         int codConsulta=-1000;//numero inventado xd
                         try{
                             codConsulta=Integer.valueOf(edtCodigoConsulta.getText().toString());
@@ -150,6 +156,34 @@ public class fragmentConsultasProgramadas extends Fragment {
 
         //FIN CODIGO AGREGADO////////////////////////////////////////////////////
         return view;
+    }
+
+    public void fecha( final EditText edt){
+        int dia,mes, anio;
+        String fecha="";
+        final Calendar calendario= Calendar.getInstance();
+        dia=calendario.get(Calendar.DAY_OF_MONTH);
+        mes=calendario.get(Calendar.MONTH);
+        anio=calendario.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+                String fechaSelec=dayOfMonth+"-"+(month+1)+"-"+year;
+                try {
+                    Date date = formatter.parse(fechaSelec);
+                    System.out.println(date);
+                    System.out.println(formatter.format(date));
+                    edt.setText(formatter.format(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+                ,anio,mes,dia);
+        datePickerDialog.show();
     }
 
     //METODO PARA CONSUMIR EL WS
