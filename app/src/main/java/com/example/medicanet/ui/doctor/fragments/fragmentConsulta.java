@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
@@ -105,7 +106,7 @@ public class fragmentConsulta extends Fragment {
                         btnTerminar.setTextColor(Color.BLACK);
 
                         //Terminar
-
+                        Toast.makeText(getContext(),"Terminando consulta",Toast.LENGTH_SHORT).show();
                     }
                 },100);
             }

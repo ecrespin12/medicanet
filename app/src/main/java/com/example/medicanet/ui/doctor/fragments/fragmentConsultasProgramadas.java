@@ -33,8 +33,10 @@ import retrofit2.Response;
 public class fragmentConsultasProgramadas extends Fragment {
 
     public static String keyImg = "img";
+    public static String keyCodigo = "codigo";
     public static String keyNombre = "nombre";
-    public static String keyDescripcion = "descripcion";
+    public static String keyFecha = "fecha";
+    public static String keyHoras = "hora";
 
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
@@ -42,9 +44,11 @@ public class fragmentConsultasProgramadas extends Fragment {
     ListView lvLista;
     AdaptadorListView adaptadorListView;
 
-    TypedArray imagenes;
+    int[] imagenes;
+    String[] codigos;
     String[] nombres;
-    String[] descripciones;
+    String[] fechas;
+    String[] horas;
 
     Button btnBuscar;
 
@@ -57,20 +61,24 @@ public class fragmentConsultasProgramadas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
-
-        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
-
-        //Codigo
-
+        //CODIGO AGREGADO////////////////////////////////////////////////
+        btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
         lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
 
-        imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
+        //INICIALIZAR OBJETO DE LA INTERFAZ
+        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
+
+        //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
+        getConsultas(view);
+
+        /*imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
         nombres = getResources().getStringArray(R.array.campo1_item_list_ejemplo);
         descripciones = getResources().getStringArray(R.array.campo2_item_list_ejemplo);
 
         adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
-        lvLista.setAdapter(adaptadorListView);
+        lvLista.setAdapter(adaptadorListView);*/
 
+        //AGREGAR EVENTO CLICKLISTENER AL LISTVIEW
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
@@ -80,9 +88,11 @@ public class fragmentConsultasProgramadas extends Fragment {
                     public void run() {
                         //creando bundle para pasar datos al fragmento
                         Bundle paqueteDeDatos = new Bundle();
-                        paqueteDeDatos.putInt(keyImg, imagenes.getResourceId(position, -1));
+                        paqueteDeDatos.putInt(keyImg, imagenes[position]);
+                        paqueteDeDatos.putString(keyCodigo, codigos[position]);
                         paqueteDeDatos.putString(keyNombre, nombres[position]);
-                        paqueteDeDatos.putString(keyDescripcion, descripciones[position]);
+                        paqueteDeDatos.putString(keyFecha,fechas[position]);
+                        paqueteDeDatos.putString(keyHoras,horas[position]);
 
                         // Crea el nuevo fragmento
                         fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta();
@@ -97,11 +107,11 @@ public class fragmentConsultasProgramadas extends Fragment {
                         // Commit a la transacción
                         transaction.commit();
                     }
-                },500);
+                },200);
             }
         });
 
-        btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
+        //AGREGAR EVENTO CLICKLISTENER AL BOTON
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,11 +129,13 @@ public class fragmentConsultasProgramadas extends Fragment {
                 }, 100);
             }
         });
-        //fin codigo agregado
-        getConsultas(view);
+
+
+        //FIN CODIGO AGREGADO////////////////////////////////////////////////////
         return view;
     }
 
+    //METODO PARA CONSUMIR EL WS
     private void getConsultas(final View view) {
         Log.d("JTDebug", "Entra Metodo consulta");
         Call<List<ConsultaModel>> call = servicio.getConsultas(0, 2, 0);
@@ -137,22 +149,24 @@ public class fragmentConsultasProgramadas extends Fragment {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         List<ConsultaModel> resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        String[] arrTit = new String[resp.size()];
-                        String[] arrFec = new String[resp.size()];
-                        String[] arrHora = new String[resp.size()];
-                        int c = 0;
+                        imagenes = new int[resp.size()];
+                        codigos = new String[resp.size()];
+                        nombres = new String[resp.size()];
+                        fechas = new String[resp.size()];
+                        horas = new String[resp.size()];
+
                         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d MMMM yyyy");
                         SimpleDateFormat hourFormat = new SimpleDateFormat("hh:mm:ss");
 
-                        for (ConsultaModel item : resp) {
-                            Log.d("JTDebug", "Conteo de arr " + c);
-                            //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
-                            arrTit[c] = item.per_nombre;
-                            arrFec[c] = dateFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
-                            arrHora[c] = hourFormat.format(item.cme_fecha_hora); //dateFormat.format(item.cme_fecha_hora);
-                            c++;
+                        for (int i=0;i<resp.size();i++) {
+                            ConsultaModel item = resp.get(i);
+                            imagenes[i]=R.drawable.medicanet1;
+                            codigos[i] = "Código consulta: "+item.cme_codigo;
+                            nombres[i] = "Paciente: "+item.per_nombre;
+                            fechas[i] = "Fecha: "+dateFormat.format(item.cme_fecha_hora);
+                            horas[i] = "Hora: "+hourFormat.format(item.cme_fecha_hora);
                         }
-                        AdaptadorListView ha = new AdaptadorListView(getContext(), null, arrTit, arrFec, arrHora, null);
+                        AdaptadorListView ha = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
                         lvLista.setAdapter(ha);
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
