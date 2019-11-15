@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
@@ -41,7 +43,10 @@ public class fragmentConsultasProgramadas extends Fragment {
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
 
+    EditText edtCodigoConsulta;
+    Button btnBuscar;
     ListView lvLista;
+
     AdaptadorListView adaptadorListView;
 
     int[] imagenes;
@@ -49,8 +54,6 @@ public class fragmentConsultasProgramadas extends Fragment {
     String[] nombres;
     String[] fechas;
     String[] horas;
-
-    Button btnBuscar;
 
     public fragmentConsultasProgramadas() {
         // Required empty public constructor
@@ -62,14 +65,15 @@ public class fragmentConsultasProgramadas extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc_consultas_programadas, container, false);
         //CODIGO AGREGADO////////////////////////////////////////////////
-        btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_pendientes);
-        lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_pendientes);
+        edtCodigoConsulta = view.findViewById(R.id.edtCodigoConsulta_fragment_doc_consultas_programadas);
+        btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_programadas);
+        lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_programadas);
 
         //INICIALIZAR OBJETO DE LA INTERFAZ
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
 
         //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
-        getConsultas(view);
+        getConsultas(view,0,1,0);
 
         /*imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
         nombres = getResources().getStringArray(R.array.campo1_item_list_ejemplo);
@@ -114,7 +118,7 @@ public class fragmentConsultasProgramadas extends Fragment {
         //AGREGAR EVENTO CLICKLISTENER AL BOTON
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 btnBuscar.setBackgroundResource(R.drawable.boton_redondeado);
                 btnBuscar.setTextColor(Color.WHITE);
                 new Handler().postDelayed(new Runnable() {
@@ -124,7 +128,20 @@ public class fragmentConsultasProgramadas extends Fragment {
                         btnBuscar.setTextColor(Color.BLACK);
 
                         //Codigo para logica del boton
-                        Toast.makeText(getContext(), "buscando", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Buscando", Toast.LENGTH_SHORT).show();
+                        int codConsulta=-1000;//numero inventado xd
+                        try{
+                            codConsulta=Integer.valueOf(edtCodigoConsulta.getText().toString());
+                        }catch (Exception e ){
+                            System.out.println("Error al convertir codConsulta: "+e);
+                        }
+                        if (codConsulta==-1000){
+                            edtCodigoConsulta.setError("Formato incorrecto, verifique!");
+                            edtCodigoConsulta.requestFocus();
+                            return;
+                        }
+
+                        getConsultas(view,0,0,codConsulta);
                     }
                 }, 100);
             }
@@ -136,9 +153,9 @@ public class fragmentConsultasProgramadas extends Fragment {
     }
 
     //METODO PARA CONSUMIR EL WS
-    private void getConsultas(final View view) {
+    private void getConsultas(final View view, int per, int doc, int cod) {
         Log.d("JTDebug", "Entra Metodo consulta");
-        Call<List<ConsultaModel>> call = servicio.getConsultas(0, 2, 0);
+        Call<List<ConsultaModel>> call = servicio.getConsultas(per, doc, cod);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<ConsultaModel>>() {
             @Override
