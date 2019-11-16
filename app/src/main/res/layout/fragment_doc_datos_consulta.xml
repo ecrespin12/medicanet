@@ -15,6 +15,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#9ECCCCCC"
+            android:text="Consultas programadas"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Datos de paciente"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -24,28 +35,40 @@
             android:id="@+id/tvDuiPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="DUI: 123456-5" />
 
         <TextView
             android:id="@+id/tvNombresPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Nombre: David" />
 
         <TextView
             android:id="@+id/tvFechaNPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Fecha N: 21 de junio de 1995" />
 
         <TextView
             android:id="@+id/tvCorreoPaciente_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Correo: davidlopez310120@gmail.com" />
 
         <TextView
@@ -60,14 +83,20 @@
             android:id="@+id/tvNombresDoctor_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Nombre: Guillermo López" />
 
         <TextView
             android:id="@+id/tvCorreoDoctor_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Correo: guillermoantonio@gmail.com" />
 
         <TextView
@@ -82,28 +111,40 @@
             android:id="@+id/tvCodigoConsulta_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Código consulta: 123" />
 
         <TextView
             android:id="@+id/tvNombreCentroM_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Centro medico: Medicanet" />
 
         <TextView
             android:id="@+id/tvFechaConsulta_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Fecha: 05/12/2019" />
 
         <TextView
             android:id="@+id/tvHoraConsulta_fragment_doc_datos_consulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Hora: 08:00" />
 
         <Button
