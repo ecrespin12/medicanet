@@ -230,8 +230,8 @@ public class fragmentConsultasProgramadas extends Fragment {
                             fechas[i] = "Fecha: "+formatoFecha.format(item.cme_fecha_hora);
                             horas[i] = "Hora: "+formatoHora.format(item.cme_fecha_hora);
                         }
-                        AdaptadorListView ha = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
-                        lvLista.setAdapter(ha);
+                        adaptadorListView = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
+                        lvLista.setAdapter(adaptadorListView);
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
