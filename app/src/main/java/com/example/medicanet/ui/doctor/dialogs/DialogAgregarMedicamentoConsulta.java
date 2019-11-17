@@ -43,6 +43,9 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     EditText edtDescripcion,edtCantidadPastillas,edtCantidadHoras;
     Button btnGuardar;
 
+    String [] codigosMedicamentos;
+    String [] nombresMedicamentos;
+
     public DialogAgregarMedicamentoConsulta() {
         this.setCancelable(false);
     }
@@ -94,30 +97,19 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
-
-                        /*
                         Log.d("JTDebug", "Count: " + resp.size());
-                        imagenes = new int[resp.size()];
-                        codigos = new String[resp.size()];
-                        nombres = new String[resp.size()];
-                        fechas = new String[resp.size()];
-                        horas = new String[resp.size()];
-
-                        SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
-                        SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
+                        codigosMedicamentos=new String[resp.size()];
+                        nombresMedicamentos=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            imagenes[i]=R.drawable.medicanet1;
-                            codigos[i] = "Código consulta: "+item.cme_codigo;
-                            nombres[i] = "Paciente: "+item.per_nombre;
-                            fechas[i] = "Fecha: "+formatoFecha.format(item.cme_fecha_hora);
-                            horas[i] = "Hora: "+formatoHora.format(item.cme_fecha_hora);
+                            codigosMedicamentos[i] = "Código: "+item.mdc_codigo;
+                            nombresMedicamentos[i] = item.mdc_nombre;
                         }
-                        AdaptadorSpinner ha = new AdaptadorSpinner(getContext(), null, null, null, null, null);
-                        lvLista.setAdapter(ha);
+                        AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, codigosMedicamentos, nombresMedicamentos, null, null);
+                        spTipoMedicamento.setAdapter(adaptadorSpinner);
 
-                        */
+
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
