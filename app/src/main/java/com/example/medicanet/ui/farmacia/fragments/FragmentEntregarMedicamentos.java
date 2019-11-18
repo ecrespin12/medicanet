@@ -32,7 +32,6 @@ public class FragmentEntregarMedicamentos extends Fragment {
 
         AdaptadorListView ha = new AdaptadorListView(getContext(),null,Arr1,Arr2,Arr3,Arr4);
         LvConsultas.setAdapter(ha);
-        edtId.setText("hola");
 
         return v;
     }
