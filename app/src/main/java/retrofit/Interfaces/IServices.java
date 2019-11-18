@@ -6,6 +6,7 @@ import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
+import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import retrofit2.Call;
