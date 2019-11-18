@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitulo_doc_modal_agregar_medicamento_consulta"
         android:gravity="left"
-        android:text="Tipo de medicamento"
+        android:text="Medicamento"
         android:layout_marginLeft="10dp"/>
 
     <LinearLayout

@@ -36,7 +36,7 @@
     <string name="datos_medicos">Datos Medicos pacientes</string>
     <string name="historial_medico">Historial Medico</string>
     <string name="medicamentos_pendientes">Medicamentos Pendientes</string>
-    <string name="agregar_proxima_cita">Agregar Proxima cita</string>
+    <string name="agregar_proxima_cita">Agregar proxima consulta</string>
     <string name="agregar_detalle_de_consulta">Agregar Detalle De Consulta</string>
     <string name="agregar_medicamentos">Agregar Medicamentos</string>
     <string name="consultar_paciente">Consultar Paciente</string>

@@ -45,7 +45,7 @@
                 android:id="@+id/ib_obtener_fecha"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/calendar" />
+                android:background="@drawable/calendario_64_1"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -66,14 +66,14 @@
                 android:id="@+id/ib_obtener_fechalimite"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/calendar" />
+                android:background="@drawable/calendario_64_1"/>
 
             <ImageButton
                 android:id="@+id/btnBuscar_pac"
-                android:layout_width="17dp"
-                android:layout_height="match_parent"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_weight="1"
-                android:src="@drawable/search" />
+                android:background="@drawable/lupa_celeste"/>
 
         </LinearLayout>
 
