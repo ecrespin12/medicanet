@@ -18,14 +18,15 @@
             android:layout_height="wrap_content"
             android:background="#343636"
             android:gravity="center_horizontal"
-            android:text="@string/consulta_programada"
+            android:text="Medicamentos Pendientes"
             android:textColor="#FFEBEE"
             android:textColorHint="#9575CD" />
 
         <ListView
             android:id="@+id/lv_pendientes_entregas_pac"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#BBDEFB"/>
 
     </LinearLayout>
 
