@@ -1,9 +1,6 @@
 package com.example.medicanet.ui.doctor.fragments;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +16,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
@@ -39,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class fragmentConsultasProgramadas extends Fragment {
+public class FragmentConsultasProgramadas extends Fragment {
 
     public static String keyImg = "img";
     public static String keyCodigo = "codigo";
@@ -66,7 +62,7 @@ public class fragmentConsultasProgramadas extends Fragment {
     String[] fechas;
     String[] horas;
 
-    public fragmentConsultasProgramadas() {
+    public FragmentConsultasProgramadas() {
         // Required empty public constructor
     }
 
@@ -112,7 +108,7 @@ public class fragmentConsultasProgramadas extends Fragment {
                         paqueteDeDatos.putString(keyHoras,horas[position]);
 
                         // Crea el nuevo fragmento
-                        fragmentDatosConsulta fragmentDatosConsulta = new fragmentDatosConsulta(resp,position);
+                        FragmentDatosConsulta fragmentDatosConsulta = new FragmentDatosConsulta(resp,position);
                         //Agregamos los argumentos al fragmento
                         fragmentDatosConsulta.setArguments(paqueteDeDatos);
                         //Crea la transaccion

@@ -54,7 +54,7 @@
         android:id="@+id/group_farmacia"
         android:visible="false">
         <item
-            android:id="@+id/nav_far_listado_paciente"
+            android:id="@+id/nav_far_entregar_medicamentos"
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/menu_far_entregar_medicamentos" />
         <item

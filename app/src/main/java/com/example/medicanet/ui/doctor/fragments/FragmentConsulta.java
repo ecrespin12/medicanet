@@ -17,14 +17,14 @@ import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarDetalleConsulta;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarMedicamentoConsulta;
 
-public class fragmentConsulta extends Fragment {
+public class FragmentConsulta extends Fragment {
 
     Button btnDetalles;
     Button btnAgregarCita;
     Button btnMedicamentos;
     Button btnTerminar;
 
-    public fragmentConsulta() {
+    public FragmentConsulta() {
         // Required empty public constructor
     }
 

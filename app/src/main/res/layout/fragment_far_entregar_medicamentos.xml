@@ -4,12 +4,24 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
+tools:context=".ui.farmacia.fragments.FragmentEntregarMedicamentos">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#9ECCCCCC"
+            android:text="Entregar Medicamentos"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +32,7 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
             android:padding="15dp">
 
             <EditText
-                android:id="@+id/edt_far_consultas_programadas"
+                android:id="@+id/edtId_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -29,7 +41,7 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
                 android:inputType="numberSigned" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fba_far_consultas_programadas_buscar"
+                android:id="@+id/fbaBuscar_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -47,7 +59,7 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edt_far_medicamentos_entregados_fecha1"
+                android:id="@+id/edtDesde_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,14 +69,14 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
                 android:inputType="textPersonName" />
 
             <ImageButton
-                android:id="@+id/imgb_far_medicamentos_entregados_fecha1"
+                android:id="@+id/imgbDesde_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:src="@android:drawable/ic_menu_my_calendar" />
 
             <EditText
-                android:id="@+id/edt_far_medicamentos_entregados_fecha2"
+                android:id="@+id/edtHasta_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,7 +86,7 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
                 android:inputType="textPersonName" />
 
             <ImageButton
-                android:id="@+id/imgb_far_medicamentos_entregados_fecha2"
+                android:id="@+id/imgbHasta_fragment_far_entregar_medicamentos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
@@ -82,17 +94,16 @@ tools:context=".ui.farmacia.ConsultasProgramadas.far_consultas_programadas">
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#343636"
             android:gravity="center_horizontal"
-            android:text="@string/consultas_programadas"
+            android:text="Lista de consultas programadas"
             android:textColor="#FFEBEE"
             android:textColorHint="#9575CD" />
 
         <ListView
-            android:id="@+id/lv_far_consultas_programadas"
+            android:id="@+id/lvConsultasProgramadas_fragment_far_entregar_medicamentos"
             android:layout_width="match_parent"
             android:layout_height="620dp"
             android:layout_weight="1"

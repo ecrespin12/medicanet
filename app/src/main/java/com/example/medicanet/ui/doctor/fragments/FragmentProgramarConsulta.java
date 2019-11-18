@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.example.medicanet.R;
 
-public class fragmentProgramarConsulta extends Fragment {
+public class FragmentProgramarConsulta extends Fragment {
 
     View view;
 
-    public fragmentProgramarConsulta() {
+    public FragmentProgramarConsulta() {
         // Required empty public constructor
     }
 

@@ -11,19 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
-import com.example.medicanet.ui.doctor.fragments.fragmentConsulta;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import clasesResponse.ConsultaModel;
 
-public class fragmentDatosConsulta extends Fragment {
+public class FragmentDatosConsulta extends Fragment {
 
     TextView tvDuiPaciente;
     TextView tvNombresPaciente;
@@ -47,7 +45,7 @@ public class fragmentDatosConsulta extends Fragment {
     SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
 
-    public fragmentDatosConsulta(List<ConsultaModel> resp, int indiceListView) {
+    public FragmentDatosConsulta(List<ConsultaModel> resp, int indiceListView) {
         this.item=resp.get(indiceListView);
     }
 
@@ -103,7 +101,7 @@ public class fragmentDatosConsulta extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        final fragmentConsulta fragmentConsulta = new fragmentConsulta();
+                        final FragmentConsulta fragmentConsulta = new FragmentConsulta();
 
                         // Crea el nuevo fragmento y la transacción.
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();

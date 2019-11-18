@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 
-public class fragmentPacientes extends Fragment {
+public class FragmentPacientes extends Fragment {
 
     View view;
     EditText edtCodigoPaciente;
@@ -36,7 +36,7 @@ public class fragmentPacientes extends Fragment {
     public static String keyCodigo = "nombre";
     public static String keyNombre = "descripcion";
 
-    public fragmentPacientes() {
+    public FragmentPacientes() {
         // Required empty public constructor
     }
 
