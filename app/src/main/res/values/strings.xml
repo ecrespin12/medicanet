@@ -168,4 +168,5 @@
 
     <!-- string WS -->
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IkhlbGxvIFdvcmxkISI.VzXeVJOGwyr_R_lWTM2VW1i7B24XlnxiPURkg4YxrWg</string>
+    <string name="consultas_programadas">Consultas Programadas</string>
 </resources>

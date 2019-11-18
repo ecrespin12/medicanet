@@ -26,7 +26,7 @@
                 android:padding="15dp">
 
                 <EditText
-                    android:id="@+id/edt_far_pendientes_entrega_id"
+                    android:id="@+id/edt_far_consultas_programadas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -35,7 +35,7 @@
                     android:inputType="numberSigned" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fba_far_pendientes_entrega_buscar"
+                    android:id="@+id/fba_far_consultas_programadas_buscar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/edt_far_pendientes_entrega_fecha1"
+                    android:id="@+id/edt_far_medicamentos_entregados_fecha1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -63,14 +63,14 @@
                     android:inputType="textPersonName" />
 
                 <ImageButton
-                    android:id="@+id/imgb_far_pendientes_entrega_fecha1"
+                    android:id="@+id/imgb_far_medicamentos_entregados_fecha1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.40"
                     android:src="@android:drawable/ic_menu_my_calendar" />
 
                 <EditText
-                    android:id="@+id/edt_far_pendientes_entrega_fecha2"
+                    android:id="@+id/edt_far_medicamentos_entregados_fecha2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -80,7 +80,7 @@
                     android:inputType="textPersonName" />
 
                 <ImageButton
-                    android:id="@+id/imgb_far_pendientes_entrega_fecha2"
+                    android:id="@+id/imgb_far_medicamentos_entregados_fecha2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.40"

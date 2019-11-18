@@ -23,7 +23,7 @@ public class PendientesDeEntrega extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_far_entrega_medicamentos, container, false);
+        return inflater.inflate(R.layout.fragment_far_consultas_programadas, container, false);
     }
 
 }
