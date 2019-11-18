@@ -1,10 +1,6 @@
 package retrofit.Interfaces;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
-
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
@@ -24,7 +20,6 @@ public interface IServices {
     @GET("version_api.php?")
     @NotNull
     Call<clItems> getConsultaVersion(@Query("id") @NotNull String id);
-
 
     @GET("CentroMedico/centro_medico")
     @NotNull
@@ -49,4 +44,9 @@ public interface IServices {
     @GET("Historial/historial?")
     @NotNull
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
+
+    @GET("Medicamentos/medicamentos_pendientes?")
+    @NotNull
+    Call<List<MedicamentosPendientesModel>> getMedicamentosPendientes(@Query("cme") int cme, @Query("per") int per);
+
 }
