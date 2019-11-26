@@ -20,20 +20,20 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spMedicamentos_far_modal_pendiente_entrega"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="10dp" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView"
+        android:id="@+id/txtIndicaciones_far_modal_pendiente_entrega"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_margin="10dp"
         android:background="@android:color/background_light" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/edtCantidad_far_modal_pendiente_entrega"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="10dp"
@@ -48,7 +48,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
+            android:id="@+id/btnCancelar_far_modal_pendiente_entrega"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -60,7 +60,7 @@
             app:srcCompat="@android:drawable/ic_menu_revert" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
+            android:id="@+id/btnGuardar_far_modal_pendiente_entrega"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
