@@ -73,6 +73,13 @@ public interface IServices {
     @NotNull
     Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
 
+
+
+
+
+
+
+    
     @POST("EntregaMedicamento/updateEntrega")
     @FormUrlEncoded
     Call postEntregaMedicamentoUpdate(@Field("cod") int cod, @Field("est") String est, @Field("fec") int fec);
