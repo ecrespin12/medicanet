@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
+import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
 
 import java.text.SimpleDateFormat;
 
@@ -98,6 +99,9 @@ public class FragmentDatosPaciente extends Fragment {
 
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Programar consulta", Toast.LENGTH_SHORT).show();
+                        //crear y mostrar un Dialog
+                        DialogAgregarCita dialog = new DialogAgregarCita();
+                        dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
                     }
                 }, 100);
             }
