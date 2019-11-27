@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 
+import clasesResponse.PacientesModel;
+
 public class FragmentDatosPaciente extends Fragment {
 
     View view;
@@ -22,11 +24,11 @@ public class FragmentDatosPaciente extends Fragment {
     String codigo;
     String nombre;
     Button btnVerHistorial;
+    PacientesModel item;
 
-    public FragmentDatosPaciente(String codigo, String nombre) {
+    public FragmentDatosPaciente(PacientesModel item) {
         // Required empty public constructor
-        this.codigo=codigo;
-        this.nombre=nombre;
+        this.item=item;
     }
 
 

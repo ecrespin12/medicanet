@@ -7,6 +7,7 @@ import clasesResponse.ConsultaModel;
 import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
+import clasesResponse.PacientesModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import retrofit2.Call;
@@ -49,5 +50,9 @@ public interface IServices {
     @GET("Medicamentos/medicamentos_pendientes?")
     @NotNull
     Call<List<MedicamentosPendientesModel>> getMedicamentosPendientes(@Query("cme") int cme, @Query("per") int per);
+
+    @GET("Medicos/pacientesActivos?")
+    @NotNull
+    Call<List<PacientesModel>> getPacientesActivos(@Query("med") int med);
 
 }
