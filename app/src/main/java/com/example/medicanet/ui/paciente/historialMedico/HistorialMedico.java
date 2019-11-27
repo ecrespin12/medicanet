@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 import clasesResponse.HistorialModel;
 import retrofit.Interfaces.IServices;
@@ -27,12 +29,22 @@ public class HistorialMedico extends Fragment {
     //###########################################################
 
     ListView lvHistorialMedico;
-    String[] hme_codthm;
-    String[] hme_descripcion;
-    String[] hme_fecha_crea;
-    String[] thm_nombre;
+    String[] arr1;
+    String[] arr2;
+    String[] arr3;
+    String[] arr4;
+
+    int codigoPaciente=1;
+
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
+    SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
+
+
     public HistorialMedico() {
         // Required empty public constructor
+    }
+    public HistorialMedico(int codigoPaciente) {
+        this.codigoPaciente=codigoPaciente;
     }
 
 
@@ -49,7 +61,7 @@ public class HistorialMedico extends Fragment {
 
     private void getHistorial(final View view){
         Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
-        Call<List<HistorialModel>> call = servicio.getHistorialPaciente( 1);
+        Call<List<HistorialModel>> call = servicio.getHistorialPaciente( codigoPaciente);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<HistorialModel>>() {
             @Override
@@ -60,19 +72,19 @@ public class HistorialMedico extends Fragment {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        hme_codthm=new String[resp.size()];
-                        hme_descripcion=new String[resp.size()];
-                        hme_fecha_crea=new String[resp.size()];
-                        thm_nombre=new String[resp.size()];
+                        arr1=new String[resp.size()];
+                        arr2=new String[resp.size()];
+                        arr3=new String[resp.size()];
+                        arr4=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            hme_codthm[i] = "Paciente: "+item.hme_codthm;
-                            hme_descripcion[i] = "Cantidad pendiente: " + item.hme_descripcion;
-                            hme_fecha_crea[i] = "Medicina: " +item.hme_fecha_crea;
-                            thm_nombre[i] = "Indicaciones: "+item.thm_nombre;
+                            arr1[i] = "TIPO HISTORIAL: "+item.thm_nombre;
+                            arr2[i] = "DESCRIPCIÓN: " + item.hme_descripcion;
+                            arr3[i] = "FECHA: " +formatoFecha.format(item.hme_fecha_crea);
+                            arr4[i] = "HORA: "+formatoHora.format(item.hme_fecha_crea);
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, hme_codthm, hme_descripcion, hme_fecha_crea, thm_nombre);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, arr1, arr2, arr3, arr4);
                         lvHistorialMedico.setAdapter(adaptadorList);
 
 

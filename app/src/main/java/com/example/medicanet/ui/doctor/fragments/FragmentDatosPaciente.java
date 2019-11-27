@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
+import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
 
 import java.text.SimpleDateFormat;
 
@@ -81,6 +83,17 @@ public class FragmentDatosPaciente extends Fragment {
 
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Ver historial", Toast.LENGTH_SHORT).show();
+
+                        // Crea el nuevo fragmento
+                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(item.per_codigo);
+                        //Crea la transaccion
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
+                        transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
+                        transaction.addToBackStack(null);
+
+                        // Commit a la transacción
+                        transaction.commit();
                     }
                 }, 100);
             }
