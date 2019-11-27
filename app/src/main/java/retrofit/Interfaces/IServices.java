@@ -2,6 +2,7 @@ package retrofit.Interfaces;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
+import clasesResponse.CitasModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.EntregaMedicamentoDetalleModel;
@@ -65,5 +66,9 @@ public interface IServices {
     @GET("EntregaMedicamento/entregaDetalle?")
     @NotNull
     Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
+
+    @GET("Consulta/consulta?")
+    @NotNull
+    Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
 
 }
