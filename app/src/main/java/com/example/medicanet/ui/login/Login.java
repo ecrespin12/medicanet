@@ -60,9 +60,26 @@ public class Login extends AppCompatActivity {
             public void run() {
                 btn_iniciar.setBackgroundResource(R.drawable.boton_redondeado_borde);
 
+                if (camposVacios()){
+                    return;
+                }
                 Ingresar(view);
             }
         },100);
+    }
+
+    public boolean camposVacios(){
+        if (edtUser.getText().toString().equals("")){
+            edtUser.setError("Digite el correo");
+            edtUser.requestFocus();
+            return true;
+        }
+        if (edtPassword.getText().toString().equals("")){
+            edtPassword.setError("Digite la contraseña");
+            edtPassword.requestFocus();
+            return true;
+        }
+        return false;
     }
 
     public void salir(View view){
@@ -111,7 +128,7 @@ public class Login extends AppCompatActivity {
                         } else {
                             // si falla mostrar.
                             Log.w("Fallo", "Error al iniciar", task.getException());
-                            Toast.makeText(getApplicationContext(), "Auth fallo.",
+                            Toast.makeText(getApplicationContext(), "Credenciales incorrectas",
                                     Toast.LENGTH_SHORT).show();
 
                         }
