@@ -4,6 +4,8 @@ import java.util.List;
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
+import clasesResponse.EntregaMedicamentoDetalleModel;
+import clasesResponse.EntregaMedicamentosModel;
 import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
@@ -49,5 +51,15 @@ public interface IServices {
     @GET("Medicamentos/medicamentos_pendientes?")
     @NotNull
     Call<List<MedicamentosPendientesModel>> getMedicamentosPendientes(@Query("cme") int cme, @Query("per") int per);
+
+    @GET("EntregaMedicamento/Entregas?")
+
+    @NotNull
+    Call<List<EntregaMedicamentosModel>> getEntregaMedicamentos(@Query("far") int far, @Query("est") String est, @Query("per")
+            int per, @Query("med") int med, @Query("ntag") String ntag, @Query("dtag") String dtag, @Query("con") int cod);
+
+    @GET("EntregaMedicamento/entregaDetalle?")
+    @NotNull
+    Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
 
 }
