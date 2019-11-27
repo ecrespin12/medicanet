@@ -22,46 +22,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edtDesde_fragment_far_pendientes_entrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:enabled="false"
-                android:hint="mm/dd/aaaa"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/imgbDesde_fragment_far_pendientes_entrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:src="@android:drawable/ic_menu_my_calendar" />
-
-            <EditText
-                android:id="@+id/edtHasta_fragment_far_pendientes_entrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:enabled="false"
-                android:hint="mm/dd/aaaa"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/imgbHasta_fragment_far_pendientes_entrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.40"
-                android:src="@android:drawable/ic_menu_my_calendar" />
-        </LinearLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -16,6 +16,7 @@ import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.Metodos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
 import java.util.List;
 
 import clasesResponse.EntregaMedicamentosModel;
@@ -61,12 +62,12 @@ public class FragmentHistorialEntregas extends Fragment {
         edtDesde = view.findViewById(R.id.edtDesde_fragment_far_historial_entregas);
         edtHasta = view.findViewById(R.id.edtHasta_fragment_far_historial_entregas);
         lvHistorial = view.findViewById(R.id.lvMedicamentosEntregados_fragment_far_historial_entregas);
-        getEntregaMedicamentos(0,"E",0,0,"","",0);
+        getEntregaMedicamentos(0,"E",0,0,"","",0,null, null);
 
         fabBuscarHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEntregaMedicamentos(0,"E",0,0,edtBuscar.getText().toString(),"",0);
+                getEntregaMedicamentos(0,"E",0,0,edtBuscar.getText().toString(),"",0,edtDesde.getText().toString(),edtHasta.getText().toString());
             }
         });
         imgDesde.setOnClickListener(new View.OnClickListener() {
@@ -79,15 +80,16 @@ public class FragmentHistorialEntregas extends Fragment {
             @Override
             public void onClick(View v) {
                 Metodos.fecha(getContext(), edtHasta);
+
             }
         });
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cod){
+    public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cod, String fini, String ffin){
         Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosModel");
-        Call<List<EntregaMedicamentosModel>> call = servicio.getEntregaMedicamentos(far,est,per,med,ntag,dtag,cod);
+        Call<List<EntregaMedicamentosModel>> call = servicio.getEntregaMedicamentos(far,est,per,med,ntag,dtag,cod,fini,ffin);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<EntregaMedicamentosModel>>() {
             @Override

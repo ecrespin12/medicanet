@@ -1,5 +1,7 @@
 package retrofit.Interfaces;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaDetalleModel;
@@ -10,10 +12,15 @@ import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.PacientesModel;
+import clasesResponse.UpdateEntregaDeMedicamentosModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IServices {
@@ -56,14 +63,17 @@ public interface IServices {
     @GET("Medicos/pacientesActivos?")
     @NotNull
     Call<List<PacientesModel>> getPacientesActivos(@Query("med") int med);
-    @GET("EntregaMedicamento/Entregas?")
 
+    @GET("EntregaMedicamento/Entregas?")
     @NotNull
     Call<List<EntregaMedicamentosModel>> getEntregaMedicamentos(@Query("far") int far, @Query("est") String est, @Query("per")
-            int per, @Query("med") int med, @Query("ntag") String ntag, @Query("dtag") String dtag, @Query("con") int cod);
+            int per, @Query("med") int med, @Query("ntag") String ntag, @Query("dtag") String dtag, @Query("con") int cod, @Query("fini")String fini, @Query("ffin") String ffin);
 
     @GET("EntregaMedicamento/entregaDetalle?")
     @NotNull
     Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
 
+    @POST("EntregaMedicamento/updateEntrega")
+    @FormUrlEncoded
+    Call postEntregaMedicamentoUpdate(@Field("cod") int cod, @Field("est") String est, @Field("fec") int fec);
 }

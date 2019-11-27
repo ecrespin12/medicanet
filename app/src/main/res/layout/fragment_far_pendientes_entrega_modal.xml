@@ -19,11 +19,15 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spMedicamentos_far_modal_pendiente_entrega"
+
+    <EditText
+        android:id="@+id/edtMedicamento_far_modal_pendiente_entrega"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="10dp" />
+        android:layout_height="44dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:inputType="number" />
 
     <MultiAutoCompleteTextView
         android:id="@+id/txtIndicaciones_far_modal_pendiente_entrega"
