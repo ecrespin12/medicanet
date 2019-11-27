@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_admin_ejemplo">
+    tools:context=".ui.admin.fragment_admin_doctor">
+
+    <!-- TODO: Update blank fragment layout -->
 
     <Button
         android:id="@+id/btnOpenDialogDoc_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="abrir" />
+        android:text="Button" />
+
 </FrameLayout>

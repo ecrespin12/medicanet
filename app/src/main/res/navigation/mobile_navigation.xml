@@ -68,9 +68,19 @@
         android:name="com.example.medicanet.webServices.WebService"
         android:label="Medicanet"
         tools:layout="@layout/fragment_web" />
+
+
+
     <fragment
         android:id="@+id/nav_admin_ejemplo"
         android:name="com.example.medicanet.fragment_admin_ejemplo"
         android:label="Medicanet"
         tools:layout="@layout/fragment_fragment_admin_ejemplo" />
+
+
+    <fragment
+        android:id="@+id/nav_admin_doctor"
+        android:name="com.example.medicanet.ui.admin.fragment_admin_doctor"
+        android:label="Admin Doctor"
+        tools:layout="@layout/fragment_admin_doctor" />
 </navigation>

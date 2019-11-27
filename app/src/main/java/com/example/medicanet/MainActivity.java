@@ -43,13 +43,15 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
 
+
+        //recupero el rol de usuario
         String user = getIntent().getExtras().getString("user");
 
-        if(user.equals("d")){
+        if(user.equals("doctor")){
             navigationView.getMenu().setGroupVisible(R.id.group_doctor, true);
-        }else if(user.equals("f")){
+        }else if(user.equals("farmacia")){
             navigationView.getMenu().setGroupVisible(R.id.group_farmacia, true);
-        }else if(user.equals("p")){
+        }else if(user.equals("paciente")){
             navigationView.getMenu().setGroupVisible(R.id.group_paciente, true);
         }else {
 
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_far_listado_paciente,
                 R.id.nav_far_historial_entregas,
 
+                R.id.nav_admin_doctor,
                 R.id.nav_admin_ejemplo)
                 .setDrawerLayout(drawer)
                 .build();

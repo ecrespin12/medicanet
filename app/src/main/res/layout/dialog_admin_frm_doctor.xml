@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    android:layout_height="450dp"
+    android:layout_gravity="center"
+    android:background="@drawable/style_modal"
+    android:padding="7dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/btnCloseDoc_modal_adm"
+        android:background="@drawable/ic_close"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="REGISTRAR DOCTOR"
+        android:textColor="#1a81ad"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txtNombresDoc_modal_adm"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+
+        android:hint="Nombres"
+
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/txtApellidosDoc_modal_adm"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/txtNombresDoc_modal_adm"
+        android:hint="Apellidos"
+        android:textSize="14sp" />
+    />
+    <EditText
+        android:id="@+id/txtCorreoDoc_modal_adm"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/txtApellidosDoc_modal_adm"
+        android:hint="Email"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnGuardarDoc_modal_adm"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/txtCorreoDoc_modal_adm"
+        android:clickable="true"
+        android:text="Guardar"
+        android:textSize="14dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/boton_style_modal"
+        android:layout_marginBottom="50dp"
+        />
+
+</RelativeLayout>
