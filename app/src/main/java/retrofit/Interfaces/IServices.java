@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
+import clasesResponse.CitasModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.EntregaMedicamentoDetalleModel;
@@ -74,6 +75,7 @@ public interface IServices {
     Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
@@ -86,4 +88,10 @@ public interface IServices {
     @POST("EntregaMedicamento/updateEntrega")
     @FormUrlEncoded
     Call postEntregaMedicamentoUpdate(@Field("cod") int cod, @Field("est") String est, @Field("fec") int fec);
+=======
+    @GET("Consulta/consulta?")
+    @NotNull
+    Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
+
+>>>>>>> 316cf49c6c8dea7ab355eaae4c31908f31aaec4d
 }
