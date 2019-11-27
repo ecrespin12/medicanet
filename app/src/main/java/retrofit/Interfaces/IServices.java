@@ -1,23 +1,16 @@
 package retrofit.Interfaces;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-import java.util.Objects;
-
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
+import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
-import clasesResponse.clVersion;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface IServices {
@@ -52,5 +45,9 @@ public interface IServices {
     @GET("Historial/historial?")
     @NotNull
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
+
+    @GET("Medicamentos/medicamentos_pendientes?")
+    @NotNull
+    Call<List<MedicamentosPendientesModel>> getMedicamentosPendientes(@Query("cme") int cme, @Query("per") int per);
 
 }

@@ -10,20 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarDetalleConsulta;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarMedicamentoConsulta;
 
-public class fragmentConsulta extends Fragment {
+public class FragmentConsulta extends Fragment {
 
     Button btnDetalles;
     Button btnAgregarCita;
     Button btnMedicamentos;
     Button btnTerminar;
 
-    public fragmentConsulta() {
+    public FragmentConsulta() {
         // Required empty public constructor
     }
 
@@ -41,13 +42,11 @@ public class fragmentConsulta extends Fragment {
         btnAgregarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnAgregarCita.setBackgroundResource(R.drawable.boton_redondeado);
-                btnAgregarCita.setTextColor(Color.WHITE);
+                btnAgregarCita.setBackgroundResource(R.drawable.nueva_consulta_2);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnAgregarCita.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnAgregarCita.setTextColor(Color.BLACK);
+                        btnAgregarCita.setBackgroundResource(R.drawable.nueva_consulta_1);
 
                         //crear y mostrar un Dialog
                         DialogAgregarCita dialog = new DialogAgregarCita();
@@ -60,13 +59,11 @@ public class fragmentConsulta extends Fragment {
         btnDetalles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnDetalles.setBackgroundResource(R.drawable.boton_redondeado);
-                btnDetalles.setTextColor(Color.WHITE);
+                btnDetalles.setBackgroundResource(R.drawable.detalle_consulta_2);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnDetalles.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnDetalles.setTextColor(Color.BLACK);
+                        btnDetalles.setBackgroundResource(R.drawable.detalle_consulta_1);
 
                         //Crear y mostrar un Dialog
                         DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta();
@@ -78,13 +75,11 @@ public class fragmentConsulta extends Fragment {
         btnMedicamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnMedicamentos.setBackgroundResource(R.drawable.boton_redondeado);
-                btnMedicamentos.setTextColor(Color.WHITE);
+                btnMedicamentos.setBackgroundResource(R.drawable.medicamento_2);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnMedicamentos.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnMedicamentos.setTextColor(Color.BLACK);
+                        btnMedicamentos.setBackgroundResource(R.drawable.medicamento_1);
 
                         //Crear y mostrar un Dialog
                         DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta();
@@ -105,7 +100,7 @@ public class fragmentConsulta extends Fragment {
                         btnTerminar.setTextColor(Color.BLACK);
 
                         //Terminar
-
+                        Toast.makeText(getContext(),"Terminando consulta",Toast.LENGTH_SHORT).show();
                     }
                 },100);
             }

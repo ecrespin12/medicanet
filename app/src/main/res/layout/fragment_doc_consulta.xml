@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.doctor.fragments.fragmentConsulta">
+    tools:context=".ui.doctor.fragments.FragmentConsulta">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,50 +11,62 @@
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#9ECCCCCC"
+            android:text="Consulta médica"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnDetalles_fragment_doc_consulta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
                 android:layout_margin="3dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_borde"
-                android:text="Detalles"
+                android:background="@drawable/detalle_consulta_1"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <Button
+
+                android:id="@+id/btnMedicamentos_fragment_doc_consulta"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/medicamento_1"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="normal" />
 
             <Button
                 android:id="@+id/btnAgregarCita_fragment_doc_consulta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_margin="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_borde"
-                android:text="Agregar cita"
+                android:background="@drawable/nueva_consulta_1"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="normal" />
 
-            <Button
-                android:id="@+id/btnMedicamentos_fragment_doc_consulta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_borde"
-                android:text="Medicamentos"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+
         </LinearLayout>
 
         <TextView

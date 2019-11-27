@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 
-public class fragmentPacientes extends Fragment {
+public class FragmentPacientes extends Fragment {
 
     View view;
     EditText edtCodigoPaciente;
@@ -35,7 +36,7 @@ public class fragmentPacientes extends Fragment {
     public static String keyCodigo = "nombre";
     public static String keyNombre = "descripcion";
 
-    public fragmentPacientes() {
+    public FragmentPacientes() {
         // Required empty public constructor
     }
 
@@ -59,22 +60,28 @@ public class fragmentPacientes extends Fragment {
         codigosPaciente = getResources().getStringArray(R.array.campo1_lista_paciente_ejemplo);
         nombresPaciente = getResources().getStringArray(R.array.campo2_lista_paciente_ejemplo);
 
-        adaptadorListView = new AdaptadorListView(getContext(),imagenes,codigosPaciente,nombresPaciente,null,null);
+        adaptadorListView = new AdaptadorListView(getContext(),null,codigosPaciente,nombresPaciente,null,null);
         lvPacientes.setAdapter(adaptadorListView);
 
 
         lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Crea el nuevo fragmento
-                FragmentDatosPaciente fragmentDatosPaciente = new FragmentDatosPaciente(codigosPaciente[position],nombresPaciente[position]);
-                // Crea la transacción.
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                //remplaza el fragmento en el contenedor
-                transaction.replace(R.id.nav_host_fragment, fragmentDatosPaciente);
-                transaction.addToBackStack(null);
-                // Commit a la transacción
-                transaction.commit();
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Logica
+                        //Crea el nuevo fragmento
+                        FragmentDatosPaciente fragmentDatosPaciente = new FragmentDatosPaciente(codigosPaciente[position],nombresPaciente[position]);
+                        // Crea la transacción.
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        //remplaza el fragmento en el contenedor
+                        transaction.replace(R.id.nav_host_fragment, fragmentDatosPaciente);
+                        transaction.addToBackStack(null);
+                        // Commit a la transacción
+                        transaction.commit();
+                    }
+                },200);
             }
         });
 

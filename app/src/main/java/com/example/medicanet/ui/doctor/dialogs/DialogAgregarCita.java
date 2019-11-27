@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+import android.os.Handler;
+import android.util.Half;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,14 +89,32 @@ public class DialogAgregarCita extends DialogFragment {
         btnFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Metodos.fecha(getContext(),edtFecha);
+                btnFecha.setBackgroundResource(R.drawable.calendario_64_2);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnFecha.setBackgroundResource(R.drawable.calendario_64_1);
+
+                        //logica
+                        Metodos.fecha(getContext(),edtFecha);
+                    }
+                },100);
             }
         });
 
         btnHora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Metodos.hora(getContext(),edtHora);
+                btnHora.setBackgroundResource(R.drawable.alarm_negro);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnHora.setBackgroundResource(R.drawable.alarm_celeste);
+
+                        //logica
+                        Metodos.hora(getContext(),edtHora);
+                    }
+                },100);
             }
         });
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.doctor.fragments.fragmentConsultasProgramadas">
+    tools:context=".ui.doctor.fragments.FragmentConsultasProgramadas">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,50 +12,85 @@
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edtIdUsuario_fragment_doc_consultas_pendientes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Código de consulta"
-                android:inputType="textPersonName" />
-
-            <Button
-                android:id="@+id/btnBuscar_fragment_doc_consultas_pendientes"
-                android:layout_width="4dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/boton_redondeado_borde"
-                android:clickable="true"
-                android:text="@string/docConsultarPaciente_btnBuscar"
-                android:textColor="#000000" />
-
-        </LinearLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
             android:background="#9ECCCCCC"
             android:text="Consultas programadas"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/edtFecha_fragment_doc_consultas_programadas"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="20dp"
+                android:hint="Seleccione una fecha"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnFecha_fragment_doc_consultas_programadas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnFecha_fragment_doc_consultas_programadas"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/calendario_64_1"
+                android:clickable="true"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/edtNombrePaciente_fragment_doc_consultas_programadas"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="20dp"
+                android:hint="Nombre de paciente"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnBuscar_fragment_doc_consultas_programadas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnBuscar_fragment_doc_consultas_programadas"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/lupa_celeste"
+                android:clickable="true"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ListView
 
-            android:id="@+id/lvConsultas_fragment_doc_consultas_pendientes"
+            android:id="@+id/lvConsultas_fragment_doc_consultas_programadas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#208bb9" />
+            android:layout_marginTop="10dp"
+            android:background="#BBDEFB" />
 
     </LinearLayout>
 

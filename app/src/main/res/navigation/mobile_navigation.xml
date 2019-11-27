@@ -30,31 +30,31 @@
     //DOCTOR
     <fragment
         android:id="@+id/nav_doc_consultas_programadas"
-        android:name="com.example.medicanet.ui.doctor.fragments.fragmentConsultasProgramadas"
+        android:name="com.example.medicanet.ui.doctor.fragments.FragmentConsultasProgramadas"
         android:label="Medicanet"
         tools:layout="@layout/fragment_doc_consultas_pacientes" />
     <fragment
         android:id="@+id/nav_doc_pacientes"
-        android:name="com.example.medicanet.ui.doctor.fragments.fragmentPacientes"
+        android:name="com.example.medicanet.ui.doctor.fragments.FragmentPacientes"
         android:label="Medicanet"
         tools:layout="@layout/fragment_doc_pacientes" />
     <fragment
         android:id="@+id/nav_doc_programar_consultas"
-        android:name="com.example.medicanet.ui.doctor.fragments.fragmentProgramarConsulta"
+        android:name="com.example.medicanet.ui.doctor.fragments.FragmentProgramarConsulta"
         android:label="Medicanet"
         tools:layout="@layout/fragment_doc_programar_consulta" />
 
     //FARMACIA
     <fragment
-        android:id="@+id/nav_far_listado_paciente"
-        android:name="com.example.medicanet.ui.farmacia.PendientesDeEntrega.PendientesDeEntrega"
+        android:id="@+id/nav_far_entregar_medicamentos"
+        android:name="com.example.medicanet.ui.farmacia.fragments.FragmentEntregarMedicamentos"
         android:label="Medicanet"
-        tools:layout="@layout/fragment_far_entrega_medicamentos" />
+        tools:layout="@layout/fragment_far_entregar_medicamentos" />
     <fragment
         android:id="@+id/nav_far_historial_entregas"
-        android:name="com.example.medicanet.ui.farmacia.MedicamentosEntregados.MedicamentosEntregados"
+        android:name="com.example.medicanet.ui.farmacia.fragments.FragmentHistorialEntregas"
         android:label="Medicanet"
-        tools:layout="@layout/fragment_far_medicamentos_entregados" />
+        tools:layout="@layout/fragment_far_historial_entregas" />
 
 
     //OTROS

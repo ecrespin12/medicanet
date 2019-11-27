@@ -16,7 +16,7 @@ import com.example.medicanet.R;
 
 public class AdaptadorListView extends ArrayAdapter {
     public Context contexto;
-    public TypedArray imagenes;
+    public int[] imagenes;
     public String [] vectorCampo1;
     public String [] vectorCampo2;
     public String [] vectorCampo3;
@@ -31,8 +31,7 @@ public class AdaptadorListView extends ArrayAdapter {
     View view;
 
     public AdaptadorListView(@NonNull Context context,
-                             TypedArray imagenes,
-
+                             int[] imagenes,
                              String [] vectorCampo1,
                              String [] vectorCampo2,
                              String [] vectorCampo3,
@@ -65,7 +64,7 @@ public class AdaptadorListView extends ArrayAdapter {
             imagen.setImageResource(R.drawable.medicanet1);
             imagen.setVisibility(View.GONE);
         }else{
-            imagen.setImageResource(imagenes.getResourceId(position,-1));
+            imagen.setImageResource(imagenes[position]);
         }
 
         if (vectorCampo1==null){
@@ -115,7 +114,7 @@ public class AdaptadorListView extends ArrayAdapter {
             imagen.setImageResource(R.drawable.medicanet1);
             imagen.setVisibility(View.GONE);
         }else{
-            imagen.setImageResource(imagenes.getResourceId(position,-1));
+            imagen.setImageResource(imagenes[position]);
         }
 
         if (vectorCampo1==null){
