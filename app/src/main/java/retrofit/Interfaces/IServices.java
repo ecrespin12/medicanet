@@ -74,24 +74,13 @@ public interface IServices {
     @NotNull
     Call<List<EntregaMedicamentoDetalleModel>> getEntregaMedicamentosDetalle(@Query("eme") int eme);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-    
->>>>>>> parent of 4427874... Update IServices.java
     @POST("EntregaMedicamento/updateEntrega")
     @FormUrlEncoded
     Call postEntregaMedicamentoUpdate(@Field("cod") int cod, @Field("est") String est, @Field("fec") int fec);
-=======
+
     @GET("Consulta/consulta?")
     @NotNull
     Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
 
->>>>>>> 316cf49c6c8dea7ab355eaae4c31908f31aaec4d
+
 }
