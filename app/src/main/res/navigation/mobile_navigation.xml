@@ -38,11 +38,6 @@
         android:name="com.example.medicanet.ui.doctor.fragments.FragmentPacientes"
         android:label="Medicanet"
         tools:layout="@layout/fragment_doc_pacientes" />
-    <fragment
-        android:id="@+id/nav_doc_programar_consultas"
-        android:name="com.example.medicanet.ui.doctor.fragments.FragmentProgramarConsulta"
-        android:label="Medicanet"
-        tools:layout="@layout/fragment_doc_programar_consulta" />
 
     //FARMACIA
     <fragment

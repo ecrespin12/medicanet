@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public  void iniciar(View view){
+    public  void iniciar(final View view){
 
 
         btn_iniciar.setBackgroundResource(R.drawable.boton_redondeado);
@@ -60,13 +60,7 @@ public class Login extends AppCompatActivity {
             public void run() {
                 btn_iniciar.setBackgroundResource(R.drawable.boton_redondeado_borde);
 
-                String username = edtUser.getText().toString().trim();
-                String password = edtPassword.getText().toString().trim();
-
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("user", username);
-                startActivity(i);
-                finish();
+                Ingresar(view);
             }
         },100);
     }

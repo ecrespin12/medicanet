@@ -58,7 +58,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/boton_redondeado_borde"
             android:clickable="true"
-            android:onClick="Ingresar"
+            android:onClick="iniciar"
             android:text="@string/iniciar_sesi_n"
             android:textColor="#FFFFFF" />
 

@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 
+import java.text.SimpleDateFormat;
+
 import clasesResponse.PacientesModel;
 
 public class FragmentDatosPaciente extends Fragment {
@@ -28,9 +30,12 @@ public class FragmentDatosPaciente extends Fragment {
     TextView tvEstado;
     TextView tvDui;
 
-    String codigo;
-    String nombre;
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
+    SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
+
     Button btnVerHistorial;
+    Button btnProgramarConsulta;
+
     PacientesModel item;
 
     public FragmentDatosPaciente(PacientesModel item) {
@@ -52,7 +57,15 @@ public class FragmentDatosPaciente extends Fragment {
         tvDui=view.findViewById(R.id.tvDui_fragment_doc_datos_paciente);
 
         btnVerHistorial=view.findViewById(R.id.btnVerHistorial_fragment_doc_datos_paciente);
-        tvCodigo.setText(codigo);
+        btnProgramarConsulta=view.findViewById(R.id.btnProgramarConsulta_fragment_doc_datos_paciente);
+
+        //llenar los TextView
+        tvCodigo.setText(item.per_codigo+"");
+        tvNombre.setText(item.pac_nombre);
+        tvFechaN.setText(formatoFecha.format(item.per_fecha_nace));
+        tvCorreo.setText(item.per_correo);
+        tvEstado.setText(item.per_estado);
+        tvDui.setText(item.per_dui);
 
         btnVerHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +80,24 @@ public class FragmentDatosPaciente extends Fragment {
 
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Ver historial", Toast.LENGTH_SHORT).show();
+                    }
+                }, 100);
+            }
+        });
+
+        btnProgramarConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnProgramarConsulta.setBackgroundResource(R.drawable.boton_redondeado);
+                btnProgramarConsulta.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnProgramarConsulta.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnProgramarConsulta.setTextColor(Color.BLACK);
+
+                        //Codigo para logica del boton
+                        Toast.makeText(getContext(), "Programar consulta", Toast.LENGTH_SHORT).show();
                     }
                 }, 100);
             }

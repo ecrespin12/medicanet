@@ -18,28 +18,10 @@
     </group>
 
     <item
-        android:id="@+id/action_agregar"
-        android:orderInCategory="300"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Agregar"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_editar"
-        android:orderInCategory="400"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="Editar"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_eliminar"
-        android:orderInCategory="500"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:title="Eliminar"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_salir"
         android:orderInCategory="600"
         android:icon="@android:drawable/ic_delete"
         android:title="Salir"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>

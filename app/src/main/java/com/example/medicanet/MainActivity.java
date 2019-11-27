@@ -63,15 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
 
+                //paciente
                 R.id.nav_pac_citas,
                 R.id.nav_pac_datos_medicos,
                 R.id.nav_pac_historial_medico,
                 R.id.nav_pac_medicamentos,
 
+                //doctor
                 R.id.nav_doc_consultas_programadas,
                 R.id.nav_doc_pacientes,
-                R.id.nav_doc_programar_consultas,
 
+                //farmacia
                 R.id.nav_far_entregar_medicamentos,
                 R.id.nav_far_historial_entregas,
 
@@ -110,12 +112,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Abriendo mapa...",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), Places.class);
             startActivity(i);
-        } else if(id==R.id.action_agregar){
-            Toast.makeText(getApplicationContext(),"Agregando...",Toast.LENGTH_SHORT).show();
-        } else if(id==R.id.action_editar){
-        Toast.makeText(getApplicationContext(),"Editando...",Toast.LENGTH_SHORT).show();
-        } else if(id==R.id.action_eliminar){
-        Toast.makeText(getApplicationContext(),"Eliminando...",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
