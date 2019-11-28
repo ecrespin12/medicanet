@@ -5,6 +5,7 @@ import clasesResponse.CentroMedicoModel;
 import clasesResponse.CitasModel;
 import clasesResponse.ConsultaDetalleModel;
 import clasesResponse.ConsultaModel;
+import clasesResponse.DatosMedicosModel;
 import clasesResponse.EntregaMedicamentoDetalleModel;
 import clasesResponse.EntregaMedicamentosModel;
 import clasesResponse.HistorialModel;
@@ -70,5 +71,9 @@ public interface IServices {
     @GET("Consulta/consulta?")
     @NotNull
     Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
+
+    @GET("Consulta/detalle?")
+    @NotNull
+    Call<List<DatosMedicosModel>> getDatosMedicos(@Query("per") int per, @Query("cod") int cod);
 
 }
