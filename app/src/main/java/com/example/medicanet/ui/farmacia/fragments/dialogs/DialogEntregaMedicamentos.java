@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
+import com.example.medicanet.metodos.Metodos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
@@ -41,6 +42,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     RetrofitClientInstance ret = new RetrofitClientInstance();
     UpdateEntregaDeMedicamentosModel item;
     public Date Date;
+    public int count= 0;
 
 
     public DialogEntregaMedicamentos() {
@@ -65,16 +67,29 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         txtMedicamento.setEnabled(false);
         txtIndicaciones.setEnabled(false);
 
-        final int Cantidad = bd.getInt("cantidad"), Codigo = bd.getInt("codigo");
-        final String Nombre=bd.getString("nombre"), Estado = bd.getString("estado"),Indicaciones=bd.getString("indicaciones");
-        txtCantidad.setText(""+Cantidad);
+        final int Cantidades = bd.getInt("cantidades"), Codigo = bd.getInt("codigo"),Cantidad = bd.getInt("cantidad");
+        final String Nombre=bd.getString("nombre"),cod_det = bd.getString("cod_det"), cod_med = bd.getString("cod_med"),Indicaciones=bd.getString("indicaciones");
+        txtCantidad.setText(""+Cantidades);
         txtMedicamento.setText(""+Nombre);
         txtIndicaciones.setText(""+Indicaciones);
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postEntregaMedicamentoUpdate(Codigo,"E", "2019-11-27");
+
+                if(count == 0){
+                    count = Cantidad;
+                }
+                String fecha = Metodos.FormatoFecha();
+                postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", "2019-11-28",cod_med);
+                count =count - 1;
+
+
+                if(count ==0){
+                    postEntregaMedicamentoUpdate(Codigo,"E", fecha);
+                }
+
+
             }
         });
 
@@ -91,8 +106,47 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     public void postEntregaMedicamentoUpdate(int cod, String est,  String fec){
 
 
-        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosModel");
+        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentoUpdate");
         Call<Boolean> call = servicio.postEntregaMedicamentoUpdate(cod,est,fec);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Se ha completado la Entrega de Medicamento",Toast.LENGTH_LONG).show();
+                        }
+
+
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+
+    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,String mdc){
+
+
+        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosUpdateDetalle");
+        Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,can,est,fec,mdc);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<Boolean>() {
             @Override
