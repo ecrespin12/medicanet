@@ -7,6 +7,8 @@ import java.util.Date;
 public class ConsultaModel {
     @SerializedName("cme_codigo")
     public int cme_codigo;
+    @SerializedName("cme_codper")
+    public int cme_codper;
     @SerializedName("per_nombre")
     public String per_nombre;
     @SerializedName("per_correo")

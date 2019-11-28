@@ -204,7 +204,7 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
     private void getCentros(final GoogleMap mMap) {
 
         Log.d("JTDebug", "Entra Metodo getCentros");
-        Call<List<CentroMedicoModel>> call = servicio.getCentroMedico();
+        Call<List<CentroMedicoModel>> call = servicio.getCentroMedico(0);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<CentroMedicoModel>>() {
             @Override

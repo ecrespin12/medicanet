@@ -35,9 +35,9 @@ public interface IServices {
     @NotNull
     Call<clItems> getConsultaVersion(@Query("id") @NotNull String id);
 
-    @GET("CentroMedico/centro_medico")
+    @GET("CentroMedico/centro_medico?")
     @NotNull
-    Call<List<CentroMedicoModel>> getCentroMedico();
+    Call<List<CentroMedicoModel>> getCentroMedico(@Query("cod") int cod);
 
     @GET("Medicamentos/catalogo")
     @NotNull
