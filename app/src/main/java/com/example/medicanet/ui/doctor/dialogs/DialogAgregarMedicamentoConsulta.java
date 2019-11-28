@@ -11,18 +11,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
+import com.example.medicanet.ui.doctor.fragments.FragmentConsulta;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import clasesResponse.ConsultaModel;
 import clasesResponse.MedicamentosModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
@@ -43,12 +47,24 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     Spinner spTipoMedicamento;
     EditText edtCantidad,edtIndicaciones;
     Button btnGuardar;
+    TextView tvTituloMedida;
 
-    String [] codigosMedicamentos;
-    String [] nombresMedicamentos;
+    int codigoMedicamento=0;
+    int codigoConsulta=0;
 
-    public DialogAgregarMedicamentoConsulta() {
+    String [] arr1;
+    String [] arr2;
+    String [] arr3;
+    String [] arr4;
+
+    ConsultaModel consultaModel;
+    FragmentConsulta fragmentConsulta;
+
+    public DialogAgregarMedicamentoConsulta(ConsultaModel consultaModel, FragmentConsulta fragmentConsulta) {
+        this.consultaModel=consultaModel;
+        this.codigoConsulta=consultaModel.cme_codigo;
         this.setCancelable(false);
+        this.fragmentConsulta=fragmentConsulta;
     }
 
 
@@ -64,10 +80,24 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
         spTipoMedicamento = view.findViewById(R.id.spTipo_doc_modal_agregar_medicamento);
         edtCantidad = view.findViewById(R.id.edtCantidad_doc_modal_agregar_medicamento);
         edtIndicaciones = view.findViewById(R.id.edtIndicaciones_doc_modal_agregar_medicamento);
+        tvTituloMedida = view.findViewById(R.id.tvTituloDeMedida_doc_modal_agregar_medicamento);
 
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
         getMedicamentos();
 
+        spTipoMedicamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                item=resp.get(i);
+                tvTituloMedida.setText("Cantidad segun unidad de medida ("+item.mdc_medida+")");
+                codigoMedicamento=item.mdc_codigo;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +111,9 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         btnGuardar.setTextColor(Color.WHITE);
 
                         //logica
+                        String indicaciones = edtIndicaciones.getText().toString().trim();
+                        double cantidad = Double.valueOf(edtCantidad.getText().toString().trim());
+                        postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
                         Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
                     }
                 },100);
@@ -121,15 +154,18 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        codigosMedicamentos=new String[resp.size()];
-                        nombresMedicamentos=new String[resp.size()];
+                        arr1=new String[resp.size()];
+                        arr2=new String[resp.size()];
+                        arr3=new String[resp.size()];
+                        arr4=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            codigosMedicamentos[i] = "Código: "+item.mdc_codigo;
-                            nombresMedicamentos[i] = item.mdc_nombre;
+                            arr1[i] = "Código: "+item.mdc_codigo;
+                            arr2[i] = ""+item.mdc_nombre;
+                            arr3[i] = "Medida: "+item.mdc_medida;
                         }
-                        AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, codigosMedicamentos, nombresMedicamentos, null, null);
+                        AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, arr3, null);
                         spTipoMedicamento.setAdapter(adaptadorSpinner);
 
 
@@ -149,4 +185,45 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
             }
         });
     }
+
+    public void postAgregarMedicamentoConsulta(int mdc, int cme,  String ind, double can){
+
+
+        Log.d("JTDebug", "Entra Metodo postAgregarMedicamentoConsulta");
+        Call<Integer> call = servicio.postAgregarReceta(mdc,cme,ind,can);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Integer resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==1){
+                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                            fragmentConsulta.getMedicamentos();
+                        }
+                        if(resp==0){
+                            Toast.makeText(getContext(),"Operacion no Realizada",Toast.LENGTH_LONG).show();
+                            fragmentConsulta.getMedicamentos();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
 }

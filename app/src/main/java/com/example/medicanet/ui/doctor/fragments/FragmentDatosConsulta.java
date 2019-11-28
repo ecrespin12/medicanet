@@ -101,7 +101,7 @@ public class FragmentDatosConsulta extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        final FragmentConsulta fragmentConsulta = new FragmentConsulta();
+                        final FragmentConsulta fragmentConsulta = new FragmentConsulta(item);
 
                         // Crea el nuevo fragmento y la transacción.
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();

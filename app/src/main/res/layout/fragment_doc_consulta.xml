@@ -5,130 +5,119 @@
     android:layout_height="match_parent"
     tools:context=".ui.doctor.fragments.FragmentConsulta">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/fab_margin"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#9ECCCCCC"
-            android:text="Consulta médica"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_margin="@dimen/fab_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#9ECCCCCC"
+                android:text="Consulta médica"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDetalles_fragment_doc_consulta"
+                    android:layout_width="57dp"
+                    android:layout_height="57dp"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/detalle_consulta_1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <Button
+
+                    android:id="@+id/btnMedicamentos_fragment_doc_consulta"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/medicamento_1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:id="@+id/btnAgregarCita_fragment_doc_consulta"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/nueva_consulta_1"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tev_ConsultaPaciente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Detalles de la consulta"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <ListView
+                android:background="#BBDEFB"
+                android:layout_margin="10dp"
+                android:id="@+id/lvDetalles_fragment_doc_consulta"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:id="@+id/tev_RecetaMedica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medicamentos recetados"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:background="#BBDEFB"
+                android:layout_margin="10dp"
+                android:id="@+id/lvMedicamentos_fragment_doc_consulta"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
 
             <Button
-                android:id="@+id/btnDetalles_fragment_doc_consulta"
-                android:layout_width="57dp"
-                android:layout_height="57dp"
-                android:layout_margin="3dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/detalle_consulta_1"
+                android:id="@+id/btnTerminar_fragment_doc_consulta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/boton_redondeado_borde"
+                android:text="Terminar Consulta"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="normal" />
-
-            <Button
-
-                android:id="@+id/btnMedicamentos_fragment_doc_consulta"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/medicamento_1"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
-            <Button
-                android:id="@+id/btnAgregarCita_fragment_doc_consulta"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_margin="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/nueva_consulta_1"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
-
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tev_ConsultaPaciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Datos Consulta"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tev_NombrePaciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Brian ALberto" />
-
-        <TextView
-            android:id="@+id/tev_RecetaMedica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Receta Medica"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/tev_Receta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="10 Acetaminosfen cada 4 horas" />
-
-        <TextView
-            android:id="@+id/tev_DatosConsulta2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Receta Medica"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tex_CitasMedicasProximas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="31/12/2019" />
-
-        <Button
-            android:id="@+id/btnTerminar_fragment_doc_consulta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/boton_redondeado_borde"
-            android:text="Terminar Consulta"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="normal" />
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

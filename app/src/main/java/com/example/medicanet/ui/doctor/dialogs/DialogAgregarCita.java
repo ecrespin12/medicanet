@@ -25,6 +25,8 @@ import com.example.medicanet.metodos.Metodos;
 
 import java.util.ArrayList;
 
+import clasesResponse.ConsultaModel;
+
 public class DialogAgregarCita extends DialogFragment {
 
     Spinner             spTipoCita;
@@ -45,8 +47,10 @@ public class DialogAgregarCita extends DialogFragment {
     String []           nombres;
     String []           descripciones;
 
-    public DialogAgregarCita() {
-        // Required empty public constructor
+    ConsultaModel item;
+
+    public DialogAgregarCita(ConsultaModel item) {
+        this.item=item;
     }
 
 

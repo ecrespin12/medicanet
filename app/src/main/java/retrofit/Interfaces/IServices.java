@@ -14,6 +14,7 @@ import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.PacientesModel;
+import clasesResponse.RecetaModel;
 import clasesResponse.UpdateEntregaDeMedicamentosModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
@@ -87,4 +88,15 @@ public interface IServices {
     @NotNull
     Call<List<DatosMedicosModel>> getDatosMedicos(@Query("per") int per, @Query("cod") int cod);
 
+    @POST("Consulta/agregarDetalle")
+    @FormUrlEncoded
+    Call<Integer> postAgregarDetalleConsulta(@Field("nom") String nom, @Field("dsc") String dsc, @Field("cme") int cme);
+
+    @GET("Receta/recetasPorConsulta?")
+    @NotNull
+    Call<List<RecetaModel>> getReceta(@Query("cod") int cod);
+
+    @POST("Receta/agregar")
+    @FormUrlEncoded
+    Call<Integer> postAgregarReceta(@Field("mdc") int mdc, @Field("cme") int cme, @Field("ind") String ind, @Field("can") double can);
 }

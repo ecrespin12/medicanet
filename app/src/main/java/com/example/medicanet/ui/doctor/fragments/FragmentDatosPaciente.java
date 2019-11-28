@@ -113,7 +113,7 @@ public class FragmentDatosPaciente extends Fragment {
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Programar consulta", Toast.LENGTH_SHORT).show();
                         //crear y mostrar un Dialog
-                        DialogAgregarCita dialog = new DialogAgregarCita();
+                        DialogAgregarCita dialog = new DialogAgregarCita(null);
                         dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
                     }
                 }, 100);
