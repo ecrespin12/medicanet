@@ -50,7 +50,7 @@ public class FragmentPendientesEntrega extends Fragment {
     public String [] fecha_entrega;
     public int [] codigo_med;
     public String [] eme_codigo;
-    public int [] ede_cantidad;
+    public int ede_cantidad = 0;
 
 
     public FragmentPendientesEntrega() {
@@ -62,6 +62,8 @@ public class FragmentPendientesEntrega extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_far_pendientes_entrega, container, false);
+
+
 
         servicio = (IServices) ret.createService(IServices.class, v.getContext().getResources().getString(R.string.token));
         lvPendientesEntrega = v.findViewById(R.id.lvPendientesEntrega_fragment_far_pendientes_entrega);
@@ -83,10 +85,11 @@ public class FragmentPendientesEntrega extends Fragment {
                    @Override
                    public void run() {
 
+
                        Bundle paqueteDeDatos = new Bundle();
                        paqueteDeDatos.putInt("codigo", codigo_med[position]);
                        paqueteDeDatos.putString("estado", eme_codigo[position]);
-                       paqueteDeDatos.putInt("cantidad", ede_cantidad[position]);
+                       paqueteDeDatos.putInt("cantidad", ede_cantidad);
                        paqueteDeDatos.putString("indicaciones",indicaciones[position]);
                        paqueteDeDatos.putString("nombre",Pac_nombre[position]);
                        //crear y mostrar un Dialog
@@ -110,6 +113,7 @@ public class FragmentPendientesEntrega extends Fragment {
             public void onResponse(Call<List<EntregaMedicamentoDetalleModel>> call, Response<List<EntregaMedicamentoDetalleModel>> response) {
                 Log.d("JTDebug", "Entra OnResponse");
                 try {
+                    ede_cantidad = 0;
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
@@ -120,11 +124,11 @@ public class FragmentPendientesEntrega extends Fragment {
                         fecha_entrega=new String[resp.size()];
                         codigo_med =new int[resp.size()];
                         eme_codigo =new String[resp.size()];
-                        ede_cantidad =new int[resp.size()];
+
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            ede_cantidad[i] = item.ede_cantidad;
+                            ede_cantidad += 1;
                             eme_codigo[i] = item.ede_estado;
                             codigo_med[i] = item.eme_codigo;
                             Pac_nombre[i] = "Nombre: "+item.mdc_nombre;

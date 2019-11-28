@@ -46,7 +46,6 @@ public class FragmentEntregarMedicamentos extends Fragment {
     public String [] Med_medico;
     public String [] Pac_codigo;
     public String [] fecha_entrega;
-    Date datei,datef;
 
     public FragmentEntregarMedicamentos() {
 

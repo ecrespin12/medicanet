@@ -3,6 +3,7 @@ package com.example.medicanet.ui.farmacia.fragments.dialogs;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,26 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.medicanet.R;
+import com.example.medicanet.metodos.AdaptadorListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
+import java.util.List;
+
+import clasesResponse.EntregaMedicamentosModel;
+import clasesResponse.UpdateEntregaDeMedicamentosModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class DialogEntregaMedicamentos extends DialogFragment {
 
@@ -26,6 +39,8 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     public MultiAutoCompleteTextView txtIndicaciones;
     private IServices servicio;
     RetrofitClientInstance ret = new RetrofitClientInstance();
+    UpdateEntregaDeMedicamentosModel item;
+    public Date Date;
 
 
     public DialogEntregaMedicamentos() {
@@ -49,10 +64,19 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         Bundle bd = getArguments();
         txtMedicamento.setEnabled(false);
         txtIndicaciones.setEnabled(false);
-        txtCantidad.setText(""+bd.getInt("cantidad"));
-        txtMedicamento.setText(""+bd.getString("nombre"));
-        txtIndicaciones.setText(""+bd.getString("indicaciones"));
 
+        final int Cantidad = bd.getInt("cantidad"), Codigo = bd.getInt("codigo");
+        final String Nombre=bd.getString("nombre"), Estado = bd.getString("estado"),Indicaciones=bd.getString("indicaciones");
+        txtCantidad.setText(""+Cantidad);
+        txtMedicamento.setText(""+Nombre);
+        txtIndicaciones.setText(""+Indicaciones);
+
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postEntregaMedicamentoUpdate(Codigo,"E", "2019-11-27");
+            }
+        });
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,5 +85,43 @@ public class DialogEntregaMedicamentos extends DialogFragment {
             }
         });
         return v;
+    }
+
+
+    public void postEntregaMedicamentoUpdate(int cod, String est,  String fec){
+
+
+        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosModel");
+        Call<Boolean> call = servicio.postEntregaMedicamentoUpdate(cod,est,fec);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                        }
+
+
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 }
