@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="340dp"
-    android:layout_height="450dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
     android:layout_gravity="center"
     android:background="@drawable/style_modal"
     android:orientation="vertical"
@@ -19,13 +18,13 @@
 
     <TextView
         android:id="@+id/tvTitulo_dialog_doc_agregar_cita"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:gravity="center"
         android:text="@string/agregar_proxima_cita"
         android:textColor="#1a81ad"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 
@@ -35,7 +34,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="Tipo de consulta" />
+        android:text="Tipo de consulta"
+        android:textSize="18sp" />
 
     <LinearLayout
 
@@ -62,12 +62,12 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="left"
-        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripción" />
+        android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:text="Descripción"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edtDescripcion_dialog_doc_agregar_cita"
@@ -82,7 +82,8 @@
         android:hint="Agregue una descripción"
         android:inputType="textMultiLine"
         android:lines="3"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_marginLeft="10dp"
@@ -97,13 +98,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/btnFecha_dialog_doc_agregar_cita"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/calendario_64_1" />
     </LinearLayout>
 
@@ -121,18 +122,19 @@
             android:layout_weight="1"
             android:ems="10"
             android:enabled="false"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/btnHora_dialog_doc_agregar_cita"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/alarm_celeste" />
 
     </LinearLayout>
 
     <Button
+        android:layout_margin="20dp"
         android:id="@+id/btnGuardar_doc_modal_agregar_cita"
         android:layout_width="280dp"
         android:layout_height="30dp"
@@ -143,6 +145,6 @@
         android:clickable="true"
         android:text="Guardar"
         android:textColor="#ffffff"
-        android:textSize="14dp" />
+    android:textSize="14dp" />
 
 </LinearLayout>

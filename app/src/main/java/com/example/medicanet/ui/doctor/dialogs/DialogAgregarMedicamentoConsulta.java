@@ -41,7 +41,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
     ImageView btnCerrar;
     Spinner spTipoMedicamento;
-    EditText edtDescripcion,edtCantidadPastillas,edtCantidadHoras;
+    EditText edtCantidad,edtIndicaciones;
     Button btnGuardar;
 
     String [] codigosMedicamentos;
@@ -62,9 +62,8 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
         btnCerrar = view.findViewById(R.id.imgCerrar_doc_modal_agregar_medicamento);
         btnGuardar = view.findViewById(R.id.btnGuardar_doc_modal_agregar_medicamento);
         spTipoMedicamento = view.findViewById(R.id.spTipo_doc_modal_agregar_medicamento);
-        edtDescripcion = view.findViewById(R.id.edtDescripcion_doc_modal_agregar_medicamento);
-        edtCantidadPastillas = view.findViewById(R.id.edtCantidadPastillas_doc_modal_agregar_medicamento);
-        edtCantidadHoras = view.findViewById(R.id.edtCantidadHoras_doc_modal_agregar_medicamento);
+        edtCantidad = view.findViewById(R.id.edtCantidad_doc_modal_agregar_medicamento);
+        edtIndicaciones = view.findViewById(R.id.edtIndicaciones_doc_modal_agregar_medicamento);
 
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
         getMedicamentos();
