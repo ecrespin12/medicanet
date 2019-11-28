@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     MedicamentosModel item;
     //###########################################################
 
-    ImageView imgCerrar;
+    ImageView btnCerrar;
     Spinner spTipoMedicamento;
     EditText edtDescripcion,edtCantidadPastillas,edtCantidadHoras;
     Button btnGuardar;
@@ -58,29 +59,52 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        imgCerrar = view.findViewById(R.id.imgCerrar_doc_modal_agregar_medicamento);
+        btnCerrar = view.findViewById(R.id.imgCerrar_doc_modal_agregar_medicamento);
         btnGuardar = view.findViewById(R.id.btnGuardar_doc_modal_agregar_medicamento);
         spTipoMedicamento = view.findViewById(R.id.spTipo_doc_modal_agregar_medicamento);
         edtDescripcion = view.findViewById(R.id.edtDescripcion_doc_modal_agregar_medicamento);
         edtCantidadPastillas = view.findViewById(R.id.edtCantidadPastillas_doc_modal_agregar_medicamento);
         edtCantidadHoras = view.findViewById(R.id.edtCantidadHoras_doc_modal_agregar_medicamento);
 
-        imgCerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Cerrando",Toast.LENGTH_SHORT).show();
-                dismiss();
-            }
-        });
+        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
+        getMedicamentos();
+
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Guardando...",Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                btnGuardar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnGuardar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGuardar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnGuardar.setTextColor(Color.WHITE);
+
+                        //logica
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                    }
+                },100);
             }
         });
-        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
-        getMedicamentos();
+
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnCerrar.setImageResource(R.drawable.eliminar2);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnCerrar.setImageResource(R.drawable.eliminar1);
+
+                        //logica
+                        dismiss();
+                    }
+                },100);
+
+            }
+        });
+
         return  view;
     }
 

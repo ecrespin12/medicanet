@@ -34,7 +34,7 @@ public class DialogAgregarCita extends DialogFragment {
     EditText            edtFecha;
     EditText            edtHora;
 
-    ImageView           imgCerrar;
+    ImageView           btnCerrar;
 
     Button              btnGuardar;
 
@@ -64,7 +64,7 @@ public class DialogAgregarCita extends DialogFragment {
         edtDescripcion=view.findViewById(R.id.edtDescripcion_dialog_doc_agregar_cita);
         edtFecha=view.findViewById(R.id.edtFecha_dialog_doc_agregar_cita);
         edtHora=view.findViewById(R.id.edtHora_dialog_doc_agregar_cita);
-        imgCerrar=view.findViewById(R.id.imgCerrar_dialog_doc_agregar_cita);
+        btnCerrar=view.findViewById(R.id.imgCerrar_dialog_doc_agregar_cita);
         btnGuardar=view.findViewById(R.id.btnGuardar_doc_modal_agregar_cita);
         btnFecha=view.findViewById(R.id.btnFecha_dialog_doc_agregar_cita);
         btnHora=view.findViewById(R.id.btnHora_dialog_doc_agregar_cita);
@@ -78,13 +78,6 @@ public class DialogAgregarCita extends DialogFragment {
 
         edtHora.setEnabled(false);
         edtFecha.setEnabled(false);
-
-        imgCerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
 
         btnFecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +114,35 @@ public class DialogAgregarCita extends DialogFragment {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"Guardando...",Toast.LENGTH_SHORT).show();
+                btnGuardar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnGuardar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGuardar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnGuardar.setTextColor(Color.WHITE);
+
+                        //logica
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                    }
+                },100);
+            }
+        });
+
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnCerrar.setImageResource(R.drawable.eliminar2);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnCerrar.setImageResource(R.drawable.eliminar1);
+
+                        //logica
+                        dismiss();
+                    }
+                },100);
+
             }
         });
 

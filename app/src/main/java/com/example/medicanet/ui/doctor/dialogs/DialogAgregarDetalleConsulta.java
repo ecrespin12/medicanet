@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.example.medicanet.R;
 
 public class DialogAgregarDetalleConsulta extends DialogFragment {
 
-    Spinner spTipo;
+    EditText edtNombre;
     EditText edtDescripcion;
     Button btnGuardar;
     ImageView btnCerrar;
@@ -34,7 +35,7 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setCancelable(false);
 
-        spTipo=view.findViewById(R.id.spTipo_doc_modal_agregar_detalle_consulta);
+        edtNombre=view.findViewById(R.id.edtNombre_doc_modal_agregar_detalle_consulta);
         edtDescripcion=view.findViewById(R.id.edtDescripcion_doc_modal_agregar_detalle_consulta);
         btnGuardar=view.findViewById(R.id.btnGuardar_doc_modal_agregar_detalle_consulta);
         btnCerrar=view.findViewById(R.id.btnCerrar_doc_modal_agregar_detalle);
@@ -42,14 +43,35 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                btnGuardar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnGuardar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnGuardar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnGuardar.setTextColor(Color.WHITE);
+
+                        //logica
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                    }
+                },100);
             }
         });
 
         btnCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+                btnCerrar.setImageResource(R.drawable.eliminar2);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnCerrar.setImageResource(R.drawable.eliminar1);
+
+                        //logica
+                        dismiss();
+                    }
+                },100);
+
             }
         });
 

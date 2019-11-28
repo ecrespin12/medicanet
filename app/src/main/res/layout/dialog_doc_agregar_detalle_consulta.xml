@@ -11,10 +11,10 @@
 
     <ImageView
         android:id="@+id/btnCerrar_doc_modal_agregar_detalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_gravity="end"
-        android:background="@drawable/ic_close" />
+        android:background="@drawable/eliminar1" />
 
     <TextView
         android:id="@+id/tvTitulo_doc_modal_agregar_detalle_consulta"
@@ -24,49 +24,39 @@
         android:gravity="center"
         android:text="Agregar detalle de consulta"
         android:textColor="#1a81ad"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo de detalle" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:text="Nombre de detalle"
+        android:textSize="18sp" />
 
-    <LinearLayout
-        android:id="@+id/splinearlayout"
+
+    <EditText
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/edtNombre_doc_modal_agregar_detalle_consulta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/boton_cuadrado_borde"
-        android:orientation="vertical">
-
-        <Spinner
-            android:id="@+id/spTipo_doc_modal_agregar_detalle_consulta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
-
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nombre detalle" />
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripción" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:text="Descripción"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edtDescripcion_doc_modal_agregar_detalle_consulta"
@@ -87,13 +77,13 @@
         android:id="@+id/btnGuardar_doc_modal_agregar_detalle_consulta"
         android:layout_width="280dp"
         android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/boton_style_modal"
         android:clickable="true"
-        android:layout_gravity="center"
         android:text="Guardar"
         android:textColor="#ffffff"
-        android:textSize="14dp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
