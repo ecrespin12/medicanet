@@ -34,7 +34,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="Tipo de consulta"
+        android:text="Centro medico"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -61,36 +61,24 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
-        android:text="Descripción"
-        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/edtDescripcion_dialog_doc_agregar_cita"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/boton_cuadrado_borde"
-        android:gravity="center_horizontal"
-        android:hint="Agregue una descripción"
-        android:inputType="textMultiLine"
-        android:lines="3"
-        android:scrollbars="vertical"
-        android:textSize="18sp" />
+
+
 
     <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:text="Fecha:  "
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/edtFecha_dialog_doc_agregar_cita"
@@ -109,12 +97,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:text="Hora:    "
+            android:textSize="18sp" />
         <EditText
             android:id="@+id/edtHora_dialog_doc_agregar_cita"
             android:layout_width="wrap_content"
