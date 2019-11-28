@@ -69,19 +69,18 @@ public class FragmentEntregarMedicamentos extends Fragment {
 
         servicio = (IServices) ret.createService(IServices.class, v.getContext().getResources().getString(R.string.token));
 
-        getEntregaMedicamentos(0,"P",0,0,"","",0);
+        getEntregaMedicamentos(0,"P",0,0,"","",0,null,null);
 
         fabBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEntregaMedicamentos(0,"P",0,0,edtId.getText().toString(),"",0);
+                getEntregaMedicamentos(0,"P",0,0,edtId.getText().toString(),"",0,edtDesde.getText().toString(),edtHasta.getText().toString());
             }
         });
         imgDesde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Metodos.fecha(getContext(),edtDesde);
-
             }
         });
 
@@ -89,6 +88,7 @@ public class FragmentEntregarMedicamentos extends Fragment {
             @Override
             public void onClick(View v) {
                 Metodos.fecha(getContext(),edtHasta);
+                getEntregaMedicamentos(0,"P",0,0,edtId.getText().toString(),"",0,edtDesde.getText().toString(),edtHasta.getText().toString());
             }
         });
 
@@ -116,9 +116,9 @@ public class FragmentEntregarMedicamentos extends Fragment {
         return v;
     }
 
-    public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cod){
+    public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cod, String fini, String ffin){
         Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosModel");
-        Call<List<EntregaMedicamentosModel>> call = servicio.getEntregaMedicamentos(far,est,per,med,ntag,dtag,cod);
+        Call<List<EntregaMedicamentosModel>> call = servicio.getEntregaMedicamentos(far,est,per,med,ntag,dtag,cod,fini,ffin);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<EntregaMedicamentosModel>>() {
             @Override

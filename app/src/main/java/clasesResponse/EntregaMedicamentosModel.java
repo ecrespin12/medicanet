@@ -28,4 +28,8 @@ public class EntregaMedicamentosModel {
     public String eme_fecha_entrega;
     @SerializedName("eme_estado")
     public String eme_estado;
+    @SerializedName("fini")
+    public String fini;
+    @SerializedName("ffin")
+    public String ffin;
 }

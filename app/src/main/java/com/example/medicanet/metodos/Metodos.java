@@ -25,8 +25,8 @@ public class Metodos {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-                String fechaSelec=dayOfMonth+"-"+(month+1)+"-"+year;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                String fechaSelec=year+"-"+(month+1)+"-"+dayOfMonth;
                 try {
                     Date date = formatter.parse(fechaSelec);
                     System.out.println(date);
