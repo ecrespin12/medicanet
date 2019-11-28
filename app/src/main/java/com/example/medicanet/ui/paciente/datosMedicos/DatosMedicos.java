@@ -18,6 +18,7 @@ import java.util.List;
 
 import clasesResponse.CitasModel;
 import clasesResponse.ConsultaModel;
+import clasesResponse.DatosMedicosModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -32,21 +33,12 @@ public class DatosMedicos extends Fragment {
     //VARIABLES PARA CONSUMIR EL WS##############################
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<ConsultaModel> resp;
-    ConsultaModel item;
+    List<DatosMedicosModel> resp;
+    DatosMedicosModel item;
     //###########################################################
-    String[] cme_codigo;
-    String[] per_nombre;
-    String[] per_correo;
-    String[] per_dui;
-    String[] per_fecha_nace;
-    String[] med_nombre;
-    String[] med_correo;
-    String[] cmd_codigo;
-    String[] cmd_nombre;
-    String[] cmd_latitud;
-    String[] cmd_longitud;
-    String[] cme_fecha_hora;
+    String[] dcm_codigo;
+    String[] dcm_nombre;
+    String[] dcm_descripcion;
 
 
     ListView lvDatosMedicos;
@@ -59,7 +51,11 @@ public class DatosMedicos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view =  inflater.inflate(R.layout.fragment_pac_datos_medicos, container, false);
+        servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
+        getHistorial(view);
+
         lvDatosMedicos = view.findViewById(R.id.lvDatosMedicos_pac);
         return view;
 
@@ -67,38 +63,30 @@ public class DatosMedicos extends Fragment {
 
     private void getHistorial(final View view){
         Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
-        Call<List<ConsultaModel>> call = servicio.getConsultas( 1,0,0);
+        Call<List<DatosMedicosModel>> call = servicio.getDatosMedicos( 1,0);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
-        call.enqueue(new Callback<List<ConsultaModel>>() {
+        call.enqueue(new Callback<List<DatosMedicosModel>>() {
             @Override
-            public void onResponse(Call<List<ConsultaModel>> call, Response<List<ConsultaModel>> response) {
+            public void onResponse(Call<List<DatosMedicosModel>> call, Response<List<DatosMedicosModel>> response) {
                 Log.d("JTDebug", "Entra OnResponse");
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        per_nombre=new String[resp.size()];
-                        per_correo=new String[resp.size()];
-                        per_dui=new String[resp.size()];
-                        per_fecha_nace=new String[resp.size()];
-                        med_nombre=new String[resp.size()];
-                        med_correo=new String[resp.size()];
-                        cmd_codigo=new String[resp.size()];
-                        cmd_nombre=new String[resp.size()];
-                        cmd_latitud=new String[resp.size()];
-                        cmd_longitud=new String[resp.size()];
-                        cme_fecha_hora=new String[resp.size()];
+                        dcm_codigo=new String[resp.size()];
+                        dcm_nombre=new String[resp.size()];
+                        dcm_descripcion=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            per_nombre[i] = "Paciente: "+item.per_nombre;
-                            per_correo[i] = "Correo: " + item.per_correo;
-                            per_dui[i] = "DUI: " +item.per_dui;
-                            per_fecha_nace[i] = "Fecha de Nacimiento: "+item.per_fecha_nace+"\n"
+                            dcm_codigo[i] = "Codigo: "+item.dcm_codigo;
+                            dcm_nombre[i] = "Diagnostico: " + item.dcm_nombre;
+                            dcm_descripcion[i] = "Descripcion: " +item.dcm_descripcion;
+                            /*per_fecha_nace[i] = "Fecha de Nacimiento: "+item.per_fecha_nace+"\n"
                             +"Latitud: "+item.cmd_latitud+"\n"
                             +"Longitud: "+item.cmd_longitud;
-                            /*med_nombre[i] = "Nombre del Medico: "+item.med_nombre;
+                            med_nombre[i] = "Nombre del Medico: "+item.med_nombre;
                             med_correo[i] = "Medico Correp: "+item.med_correo;
                             cmd_codigo[i] = "Codigo del medico: "+item.cmd_codigo;
                             cmd_nombre[i] = "Nombre: "+item.cmd_nombre;
@@ -106,7 +94,7 @@ public class DatosMedicos extends Fragment {
                             cmd_longitud[i] = "Longitud: "+item.cmd_longitud;
                             cme_fecha_hora[i] = "Fecha: "+item.cme_fecha_hora;*/
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_correo, per_dui, per_fecha_nace);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, dcm_codigo, dcm_nombre, dcm_descripcion, null);
                         lvDatosMedicos.setAdapter(adaptadorList);
 
 
@@ -119,7 +107,7 @@ public class DatosMedicos extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<ConsultaModel>> call, Throwable t) {
+            public void onFailure(Call<List<DatosMedicosModel>> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();
