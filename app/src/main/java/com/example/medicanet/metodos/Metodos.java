@@ -3,6 +3,7 @@ package com.example.medicanet.metodos;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.provider.CalendarContract;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -63,6 +64,20 @@ public class Metodos {
             }
         },hora,minutos,false);
         timePickerDialog.show();
+    }
+
+    public static String FormatoFecha(){
+        int dia,mes, anio;
+        String fecha="";
+        final Calendar calendario= Calendar.getInstance();
+        dia=calendario.get(Calendar.DAY_OF_MONTH);
+        mes=calendario.get(Calendar.MONTH);
+        anio=calendario.get(Calendar.YEAR);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        fecha=anio+"-"+(mes)+"-"+dia;
+
+        return fecha;
     }
 
     public static  boolean  validarFechaDesde(EditText edtFecha) throws ParseException {

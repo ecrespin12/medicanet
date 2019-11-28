@@ -80,6 +80,10 @@ public interface IServices {
     @FormUrlEncoded
     Call<Boolean> postEntregaMedicamentoUpdate(@Field("cod") int cod, @Field("est") String est, @Field("fec") String fec);
 
+    @POST("EntregaMedicamento/updateEntregaDetalle")
+    @FormUrlEncoded
+    Call<Boolean> postEntregaMedicamentoUpdateDetalle(@Field("cod") String cod,@Field("can") int can, @Field("est") String est, @Field("fec") String fec,@Field("mdc") String mdc);
+
     @GET("Consulta/consulta?")
     @NotNull
     Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);

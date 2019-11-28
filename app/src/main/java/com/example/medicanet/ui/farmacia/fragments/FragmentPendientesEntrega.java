@@ -50,6 +50,8 @@ public class FragmentPendientesEntrega extends Fragment {
     public String [] fecha_entrega;
     public int [] codigo_med;
     public String [] eme_codigo;
+    public int [] cantidad;
+    public String [] ede_codigo;
     public int ede_cantidad = 0;
 
 
@@ -88,8 +90,10 @@ public class FragmentPendientesEntrega extends Fragment {
 
                        Bundle paqueteDeDatos = new Bundle();
                        paqueteDeDatos.putInt("codigo", codigo_med[position]);
-                       paqueteDeDatos.putString("estado", eme_codigo[position]);
+                       paqueteDeDatos.putString("cod_med", eme_codigo[position]);
+                       paqueteDeDatos.putString("cod_det", ede_codigo[position]);
                        paqueteDeDatos.putInt("cantidad", ede_cantidad);
+                       paqueteDeDatos.putInt("cantidades", cantidad[position]);
                        paqueteDeDatos.putString("indicaciones",indicaciones[position]);
                        paqueteDeDatos.putString("nombre",Pac_nombre[position]);
                        //crear y mostrar un Dialog
@@ -124,10 +128,14 @@ public class FragmentPendientesEntrega extends Fragment {
                         fecha_entrega=new String[resp.size()];
                         codigo_med =new int[resp.size()];
                         eme_codigo =new String[resp.size()];
+                        cantidad = new int[resp.size()];
+                        ede_codigo = new String[resp.size()];
 
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
+                            ede_codigo [i] = ""+item.ede_codigo;
+                            cantidad [i]= item.ede_cantidad;
                             ede_cantidad += 1;
                             eme_codigo[i] = item.ede_estado;
                             codigo_med[i] = item.eme_codigo;
