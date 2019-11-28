@@ -44,10 +44,12 @@ public class Medicamentos extends Fragment {
     //###########################################################
     ListView lvMedicamentosPendientes;
 
-    String[] Paciente_Entrega;
-    String[] Cantidad_Pendiente_Entrega;
-    String[] Medicina;
-    String[] Indicaciones;
+    String[] per_codigo;
+    String[] med_nombre;
+    String[] mdc_nombre;
+    String[] mdc_descripcion;
+    String[] rme_cantidad;
+    String[] rme_indicaciones;
 
     public Medicamentos() {
         // Required empty public constructor
@@ -73,7 +75,7 @@ public class Medicamentos extends Fragment {
     //METODO PARA CONSUMIR EL WS
     private void getMedicamentosPendientes() {
         Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
-        Call<List<MedicamentosPendientesModel>> call = servicio.getMedicamentosPendientes(0, 1);
+        Call<List<MedicamentosPendientesModel>> call = servicio.getMedicamentosPendientes(1);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<MedicamentosPendientesModel>>() {
             @Override
@@ -84,19 +86,21 @@ public class Medicamentos extends Fragment {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        Paciente_Entrega=new String[resp.size()];
-                        Cantidad_Pendiente_Entrega=new String[resp.size()];
-                        Medicina=new String[resp.size()];
-                        Indicaciones=new String[resp.size()];
+                        med_nombre=new String[resp.size()];
+                        mdc_nombre=new String[resp.size()];
+                        mdc_descripcion=new String[resp.size()];
+                        rme_cantidad=new String[resp.size()];
+                        rme_indicaciones=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            Paciente_Entrega[i] = "Paciente: "+item.Paciente_Entrega;
-                            Cantidad_Pendiente_Entrega[i] = "Cantidad pendiente: " + item.Cantidad_Pendiente_Entrega;
-                            Medicina[i] = "Medicina: " +item.Medicina;
-                            Indicaciones[i] = "Indicaciones: "+item.Indicaciones;
+                            mdc_descripcion[i] = "Medicina: " +item.mdc_descripcion;
+                            med_nombre[i] = "Paciente: "+item.med_nombre;
+                            mdc_nombre[i] = "Cantidad pendiente: " + item.mdc_nombre;
+                            rme_cantidad[i] = "Indicaciones: "+item.rme_cantidad;
+                            rme_indicaciones[i] = "Indicaciones:"+item.rme_indicaciones;
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, Medicina, Paciente_Entrega, Cantidad_Pendiente_Entrega, Indicaciones);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, med_nombre, mdc_nombre, mdc_descripcion, rme_cantidad);
                         lvMedicamentosPendientes.setAdapter(adaptadorList);
 
 

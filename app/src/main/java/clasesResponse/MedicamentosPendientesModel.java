@@ -3,12 +3,16 @@ package clasesResponse;
 import com.google.gson.annotations.SerializedName;
 
 public class MedicamentosPendientesModel {
-    @SerializedName("Paciente_Entrega")
-    public String Paciente_Entrega;
-    @SerializedName("Cantidad_Pendiente_Entrega")
-    public Double Cantidad_Pendiente_Entrega;
-    @SerializedName("Medicina")
-    public String Medicina;
-    @SerializedName("Indicaciones")
-    public String Indicaciones;
+    @SerializedName("per_codigo")
+    public int per_codigo;
+    @SerializedName("med_nombre")
+    public String med_nombre;
+    @SerializedName("mdc_nombre")
+    public String mdc_nombre;
+    @SerializedName("mdc_descripcion")
+    public String mdc_descripcion;
+    @SerializedName("rme_cantidad")
+    public String rme_cantidad;
+    @SerializedName("rme_indicaciones")
+    public String rme_indicaciones;
 }
