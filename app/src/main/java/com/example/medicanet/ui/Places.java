@@ -8,12 +8,14 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
+import com.example.medicanet.metodos.AdaptadorListView;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,9 +28,24 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.List;
+
+import clasesResponse.CentroMedicoModel;
+import clasesResponse.PacientesModel;
+import retrofit.Interfaces.IServices;
+import retrofit.RetrofitClientInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Places extends FragmentActivity implements OnMapReadyCallback {
+
+    RetrofitClientInstance ret = new RetrofitClientInstance();
+    private IServices servicio;
+    List<CentroMedicoModel> resp;
+    CentroMedicoModel item;
 
     private GoogleMap mMap;
 
@@ -53,6 +70,12 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
         btnNormal.setBackgroundResource(R.drawable.boton_redondeado_borde);
         btnSatelite.setBackgroundResource(R.drawable.boton_redondeado_borde);
         btnTerreno.setBackgroundResource(R.drawable.boton_redondeado_borde);
+
+        //INICIALIZAR OBJETO DE LA INTERFAZ
+        servicio = (IServices) ret.createService(IServices.class, getApplicationContext().getResources().getString(R.string.token));
+
+        //CARGAR EL WS
+        //getCentros();
 
         //INICIO CODIGO DE PLACES
         /**
@@ -141,15 +164,17 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //CARGAR EL WS
+        getCentros(mMap);
 
-        LatLng ubicacion = new LatLng(13.701198, -89.200830);
-        mMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
-                .anchor(0.5f,1f)
-                .position(ubicacion)
-                .title("UTEC")
-                .snippet("Universidad Tecnológica de El Salvador"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion,12));
+        //LatLng ubicacion = new LatLng(13.701198, -89.200830);
+        //mMap.addMarker(new MarkerOptions()
+        //        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
+        //        .anchor(0.5f,1f)
+        //        .position(ubicacion)
+        //        .title("UTEC")
+        //        .snippet("Universidad Tecnológica de El Salvador"));
+        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion,12));
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
@@ -163,14 +188,58 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                mMap.clear();
-                mMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
-                        .anchor(0.5f,1f)
-                        .position(latLng)
-                        .title("Te has cambiado de lugar")
-                        .snippet("Puedes hacer zoom para descubrir cosas nuevas en este lugar!"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
+                //mMap.clear();
+                //mMap.addMarker(new MarkerOptions()
+                //        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
+                //        .anchor(0.5f,1f)
+                //        .position(latLng)
+                //        .title("Te has cambiado de lugar")
+                //        .snippet("Puedes hacer zoom para descubrir cosas nuevas en este lugar!"));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
+            }
+        });
+    }
+
+    //METODO PARA CONSUMIR EL WS
+    private void getCentros(final GoogleMap mMap) {
+
+        Log.d("JTDebug", "Entra Metodo getCentros");
+        Call<List<CentroMedicoModel>> call = servicio.getCentroMedico();
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<CentroMedicoModel>>() {
+            @Override
+            public void onResponse(Call<List<CentroMedicoModel>> call, Response<List<CentroMedicoModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp.size());
+
+                        mMap.clear();
+                        for (int i=0;i<resp.size();i++) {
+                            item = resp.get(i);
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
+                                    .anchor(0.5f,1f)
+                                    .position(new LatLng(item.cmd_latitud,item.cmd_longitud))
+                                    .title(item.cmd_nombre)
+                                    .snippet("Visitanos en "+item.cmd_nombre+" !!!"));
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.cmd_latitud,item.cmd_longitud),12));
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CentroMedicoModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
             }
         });
     }

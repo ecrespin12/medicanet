@@ -8,7 +8,7 @@ public class CentroMedicoModel {
     @SerializedName("cmd_nombre")
     public String cmd_nombre;
     @SerializedName("cmd_latitud")
-    public String cmd_latitud;
+    public double cmd_latitud;
     @SerializedName("cmd_longitud")
-    public String cmd_longitud;
+    public double cmd_longitud;
 }
