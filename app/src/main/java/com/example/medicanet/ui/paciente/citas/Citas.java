@@ -123,7 +123,7 @@ public class Citas extends Fragment  {
                             item = resp.get(i);
                             per_nombre[i] = "Paciente: "+item.per_nombre;
                             per_correo[i] = "Correo: " + item.per_correo;
-                            per_dui[i] = "DUI" +item.per_dui;
+                            per_dui[i] = "DUI: " +item.per_dui;
                             per_fecha_nace[i] = "Fecha de Nacimiento: "+item.per_fecha_nace;
                             med_nombre[i] = "Nombre del Medico: "+item.med_nombre;
                             med_correo[i] = "Medico Correp: "+item.med_correo;

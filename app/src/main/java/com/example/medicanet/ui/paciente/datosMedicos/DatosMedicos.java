@@ -5,17 +5,48 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.medicanet.R;
+import com.example.medicanet.metodos.AdaptadorListView;
+
+import java.util.List;
+
+import clasesResponse.CitasModel;
+import clasesResponse.ConsultaModel;
+import retrofit.Interfaces.IServices;
+import retrofit.RetrofitClientInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DatosMedicos extends Fragment {
+
+    //VARIABLES PARA CONSUMIR EL WS##############################
+    RetrofitClientInstance ret = new RetrofitClientInstance();
+    private IServices servicio;
+    List<ConsultaModel> resp;
+    ConsultaModel item;
+    //###########################################################
+    String[] cme_codigo;
+    String[] per_nombre;
+    String[] per_correo;
+    String[] per_dui;
+    String[] per_fecha_nace;
+    String[] med_nombre;
+    String[] med_correo;
+    String[] cmd_codigo;
+    String[] cmd_nombre;
+    String[] cmd_latitud;
+    String[] cmd_longitud;
+    String[] cme_fecha_hora;
 
 
     ListView lvDatosMedicos;
@@ -32,6 +63,68 @@ public class DatosMedicos extends Fragment {
         lvDatosMedicos = view.findViewById(R.id.lvDatosMedicos_pac);
         return view;
 
+    }
+
+    private void getHistorial(final View view){
+        Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
+        Call<List<ConsultaModel>> call = servicio.getConsultas( 1,0,0);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<ConsultaModel>>() {
+            @Override
+            public void onResponse(Call<List<ConsultaModel>> call, Response<List<ConsultaModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp.size());
+                        per_nombre=new String[resp.size()];
+                        per_correo=new String[resp.size()];
+                        per_dui=new String[resp.size()];
+                        per_fecha_nace=new String[resp.size()];
+                        med_nombre=new String[resp.size()];
+                        med_correo=new String[resp.size()];
+                        cmd_codigo=new String[resp.size()];
+                        cmd_nombre=new String[resp.size()];
+                        cmd_latitud=new String[resp.size()];
+                        cmd_longitud=new String[resp.size()];
+                        cme_fecha_hora=new String[resp.size()];
+
+                        for (int i=0;i<resp.size();i++) {
+                            item = resp.get(i);
+                            per_nombre[i] = "Paciente: "+item.per_nombre;
+                            per_correo[i] = "Correo: " + item.per_correo;
+                            per_dui[i] = "DUI: " +item.per_dui;
+                            per_fecha_nace[i] = "Fecha de Nacimiento: "+item.per_fecha_nace+"\n"
+                            +"Latitud: "+item.cmd_latitud+"\n"
+                            +"Longitud: "+item.cmd_longitud;
+                            /*med_nombre[i] = "Nombre del Medico: "+item.med_nombre;
+                            med_correo[i] = "Medico Correp: "+item.med_correo;
+                            cmd_codigo[i] = "Codigo del medico: "+item.cmd_codigo;
+                            cmd_nombre[i] = "Nombre: "+item.cmd_nombre;
+                            cmd_latitud[i] = "Latitud: "+item.cmd_latitud;
+                            cmd_longitud[i] = "Longitud: "+item.cmd_longitud;
+                            cme_fecha_hora[i] = "Fecha: "+item.cme_fecha_hora;*/
+                        }
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_correo, per_dui, per_fecha_nace);
+                        lvDatosMedicos.setAdapter(adaptadorList);
+
+
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ConsultaModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 
 }
