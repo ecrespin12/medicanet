@@ -106,7 +106,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     public void postEntregaMedicamentoUpdate(int cod, String est,  String fec){
 
 
-        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentoUpdate");
+        Log.d("JTDebug", "Entra Metodo postEntregaMedicamentoUpdate");
         Call<Boolean> call = servicio.postEntregaMedicamentoUpdate(cod,est,fec);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<Boolean>() {
@@ -145,8 +145,8 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,String mdc){
 
 
-        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosUpdateDetalle");
-        Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,can,est,fec,mdc);
+        Log.d("JTDebug", "Entra Metodo postEntregaMedicamentosUpdateDetalle");
+        Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,mdc,can,est,fec);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<Boolean>() {
             @Override
