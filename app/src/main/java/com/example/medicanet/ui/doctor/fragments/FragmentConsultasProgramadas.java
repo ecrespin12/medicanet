@@ -15,11 +15,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
+import com.example.medicanet.metodos.AdaptadorListViewCargando;
 import com.example.medicanet.metodos.Metodos;
 
 import java.text.ParseException;
@@ -52,6 +55,11 @@ public class FragmentConsultasProgramadas extends Fragment {
     EditText edtNombrePaciente;
     Button btnBuscar;
     Button btnFecha;
+
+    ImageView imgRecargar;
+
+    ProgressBar pgbRecargar;
+
     ListView lvLista;
 
     AdaptadorListView adaptadorListView;
@@ -77,19 +85,28 @@ public class FragmentConsultasProgramadas extends Fragment {
         btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_programadas);
         btnFecha = view.findViewById(R.id.btnFecha_fragment_doc_consultas_programadas);
         lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_programadas);
+        lvLista.setAdapter(new AdaptadorListViewCargando(getContext()));
+
+        imgRecargar = view.findViewById(R.id.imgRecargar_fragment_doc_consultas_programadas);
+        pgbRecargar = view.findViewById(R.id.pgbRecargar_fragment_doc_consultas_programadas);
+
+        pgbRecargar.setVisibility(View.INVISIBLE);
+
+        imgRecargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lvLista.setAdapter(new AdaptadorListViewCargando(getContext()));
+                imgRecargar.setVisibility(View.GONE);
+                pgbRecargar.setVisibility(View.VISIBLE);
+                getConsultas(view,0,1,0);
+            }
+        });
 
         //INICIALIZAR OBJETO DE LA INTERFAZ
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
 
         //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
         getConsultas(view,0,1,0);
-
-        /*imagenes = getResources().obtainTypedArray(R.array.img_item_list_ejemplo);
-        nombres = getResources().getStringArray(R.array.campo1_item_list_ejemplo);
-        descripciones = getResources().getStringArray(R.array.campo2_item_list_ejemplo);
-
-        adaptadorListView = new AdaptadorListView(getContext(), imagenes, nombres, descripciones, null, null);
-        lvLista.setAdapter(adaptadorListView);*/
 
         //AGREGAR EVENTO CLICKLISTENER AL LISTVIEW
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -228,16 +245,27 @@ public class FragmentConsultasProgramadas extends Fragment {
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
                         lvLista.setAdapter(adaptadorListView);
+                        imgRecargar.setVisibility(View.VISIBLE);
+                        pgbRecargar.setVisibility(View.INVISIBLE);
                     } else {
+                        imgRecargar.setVisibility(View.VISIBLE);
+                        pgbRecargar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
+                    imgRecargar.setVisibility(View.VISIBLE);
+                    pgbRecargar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ConsultaModel>> call, Throwable t) {
+                imgRecargar.setVisibility(View.VISIBLE);
+                pgbRecargar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

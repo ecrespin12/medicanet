@@ -128,7 +128,7 @@ public class Login extends AppCompatActivity {
                         } else {
                             // si falla mostrar.
                             Log.w("Fallo", "Error al iniciar", task.getException());
-                            Toast.makeText(getApplicationContext(), "Credenciales incorrectas",
+                            Toast.makeText(getApplicationContext(), "Credenciales incorrectas o fallo de conexión",
                                     Toast.LENGTH_SHORT).show();
 
                         }

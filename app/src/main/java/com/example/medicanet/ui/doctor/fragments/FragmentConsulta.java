@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
@@ -35,6 +37,9 @@ public class FragmentConsulta extends Fragment {
 
     ListView lvDetalles;
     ListView lvMedicamentos;
+
+    ImageView imgRecargarDetalles,imgRecargarMedicamentos;
+    ProgressBar pgbRecargarDetalles,pgbRecargarMedicamentos;
 
     ConsultaModel item;
 
@@ -72,6 +77,15 @@ public class FragmentConsulta extends Fragment {
 
         lvDetalles=view.findViewById(R.id.lvDetalles_fragment_doc_consulta);
         lvMedicamentos=view.findViewById(R.id.lvMedicamentos_fragment_doc_consulta);
+
+        imgRecargarDetalles=view.findViewById(R.id.imgRecargarDetalles_fragment_doc_consulta);
+        imgRecargarMedicamentos=view.findViewById(R.id.imgRecargarMedicamentos_fragment_doc_consulta);
+
+        pgbRecargarDetalles=view.findViewById(R.id.pgbRecargarDetalles_fragment_doc_consulta);
+        pgbRecargarMedicamentos=view.findViewById(R.id.pgbRecargarMedicamentos_fragment_doc_consulta);
+
+        pgbRecargarDetalles.setVisibility(View.INVISIBLE);
+        pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
 
         //INICIALIZAR OBJETO DE LA INTERFAZ
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
@@ -146,6 +160,27 @@ public class FragmentConsulta extends Fragment {
                 },100);
             }
         });
+
+        imgRecargarDetalles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lvDetalles.setAdapter(null);
+                imgRecargarDetalles.setVisibility(View.GONE);
+                pgbRecargarDetalles.setVisibility(View.VISIBLE);
+                getDetalles();
+            }
+        });
+
+        imgRecargarMedicamentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lvMedicamentos.setAdapter(null);
+                imgRecargarMedicamentos.setVisibility(View.GONE);
+                pgbRecargarMedicamentos.setVisibility(View.VISIBLE);
+                getMedicamentos();
+            }
+        });
+
         //fin codigo agregado
 
         return  view;
@@ -175,10 +210,18 @@ public class FragmentConsulta extends Fragment {
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), null, arr1, arr2, null, null);
                         lvDetalles.setAdapter(adaptadorListView);
+                        imgRecargarDetalles.setVisibility(View.VISIBLE);
+                        pgbRecargarDetalles.setVisibility(View.INVISIBLE);
                     } else {
+                        imgRecargarDetalles.setVisibility(View.VISIBLE);
+                        pgbRecargarDetalles.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
+                    imgRecargarDetalles.setVisibility(View.VISIBLE);
+                    pgbRecargarDetalles.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -187,6 +230,9 @@ public class FragmentConsulta extends Fragment {
             public void onFailure(Call<List<DatosMedicosModel>> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
+                Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
+                imgRecargarDetalles.setVisibility(View.VISIBLE);
+                pgbRecargarDetalles.setVisibility(View.INVISIBLE);
                 t.printStackTrace();
             }
         });
@@ -218,16 +264,27 @@ public class FragmentConsulta extends Fragment {
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), null, arr1, arr2, arr3, null);
                         lvMedicamentos.setAdapter(adaptadorListView);
+                        imgRecargarMedicamentos.setVisibility(View.VISIBLE);
+                        pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
                     } else {
+                        imgRecargarMedicamentos.setVisibility(View.VISIBLE);
+                        pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
+                    imgRecargarMedicamentos.setVisibility(View.VISIBLE);
+                    pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<List<RecetaModel>> call, Throwable t) {
+                imgRecargarMedicamentos.setVisibility(View.VISIBLE);
+                pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
+                Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();
