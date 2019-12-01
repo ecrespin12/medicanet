@@ -68,7 +68,10 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         txtIndicaciones.setEnabled(false);
 
         final int Cantidades = bd.getInt("cantidades"), Codigo = bd.getInt("codigo"),Cantidad = bd.getInt("cantidad");
-        final String Nombre=bd.getString("nombre"),cod_det = bd.getString("cod_det"), cod_med = bd.getString("cod_med"),Indicaciones=bd.getString("indicaciones");
+        final String Nombre=bd.getString("nombre");
+        final String cod_det = bd.getString("cod_det");
+        final int cod_mdc = bd.getInt("mdc_codigo");
+        final String Indicaciones=bd.getString("indicaciones");
         txtCantidad.setText(""+Cantidades);
         txtMedicamento.setText(""+Nombre);
         txtIndicaciones.setText(""+Indicaciones);
@@ -81,7 +84,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                     count = Cantidad;
                 }
                 String fecha = Metodos.FormatoFecha();
-                postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", "2019-11-28",cod_med);
+                postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", "2019-11-28",cod_mdc);
                 count =count - 1;
 
 
@@ -142,12 +145,11 @@ public class DialogEntregaMedicamentos extends DialogFragment {
 
 
 
-    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,String mdc){
-
-
+    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,int mdc){
         Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosUpdateDetalle");
         Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,can,est,fec,mdc);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        Log.d("JTDebug", fec + " " + mdc + " " + cod + " " + can);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
