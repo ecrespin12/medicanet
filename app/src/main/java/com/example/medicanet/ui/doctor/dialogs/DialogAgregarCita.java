@@ -194,7 +194,7 @@ public class DialogAgregarCita extends DialogFragment {
 
                         for (int i=0;i<centroMedicoModels.size();i++) {
                             centroMedicoModel = centroMedicoModels.get(i);
-                            arr1[i] = "Código: "+centroMedicoModel.cmd_nombre;
+                            arr1[i] = centroMedicoModel.cmd_nombre;
                         }
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, null, null, null);
                         spCentro.setAdapter(adaptadorSpinner);

@@ -103,4 +103,8 @@ public interface IServices {
     @POST("Receta/agregar")
     @FormUrlEncoded
     Call<Integer> postAgregarReceta(@Field("mdc") int mdc, @Field("cme") int cme, @Field("ind") String ind, @Field("can") double can);
+
+    @POST("Consulta/agregar")
+    @FormUrlEncoded
+    Call<Integer> postAgregarConsulta(@Field("per") int per, @Field("med") int med, @Field("cmd") int cmd, @Field("fec") Date fec);
 }
