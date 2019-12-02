@@ -18,6 +18,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.Metodos;
+import com.example.medicanet.ui.farmacia.fragments.FragmentPendientesEntrega;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
@@ -82,9 +83,11 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                     postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", fecha,cod_med);
                     count =count + 1;
                 }
-                else if(count ==Cantidad){
+                if(Cantidad == count){
                     postEntregaMedicamentoUpdate(Codigo,"E", fecha);
                     count = 0;
+                    txtCantidad.setEnabled(false);
+                    btnGuardar.setEnabled(false);
                 }
 
 
@@ -97,6 +100,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                 dismiss();
             }
         });
+
         return v;
     }
 

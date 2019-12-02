@@ -142,7 +142,7 @@ public class FragmentPendientesEntrega extends Fragment {
                             mdc_codigo [i] = ""+item.mdc_codigo;
                             ede_codigo [i] = ""+item.ede_codigo;
                             cantidad [i]= item.ede_cantidad;
-                            if(item.ede_estado.equals("E")){
+                            if(item.ede_estado.equals("PENDIENTE")){
                                 ede_cantidad += 1;
                             }
                             eme_codigo[i] = item.ede_estado;

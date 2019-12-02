@@ -80,6 +80,8 @@ public class Metodos {
         return fecha;
     }
 
+
+
     public static  boolean  validarFechaDesde(EditText edtFecha) throws ParseException {
         int dia=0,mes=0, anio=0;
         SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
