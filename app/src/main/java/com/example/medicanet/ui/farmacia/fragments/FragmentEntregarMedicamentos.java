@@ -100,6 +100,7 @@ public class FragmentEntregarMedicamentos extends Fragment {
                     public void run() {
                         Bundle paqueteDeDatos = new Bundle();
                         paqueteDeDatos.putInt("codigo", eme[position]);
+                        paqueteDeDatos.putString("codpaciente",Pac_codigo[position]);
 
                         FragmentPendientesEntrega fragmentPedientesEntrega = new FragmentPendientesEntrega();
 

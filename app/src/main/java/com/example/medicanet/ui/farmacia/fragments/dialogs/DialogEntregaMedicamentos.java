@@ -18,6 +18,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.Metodos;
+import com.example.medicanet.ui.farmacia.fragments.FragmentPendientesEntrega;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
@@ -68,10 +69,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         txtIndicaciones.setEnabled(false);
 
         final int Cantidades = bd.getInt("cantidades"), Codigo = bd.getInt("codigo"),Cantidad = bd.getInt("cantidad");
-        final String Nombre=bd.getString("nombre");
-        final String cod_det = bd.getString("cod_det");
-        final int cod_mdc = bd.getInt("mdc_codigo");
-        final String Indicaciones=bd.getString("indicaciones");
+        final String Nombre=bd.getString("nombre"),cod_det = bd.getString("cod_det"), cod_med = bd.getString("mdc_codigo"),Indicaciones=bd.getString("indicaciones");
         txtCantidad.setText(""+Cantidades);
         txtMedicamento.setText(""+Nombre);
         txtIndicaciones.setText(""+Indicaciones);
@@ -79,17 +77,17 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(count == 0){
-                    count = Cantidad;
-                }
                 String fecha = Metodos.FormatoFecha();
-                postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", "2019-11-28",cod_mdc);
-                count =count - 1;
 
-
-                if(count ==0){
+                if(Cantidad > count){
+                    postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", fecha,cod_med);
+                    count =count + 1;
+                }
+                if(Cantidad == count){
                     postEntregaMedicamentoUpdate(Codigo,"E", fecha);
+                    count = 0;
+                    txtCantidad.setEnabled(false);
+                    btnGuardar.setEnabled(false);
                 }
 
 
@@ -102,6 +100,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                 dismiss();
             }
         });
+
         return v;
     }
 
@@ -109,7 +108,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
     public void postEntregaMedicamentoUpdate(int cod, String est,  String fec){
 
 
-        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentoUpdate");
+        Log.d("JTDebug", "Entra Metodo postEntregaMedicamentoUpdate");
         Call<Boolean> call = servicio.postEntregaMedicamentoUpdate(cod,est,fec);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<Boolean>() {
@@ -145,9 +144,11 @@ public class DialogEntregaMedicamentos extends DialogFragment {
 
 
 
-    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,int mdc){
-        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosUpdateDetalle");
-        Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,can,est,fec,mdc);
+    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,String mdc){
+
+
+        Log.d("JTDebug", "Entra Metodo postEntregaMedicamentosUpdateDetalle");
+        Call<Boolean> call = servicio.postEntregaMedicamentoUpdateDetalle(cod,mdc,can,est,fec);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         Log.d("JTDebug", fec + " " + mdc + " " + cod + " " + can);
         call.enqueue(new Callback<Boolean>() {
