@@ -9,6 +9,8 @@ public class EntregaMedicamentoDetalleModel {
     public int ede_codigo;
     @SerializedName("mdc_nombre")
     public String mdc_nombre;
+    @SerializedName("mdc_codigo")
+    public String mdc_codigo;
     @SerializedName("rme_indicaciones")
     public String rme_indicaciones;
     @SerializedName("ede_cantidad")

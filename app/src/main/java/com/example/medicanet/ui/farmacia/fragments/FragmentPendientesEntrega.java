@@ -52,7 +52,9 @@ public class FragmentPendientesEntrega extends Fragment {
     public String [] eme_codigo;
     public int [] cantidad;
     public String [] ede_codigo;
+    public String [] mdc_codigo;
     public int ede_cantidad = 0;
+    public String codPac;
 
 
     public FragmentPendientesEntrega() {
@@ -74,6 +76,7 @@ public class FragmentPendientesEntrega extends Fragment {
         lvPendientesEntrega.setAdapter(ha);*/
         bd = getArguments();
         eme = bd.getInt("codigo");
+        codPac = bd.getString("codpaciente");
 
         getEntregaMedicamentosDetalle(eme);
 
@@ -90,7 +93,8 @@ public class FragmentPendientesEntrega extends Fragment {
 
                        Bundle paqueteDeDatos = new Bundle();
                        paqueteDeDatos.putInt("codigo", codigo_med[position]);
-                       paqueteDeDatos.putString("cod_med", eme_codigo[position]);
+                       paqueteDeDatos.putInt("cod_med", eme);
+                       paqueteDeDatos.putString("mdc_codigo", mdc_codigo[position]);
                        paqueteDeDatos.putString("cod_det", ede_codigo[position]);
                        paqueteDeDatos.putInt("cantidad", ede_cantidad);
                        paqueteDeDatos.putInt("cantidades", cantidad[position]);
@@ -130,10 +134,12 @@ public class FragmentPendientesEntrega extends Fragment {
                         eme_codigo =new String[resp.size()];
                         cantidad = new int[resp.size()];
                         ede_codigo = new String[resp.size()];
+                        mdc_codigo = new String[resp.size()];
 
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
+                            mdc_codigo [i] = ""+item.mdc_codigo;
                             ede_codigo [i] = ""+item.ede_codigo;
                             cantidad [i]= item.ede_cantidad;
                             ede_cantidad += 1;

@@ -80,7 +80,7 @@ public interface IServices {
 
     @POST("EntregaMedicamento/updateEntregaDetalle")
     @FormUrlEncoded
-    Call<Boolean> postEntregaMedicamentoUpdateDetalle(@Field("cod") String cod,@Field("mdc") String mdc,@Field("can") int can, @Field("est") String est, @Field("fec") String fec);
+    Call<Boolean> postEntregaMedicamentoUpdateDetalle(@Field("cod") int cod,@Field("mdc") String mdc,@Field("can") int can, @Field("est") String est, @Field("fec") String fec);
 
     @GET("Consulta/consulta?")
     @NotNull

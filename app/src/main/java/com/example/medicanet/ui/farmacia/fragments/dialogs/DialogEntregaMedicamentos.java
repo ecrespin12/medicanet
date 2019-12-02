@@ -68,7 +68,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         txtIndicaciones.setEnabled(false);
 
         final int Cantidades = bd.getInt("cantidades"), Codigo = bd.getInt("codigo"),Cantidad = bd.getInt("cantidad");
-        final String Nombre=bd.getString("nombre"),cod_det = bd.getString("cod_det"), cod_med = bd.getString("cod_med"),Indicaciones=bd.getString("indicaciones");
+        final String codMed = bd.getString("cod_med"), Nombre=bd.getString("nombre"),cod_det = bd.getString("cod_det"), cod_med = bd.getString("mdc_codigo"),Indicaciones=bd.getString("indicaciones");
         txtCantidad.setText(""+Cantidades);
         txtMedicamento.setText(""+Nombre);
         txtIndicaciones.setText(""+Indicaciones);
@@ -81,7 +81,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                     count = Cantidad;
                 }
                 String fecha = Metodos.FormatoFecha();
-                postEntregaMedicamentoUpdateDetalle(cod_det,Cantidades,"E", "2019-11-28",cod_med);
+                postEntregaMedicamentoUpdateDetalle(Codigo,Cantidades,"E", "2019-11-28",cod_med);
                 count =count - 1;
 
 
@@ -142,7 +142,7 @@ public class DialogEntregaMedicamentos extends DialogFragment {
 
 
 
-    public void postEntregaMedicamentoUpdateDetalle(String cod,int can, String est,  String fec,String mdc){
+    public void postEntregaMedicamentoUpdateDetalle(int cod,int can, String est,  String fec,String mdc){
 
 
         Log.d("JTDebug", "Entra Metodo postEntregaMedicamentosUpdateDetalle");
