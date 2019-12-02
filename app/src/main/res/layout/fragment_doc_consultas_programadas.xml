@@ -85,6 +85,8 @@
 
 
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -115,13 +117,29 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
-        <ListView
 
-            android:id="@+id/lvConsultas_fragment_doc_consultas_programadas"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:background="#BBDEFB" />
+            android:background="#BBDEFB">
+
+            <ProgressBar
+                android:id="@+id/pgbLista_fragment_doc_consultas_programadas"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ListView
+
+                android:id="@+id/lvConsultas_fragment_doc_consultas_programadas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="535dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

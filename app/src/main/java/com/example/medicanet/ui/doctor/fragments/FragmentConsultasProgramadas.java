@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
-import com.example.medicanet.metodos.AdaptadorListViewCargando;
 import com.example.medicanet.metodos.Metodos;
 
 import java.text.ParseException;
@@ -58,7 +57,7 @@ public class FragmentConsultasProgramadas extends Fragment {
 
     ImageView imgRecargar;
 
-    ProgressBar pgbRecargar;
+    ProgressBar pgbRecargar, pgbLista;
 
     ListView lvLista;
 
@@ -85,19 +84,20 @@ public class FragmentConsultasProgramadas extends Fragment {
         btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_consultas_programadas);
         btnFecha = view.findViewById(R.id.btnFecha_fragment_doc_consultas_programadas);
         lvLista = view.findViewById(R.id.lvConsultas_fragment_doc_consultas_programadas);
-        lvLista.setAdapter(new AdaptadorListViewCargando(getContext()));
 
         imgRecargar = view.findViewById(R.id.imgRecargar_fragment_doc_consultas_programadas);
         pgbRecargar = view.findViewById(R.id.pgbRecargar_fragment_doc_consultas_programadas);
+        pgbLista = view.findViewById(R.id.pgbLista_fragment_doc_consultas_programadas);
 
         pgbRecargar.setVisibility(View.INVISIBLE);
 
         imgRecargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                lvLista.setAdapter(new AdaptadorListViewCargando(getContext()));
+                lvLista.setAdapter(null);
                 imgRecargar.setVisibility(View.GONE);
                 pgbRecargar.setVisibility(View.VISIBLE);
+                pgbLista.setVisibility(View.VISIBLE);
                 getConsultas(view,0,1,0);
             }
         });
@@ -112,6 +112,7 @@ public class FragmentConsultasProgramadas extends Fragment {
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+
                 //Pausa para que haga la transicion, esto para que se note el efecto de Click sobre el listView
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -247,15 +248,18 @@ public class FragmentConsultasProgramadas extends Fragment {
                         lvLista.setAdapter(adaptadorListView);
                         imgRecargar.setVisibility(View.VISIBLE);
                         pgbRecargar.setVisibility(View.INVISIBLE);
+                        pgbLista.setVisibility(View.INVISIBLE);
                     } else {
                         imgRecargar.setVisibility(View.VISIBLE);
                         pgbRecargar.setVisibility(View.INVISIBLE);
+                        pgbLista.setVisibility(View.INVISIBLE);
                         Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
                     imgRecargar.setVisibility(View.VISIBLE);
                     pgbRecargar.setVisibility(View.INVISIBLE);
+                    pgbLista.setVisibility(View.INVISIBLE);
                     Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
@@ -265,6 +269,7 @@ public class FragmentConsultasProgramadas extends Fragment {
             public void onFailure(Call<List<ConsultaModel>> call, Throwable t) {
                 imgRecargar.setVisibility(View.VISIBLE);
                 pgbRecargar.setVisibility(View.INVISIBLE);
+                pgbLista.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
