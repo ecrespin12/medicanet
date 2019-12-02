@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicanet.R;
+import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -136,6 +137,17 @@ public class FragmentDatosConsulta extends Fragment {
 
                         //AQUI COMIENZA LA LOGICA DE DEL BOTON
                         Toast.makeText(getContext(), "Ver historial medico", Toast.LENGTH_SHORT).show();
+                        // Crea el nuevo fragmento
+                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(item.cme_codper);
+                        //Crea la transaccion
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
+                        transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
+                        //agregar el fragmento a la pila para regresar al anterior
+                        transaction.addToBackStack(null);
+
+                        // Commit a la transacción
+                        transaction.commit();
                     }
                 }, 500);
             }
