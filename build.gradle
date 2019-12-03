@@ -21,7 +21,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        //agregando proyecto para librerias
+        maven { url 'https://jitpack.io' }
+
     }
 }
 

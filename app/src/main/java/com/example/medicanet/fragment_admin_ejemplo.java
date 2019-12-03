@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import me.ibrahimsn.particle.ParticleView;
+
 public class fragment_admin_ejemplo extends Fragment {
+
+    private ParticleView particleView;
 
     public fragment_admin_ejemplo() {
         // Required empty public constructor
@@ -21,6 +25,20 @@ public class fragment_admin_ejemplo extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_fragment_admin_ejemplo, container, false);
 
+        particleView=view.findViewById(R.id.particleView_fragment_admin_ejemplo);
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        particleView.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        particleView.pause();
     }
 }

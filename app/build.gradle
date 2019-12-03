@@ -55,6 +55,8 @@ dependencies {
     //Agregando libreria para google places
     implementation 'com.google.android.libraries.places:places:2.0.0'
 
+    //libreria para efecto de particulas
+    implementation 'com.github.ibrahimsn98:android-particles:1.7'
 }
 repositories {
     mavenCentral()
