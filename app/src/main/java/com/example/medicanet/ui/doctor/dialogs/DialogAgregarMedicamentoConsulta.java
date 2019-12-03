@@ -143,7 +143,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     //METODO PARA CONSUMIR EL WS
     private void getMedicamentos() {
         Log.d("JTDebug", "Entra Metodo getmedicamentos");
-        Call<List<MedicamentosModel>> call = servicio.getMedicamentos();
+        Call<List<MedicamentosModel>> call = servicio.getMedicamentos(0,"","","");
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<MedicamentosModel>>() {
             @Override
@@ -161,11 +161,10 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            arr1[i] = "Código: "+item.mdc_codigo;
-                            arr2[i] = ""+item.mdc_nombre;
-                            arr3[i] = "Medida: "+item.mdc_medida;
+                            arr1[i] = item.mdc_nombre;
+                            arr2[i] = "Medida: "+item.mdc_medida;
                         }
-                        AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, arr3, null);
+                        AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, null, null);
                         spTipoMedicamento.setAdapter(adaptadorSpinner);
 
 

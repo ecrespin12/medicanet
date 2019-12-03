@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import clasesResponse.CentroMedicoModel;
@@ -63,6 +65,8 @@ public class DialogAgregarCita extends DialogFragment {
 
     int codigoMedicamento=0;
     int codigoConsulta=0;
+
+    int codigoCentroMedico;
 
     String [] arr1;
     String [] arr2;
@@ -103,6 +107,19 @@ public class DialogAgregarCita extends DialogFragment {
         edtFecha.setEnabled(false);
 
         getCentros();
+
+        spCentro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                centroMedicoModel=centroMedicoModels.get(i);
+                codigoCentroMedico=centroMedicoModel.cmd_codigo;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btnFecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +166,11 @@ public class DialogAgregarCita extends DialogFragment {
 
                         //logica
                         Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                        int per = item.cme_codper;
+                        int med = 1; // codigo del medico logeado
+                        int cmd = codigoCentroMedico;
+                        int cme = item.cme_codigo;
+                        //postAgregarConsulta(per, med, cmd, fec);
                     }
                 },100);
             }
@@ -208,6 +230,41 @@ public class DialogAgregarCita extends DialogFragment {
 
             @Override
             public void onFailure(Call<List<CentroMedicoModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postAgregarConsulta(int per, int med, int cmd, Date fec){
+
+
+        Log.d("JTDebug", "Entra Metodo postAgregarConsulta");
+        Call<Integer> call = servicio.postAgregarConsulta(per,med,cmd,fec);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Integer resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==1){
+                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

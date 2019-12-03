@@ -15,11 +15,9 @@ import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.PacientesModel;
 import clasesResponse.RecetaModel;
-import clasesResponse.UpdateEntregaDeMedicamentosModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -39,9 +37,9 @@ public interface IServices {
     @NotNull
     Call<List<CentroMedicoModel>> getCentroMedico(@Query("cod") int cod);
 
-    @GET("Medicamentos/catalogo")
+    @GET("Medicamentos/catalogo?")
     @NotNull
-    Call<List<MedicamentosModel>> getMedicamentos();
+    Call<List<MedicamentosModel>> getMedicamentos(@Query("cod") int cod,@Query("nom") String nom,@Query("des") String des,@Query("med") String med);
 
     @GET("Consulta/consulta?")
     @NotNull
