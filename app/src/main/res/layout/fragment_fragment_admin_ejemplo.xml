@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:backgroundColor="#FFFFFF"
-        app:maxParticleRadius="12"
+        app:maxParticleRadius="5"
         app:minParticleRadius="5"
-        app:particleColor="#208bb9"
-        app:particleCount="40"
+        app:particleColor="#74208BB9"
+        app:particleCount="10"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
