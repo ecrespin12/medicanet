@@ -121,11 +121,6 @@ public class Login extends AppCompatActivity {
     }
     public void Ingresar(View v){
 
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        i.putExtra("user", "doctor");
-        startActivity(i);
-        finish();
-
         final String email = edtUser.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
 
