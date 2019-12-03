@@ -74,6 +74,14 @@ public class DialogEntregaMedicamentos extends DialogFragment {
         txtMedicamento.setText(""+Nombre);
         txtIndicaciones.setText(""+Indicaciones);
 
+        if(Cantidad == count){
+            txtCantidad.setEnabled(false);
+            btnGuardar.setEnabled(false);
+        }else{
+            txtCantidad.setEnabled(true);
+            btnGuardar.setEnabled(true);
+        }
+
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +94,6 @@ public class DialogEntregaMedicamentos extends DialogFragment {
                 if(Cantidad == count){
                     postEntregaMedicamentoUpdate(Codigo,"E", fecha);
                     count = 0;
-                    txtCantidad.setEnabled(false);
-                    btnGuardar.setEnabled(false);
                 }
 
 
