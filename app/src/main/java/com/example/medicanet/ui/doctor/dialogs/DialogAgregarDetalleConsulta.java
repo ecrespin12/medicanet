@@ -1,12 +1,9 @@
 package com.example.medicanet.ui.doctor.dialogs;
 
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.fragment.app.DialogFragment;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.fragments.FragmentConsulta;
-
 import clasesResponse.ConsultaModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
@@ -35,14 +29,16 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
     Button btnGuardar;
     ImageView btnCerrar;
 
+    //VARIABLES DEL WS
     private IServices servicio;
     RetrofitClientInstance ret = new RetrofitClientInstance();
+    /////////////////////////////////////////////////////////////
 
-    ConsultaModel item;
+    ConsultaModel consulta;
     FragmentConsulta fragmentConsulta;
 
-    public DialogAgregarDetalleConsulta(ConsultaModel item, FragmentConsulta fragmentConsulta) {
-        this.item=item;
+    public DialogAgregarDetalleConsulta(ConsultaModel consulta, FragmentConsulta fragmentConsulta) {
+        this.consulta=consulta;
         this.fragmentConsulta=fragmentConsulta;
     }
     @Override
@@ -75,9 +71,9 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
                         //logica
                         String nom = edtNombre.getText().toString().trim();
                         String dsc = edtDescripcion.getText().toString().trim();
-                        int cme = item.cme_codigo;
+                        int cme = consulta.cme_codigo;
                         postAgregarDetalleConsulta(nom,dsc,cme);
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
                     }
                 },100);
             }
@@ -106,7 +102,6 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
 
     public void postAgregarDetalleConsulta(String nom, String dsc,  int cme){
 
-
         Log.d("JTDebug", "Entra Metodo postAgregarDetalleConsulta");
         Call<Integer> call = servicio.postAgregarDetalleConsulta(nom,dsc,cme);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
@@ -121,8 +116,12 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp);
                         if(resp==1){
-                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
                             fragmentConsulta.getDetalles();
+                            dismiss();
+                        }
+                        if(resp==0){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());

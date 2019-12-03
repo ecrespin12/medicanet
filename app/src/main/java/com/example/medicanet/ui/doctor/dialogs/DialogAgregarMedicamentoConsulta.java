@@ -3,9 +3,7 @@ package com.example.medicanet.ui.doctor.dialogs;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.fragment.app.DialogFragment;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,14 +16,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.ui.doctor.fragments.FragmentConsulta;
-
-import java.text.SimpleDateFormat;
 import java.util.List;
-
 import clasesResponse.ConsultaModel;
 import clasesResponse.MedicamentosModel;
 import retrofit.Interfaces.IServices;
@@ -39,9 +33,10 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     //VARIABLES PARA CONSUMIR EL WS##############################
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<MedicamentosModel> resp;
-    MedicamentosModel item;
     //###########################################################
+
+    List<MedicamentosModel> listMedicamentos;
+    MedicamentosModel medicamento;
 
     ImageView btnCerrar;
     Spinner spTipoMedicamento;
@@ -54,8 +49,6 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
     String [] arr1;
     String [] arr2;
-    String [] arr3;
-    String [] arr4;
 
     ConsultaModel consultaModel;
     FragmentConsulta fragmentConsulta;
@@ -88,9 +81,9 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
         spTipoMedicamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                item=resp.get(i);
-                tvTituloMedida.setText("Cantidad segun unidad de medida ("+item.mdc_medida+")");
-                codigoMedicamento=item.mdc_codigo;
+                medicamento=listMedicamentos.get(i);
+                tvTituloMedida.setText("Cantidad segun unidad de medida ("+medicamento.mdc_medida+")");
+                codigoMedicamento=medicamento.mdc_codigo;
             }
 
             @Override
@@ -114,7 +107,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         String indicaciones = edtIndicaciones.getText().toString().trim();
                         double cantidad = Double.valueOf(edtCantidad.getText().toString().trim());
                         postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
                     }
                 },100);
             }
@@ -152,22 +145,18 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        resp = response.body();
-                        Log.d("JTDebug", "Count: " + resp.size());
-                        arr1=new String[resp.size()];
-                        arr2=new String[resp.size()];
-                        arr3=new String[resp.size()];
-                        arr4=new String[resp.size()];
+                        listMedicamentos = response.body();
+                        Log.d("JTDebug", "Count: " + listMedicamentos.size());
+                        arr1=new String[listMedicamentos.size()];
+                        arr2=new String[listMedicamentos.size()];
 
-                        for (int i=0;i<resp.size();i++) {
-                            item = resp.get(i);
-                            arr1[i] = item.mdc_nombre;
-                            arr2[i] = "Medida: "+item.mdc_medida;
+                        for (int i=0;i<listMedicamentos.size();i++) {
+                            medicamento = listMedicamentos.get(i);
+                            arr1[i] = medicamento.mdc_nombre;
+                            arr2[i] = "Medida: "+medicamento.mdc_medida;
                         }
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, null, null);
                         spTipoMedicamento.setAdapter(adaptadorSpinner);
-
-
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
@@ -187,7 +176,6 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
     public void postAgregarMedicamentoConsulta(int mdc, int cme,  String ind, double can){
 
-
         Log.d("JTDebug", "Entra Metodo postAgregarMedicamentoConsulta");
         Call<Integer> call = servicio.postAgregarReceta(mdc,cme,ind,can);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
@@ -202,12 +190,12 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp);
                         if(resp==1){
-                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
                             fragmentConsulta.getMedicamentos();
+                            dismiss();
                         }
                         if(resp==0){
-                            Toast.makeText(getContext(),"Operacion no Realizada",Toast.LENGTH_LONG).show();
-                            fragmentConsulta.getMedicamentos();
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());

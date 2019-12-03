@@ -1,14 +1,10 @@
 package com.example.medicanet.ui.doctor.dialogs;
 
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.fragment.app.DialogFragment;
-
 import android.os.Handler;
-import android.util.Half;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,22 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.metodos.Metodos;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import clasesResponse.CentroMedicoModel;
-import clasesResponse.ConsultaModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -44,15 +29,17 @@ import retrofit2.Response;
 
 public class DialogAgregarCita extends DialogFragment {
 
+    //VARIABLES DE WS
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<CentroMedicoModel> centroMedicoModels;
-    CentroMedicoModel centroMedicoModel;
+    /////////////////////////////////////////////////////////
+    List<CentroMedicoModel> listCentros;
+    CentroMedicoModel centroMedico;
+
+    int codPaciente;
 
     Spinner             spCentro;
-    AdaptadorSpinner    adaptadorSpinner;
 
-    EditText            edtDescripcion;
     EditText            edtFecha;
     EditText            edtHora;
 
@@ -63,20 +50,12 @@ public class DialogAgregarCita extends DialogFragment {
     ImageButton         btnFecha;
     ImageButton         btnHora;
 
-    int codigoMedicamento=0;
-    int codigoConsulta=0;
-
     int codigoCentroMedico;
 
     String [] arr1;
-    String [] arr2;
-    String [] arr3;
-    String [] arr4;
 
-    ConsultaModel item;
-
-    public DialogAgregarCita(ConsultaModel item) {
-        this.item=item;
+    public DialogAgregarCita(int codPaciente) {
+        this.codPaciente=codPaciente;
     }
 
 
@@ -102,7 +81,6 @@ public class DialogAgregarCita extends DialogFragment {
         btnFecha=view.findViewById(R.id.btnFecha_dialog_doc_agregar_cita);
         btnHora=view.findViewById(R.id.btnHora_dialog_doc_agregar_cita);
 
-
         edtHora.setEnabled(false);
         edtFecha.setEnabled(false);
 
@@ -111,8 +89,8 @@ public class DialogAgregarCita extends DialogFragment {
         spCentro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                centroMedicoModel=centroMedicoModels.get(i);
-                codigoCentroMedico=centroMedicoModel.cmd_codigo;
+                centroMedico=listCentros.get(i);
+                codigoCentroMedico=centroMedico.cmd_codigo;
             }
 
             @Override
@@ -165,12 +143,16 @@ public class DialogAgregarCita extends DialogFragment {
                         btnGuardar.setTextColor(Color.WHITE);
 
                         //logica
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_LONG).show();
-                        int per = item.cme_codper;
+
+                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+                        int per = codPaciente;
                         int med = 1; // codigo del medico logeado
                         int cmd = codigoCentroMedico;
-                        int cme = item.cme_codigo;
-                        //postAgregarConsulta(per, med, cmd, fec);
+                        String fecha=edtFecha.getText().toString().trim();
+                        String hora=edtHora.getText().toString().trim();
+                        String fechaHora = fecha+" "+hora+":00";
+
+                        postAgregarConsulta(per, med, cmd, fechaHora); //LLAMAR AL WS
                     }
                 },100);
             }
@@ -209,19 +191,18 @@ public class DialogAgregarCita extends DialogFragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        centroMedicoModels = response.body();
-                        Log.d("JTDebug", "Count: " + centroMedicoModels.size());
+                        listCentros = response.body();
+                        Log.d("JTDebug", "Count: " + listCentros.size());
 
-                        arr1=new String[centroMedicoModels.size()];
+                        arr1=new String[listCentros.size()];
 
-                        for (int i=0;i<centroMedicoModels.size();i++) {
-                            centroMedicoModel = centroMedicoModels.get(i);
-                            arr1[i] = centroMedicoModel.cmd_nombre;
+                        for (int i=0;i<listCentros.size();i++) {
+                            centroMedico = listCentros.get(i);
+                            arr1[i] = centroMedico.cmd_nombre;
                         }
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, null, null, null);
                         spCentro.setAdapter(adaptadorSpinner);
-                    } else {
-                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    } else {Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -237,8 +218,7 @@ public class DialogAgregarCita extends DialogFragment {
         });
     }
 
-    public void postAgregarConsulta(int per, int med, int cmd, Date fec){
-
+    public void postAgregarConsulta(int per, int med, int cmd, String fec){
 
         Log.d("JTDebug", "Entra Metodo postAgregarConsulta");
         Call<Integer> call = servicio.postAgregarConsulta(per,med,cmd,fec);
@@ -254,7 +234,11 @@ public class DialogAgregarCita extends DialogFragment {
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp);
                         if(resp==1){
-                            Toast.makeText(getContext(),"Operacion Realizada Exitosamente",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                        if(resp==0){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());

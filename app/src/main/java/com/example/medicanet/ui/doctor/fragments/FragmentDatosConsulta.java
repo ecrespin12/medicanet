@@ -2,10 +2,8 @@ package com.example.medicanet.ui.doctor.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import clasesResponse.ConsultaModel;
 
 public class FragmentDatosConsulta extends Fragment {
@@ -40,14 +35,14 @@ public class FragmentDatosConsulta extends Fragment {
     Button btnIniciarConsulta;
     Button btnVerHistorial;
 
-    ConsultaModel item;
+    ConsultaModel consulta;
 
     SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
     SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
 
-    public FragmentDatosConsulta(List<ConsultaModel> resp, int indiceListView) {
-        this.item=resp.get(indiceListView);
+    public FragmentDatosConsulta(List<ConsultaModel> listConsultas, int indiceListView) {
+        this.consulta=listConsultas.get(indiceListView);
     }
 
     @Override
@@ -73,18 +68,18 @@ public class FragmentDatosConsulta extends Fragment {
         btnVerHistorial=view.findViewById(R.id.btnVerHistorial_fragment_doc_datos_consulta);
 
         //CARGAR DATOS DE LA CONSULTA SELECCIONADA DESDE EL LISTADO ANTERIOR
-        tvDuiPaciente.setText("DUI: "+item.per_dui);
-        tvNombresPaciente.setText("Nombre: "+item.per_nombre);
-        tvFechaNPaciente.setText("Fecha N: "+formatoFecha.format(item.per_fecha_nace));
-        tvCorreoPaciente.setText("Correo: "+item.per_correo);
+        tvDuiPaciente.setText("DUI: "+consulta.per_dui);
+        tvNombresPaciente.setText("Nombre: "+consulta.per_nombre);
+        tvFechaNPaciente.setText("Fecha N: "+formatoFecha.format(consulta.per_fecha_nace));
+        tvCorreoPaciente.setText("Correo: "+consulta.per_correo);
 
-        tvNombresDoctor.setText("Nombre: "+item.med_nombre);
-        tvCorreoDoctor.setText("Correo: "+item.med_correo);
+        tvNombresDoctor.setText("Nombre: "+consulta.med_nombre);
+        tvCorreoDoctor.setText("Correo: "+consulta.med_correo);
 
-        tvCodigoConsulta.setText("Código de consulta: "+item.cme_codigo);
-        tvNombreCentroM.setText("Centro medico: "+item.cmd_nombre);
-        tvFechaConsulta.setText("Fecha: "+formatoFecha.format(item.cme_fecha_hora));
-        tvHoraConsulta.setText("Hora: "+formatoHora.format(item.cme_fecha_hora));
+        tvCodigoConsulta.setText("Código de consulta: "+consulta.cme_codigo);
+        tvNombreCentroM.setText("Centro medico: "+consulta.cmd_nombre);
+        tvFechaConsulta.setText("Fecha: "+formatoFecha.format(consulta.cme_fecha_hora));
+        tvHoraConsulta.setText("Hora: "+formatoHora.format(consulta.cme_fecha_hora));
 
         btnIniciarConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,15 +97,21 @@ public class FragmentDatosConsulta extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        final FragmentConsulta fragmentConsulta = new FragmentConsulta(item);
 
-                        // Crea el nuevo fragmento y la transacción.
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.nav_host_fragment, fragmentConsulta);
-                        transaction.addToBackStack(null);
+                        try {
+                            final FragmentConsulta fragmentConsulta = new FragmentConsulta(consulta);
 
-                        // Commit a la transacción
-                        transaction.commit();
+                            // Crea el nuevo fragmento y la transacción.
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.nav_host_fragment, fragmentConsulta);
+                            transaction.addToBackStack(null);
+
+                            // Commit a la transacción
+                            transaction.commit();
+                        }catch (Exception e){
+                            System.out.println("error: "+e);
+                        }
+
                     }
                 }, 500);
             }
@@ -138,7 +139,7 @@ public class FragmentDatosConsulta extends Fragment {
                         //AQUI COMIENZA LA LOGICA DE DEL BOTON
                         Toast.makeText(getContext(), "Ver historial medico", Toast.LENGTH_SHORT).show();
                         // Crea el nuevo fragmento
-                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(item.cme_codper);
+                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(consulta.cme_codper);
                         //Crea la transaccion
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)

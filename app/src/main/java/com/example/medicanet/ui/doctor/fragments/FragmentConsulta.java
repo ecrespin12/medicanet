@@ -41,26 +41,26 @@ public class FragmentConsulta extends Fragment {
     ImageView imgRecargarDetalles,imgRecargarMedicamentos;
     ProgressBar pgbRecargarDetalles,pgbRecargarMedicamentos;
 
-    ConsultaModel item;
-
     AdaptadorListView adaptadorListView;
 
-    int[] imagenes;
     String[] arr1;
     String[] arr2;
     String[] arr3;
-    String[] arr4;
 
+    //VARIABLES PARA EL WS
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<DatosMedicosModel> datosMedicosModels;
-    DatosMedicosModel datosMedicosModel;
-    List<RecetaModel> recetaModels;
-    RecetaModel recetaModel;
+    ////////////////////////////////////////////////////////////////////
+
+    ConsultaModel consulta;
+    List<DatosMedicosModel> listDatosMedicos;
+    DatosMedicosModel datoMedico;
+    List<RecetaModel> listRecetas;
+    RecetaModel receta;
     FragmentConsulta fragmentConsulta;
 
-    public FragmentConsulta(ConsultaModel item) {
-        this.item=item;
+    public FragmentConsulta(ConsultaModel consulta) {
+        this.consulta=consulta;
         fragmentConsulta=this;
     }
 
@@ -104,7 +104,7 @@ public class FragmentConsulta extends Fragment {
                         btnAgregarCita.setBackgroundResource(R.drawable.nueva_consulta_1);
 
                         //crear y mostrar un Dialog
-                        DialogAgregarCita dialog = new DialogAgregarCita(item);
+                        DialogAgregarCita dialog = new DialogAgregarCita(consulta.cme_codper);
                         dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
                     }
                 },100);
@@ -121,7 +121,7 @@ public class FragmentConsulta extends Fragment {
                         btnDetalles.setBackgroundResource(R.drawable.detalle_consulta_1);
 
                         //Crear y mostrar un Dialog
-                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta(item,fragmentConsulta);
+                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta(consulta,fragmentConsulta);
                         dialog.show(getFragmentManager(),"dialog_doc_agregar_detalle");
                     }
                 },100);
@@ -137,7 +137,7 @@ public class FragmentConsulta extends Fragment {
                         btnMedicamentos.setBackgroundResource(R.drawable.medicamento_1);
 
                         //Crear y mostrar un Dialog
-                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta(item,fragmentConsulta);
+                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta(consulta,fragmentConsulta);
                         dialog.show(getFragmentManager(),"dialog_doc_agregar_medicamento");
                     }
                 },100);
@@ -156,6 +156,7 @@ public class FragmentConsulta extends Fragment {
 
                         //Terminar
                         Toast.makeText(getContext(),"Terminando consulta",Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
                     }
                 },100);
             }
@@ -189,7 +190,7 @@ public class FragmentConsulta extends Fragment {
     //METODO PARA CONSUMIR EL WS
     public void getDetalles() {
         Log.d("JTDebug", "Entra Metodo getDetalles");
-        Call<List<DatosMedicosModel>> call = servicio.getDatosMedicos(0,item.cme_codigo);
+        Call<List<DatosMedicosModel>> call = servicio.getDatosMedicos(consulta.cme_codper,consulta.cme_codigo);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<DatosMedicosModel>>() {
             @Override
@@ -198,15 +199,15 @@ public class FragmentConsulta extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        datosMedicosModels = response.body();
-                        Log.d("JTDebug", "Count: " + datosMedicosModels.size());
-                        arr1 = new String[datosMedicosModels.size()];
-                        arr2 = new String[datosMedicosModels.size()];
+                        listDatosMedicos = response.body();
+                        Log.d("JTDebug", "Count: " + listDatosMedicos.size());
+                        arr1 = new String[listDatosMedicos.size()];
+                        arr2 = new String[listDatosMedicos.size()];
 
-                        for (int i=0;i<datosMedicosModels.size();i++) {
-                            datosMedicosModel = datosMedicosModels.get(i);
-                            arr1[i] = "Nombre: "+datosMedicosModel.dcm_nombre;
-                            arr2[i] = "Descripción: "+datosMedicosModel.dcm_descripcion;
+                        for (int i=0;i<listDatosMedicos.size();i++) {
+                            datoMedico = listDatosMedicos.get(i);
+                            arr1[i] = "Nombre: "+datoMedico.dcm_nombre;
+                            arr2[i] = "Descripción: "+datoMedico.dcm_descripcion;
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), null, arr1, arr2, null, null);
                         lvDetalles.setAdapter(adaptadorListView);
@@ -215,13 +216,11 @@ public class FragmentConsulta extends Fragment {
                     } else {
                         imgRecargarDetalles.setVisibility(View.VISIBLE);
                         pgbRecargarDetalles.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
                     imgRecargarDetalles.setVisibility(View.VISIBLE);
                     pgbRecargarDetalles.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -230,7 +229,6 @@ public class FragmentConsulta extends Fragment {
             public void onFailure(Call<List<DatosMedicosModel>> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
-                Toast.makeText(getContext(),"No se pudieron cargar los detalles",Toast.LENGTH_SHORT).show();
                 imgRecargarDetalles.setVisibility(View.VISIBLE);
                 pgbRecargarDetalles.setVisibility(View.INVISIBLE);
                 t.printStackTrace();
@@ -241,7 +239,7 @@ public class FragmentConsulta extends Fragment {
     //METODO PARA CONSUMIR EL WS
     public void getMedicamentos() {
         Log.d("JTDebug", "Entra Metodo getMedicamentos");
-        Call<List<RecetaModel>> call = servicio.getReceta(item.cme_codigo);
+        Call<List<RecetaModel>> call = servicio.getReceta(consulta.cme_codigo);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<RecetaModel>>() {
             @Override
@@ -250,17 +248,17 @@ public class FragmentConsulta extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        recetaModels = response.body();
-                        Log.d("JTDebug", "Count: " + recetaModels.size());
-                        arr1 = new String[recetaModels.size()];
-                        arr2 = new String[recetaModels.size()];
-                        arr3 = new String[recetaModels.size()];
+                        listRecetas = response.body();
+                        Log.d("JTDebug", "Count: " + listRecetas.size());
+                        arr1 = new String[listRecetas.size()];
+                        arr2 = new String[listRecetas.size()];
+                        arr3 = new String[listRecetas.size()];
 
-                        for (int i=0;i<recetaModels.size();i++) {
-                            recetaModel = recetaModels.get(i);
-                            arr1[i] = "Medicamento: "+recetaModel.mdc_nombre;
-                            arr2[i] = "Cantidad: "+recetaModel.rme_cantidad+" "+recetaModel.mdc_medida;
-                            arr3[i] = "Indicaciones: "+recetaModel.rme_indicaciones;
+                        for (int i=0;i<listRecetas.size();i++) {
+                            receta = listRecetas.get(i);
+                            arr1[i] = "Medicamento: "+receta.mdc_nombre;
+                            arr2[i] = "Cantidad: "+receta.rme_cantidad+" "+receta.mdc_medida;
+                            arr3[i] = "Indicaciones: "+receta.rme_indicaciones;
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), null, arr1, arr2, arr3, null);
                         lvMedicamentos.setAdapter(adaptadorListView);
@@ -269,13 +267,11 @@ public class FragmentConsulta extends Fragment {
                     } else {
                         imgRecargarMedicamentos.setVisibility(View.VISIBLE);
                         pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
                     imgRecargarMedicamentos.setVisibility(View.VISIBLE);
                     pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -284,7 +280,6 @@ public class FragmentConsulta extends Fragment {
             public void onFailure(Call<List<RecetaModel>> call, Throwable t) {
                 imgRecargarMedicamentos.setVisibility(View.VISIBLE);
                 pgbRecargarMedicamentos.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(),"No se pudieron cargar los medicamentos",Toast.LENGTH_SHORT).show();
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

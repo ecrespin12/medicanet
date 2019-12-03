@@ -2,10 +2,8 @@ package com.example.medicanet.ui.doctor.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
 import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
-
 import java.text.SimpleDateFormat;
-
 import clasesResponse.PacientesModel;
 
 public class FragmentDatosPaciente extends Fragment {
@@ -39,11 +34,11 @@ public class FragmentDatosPaciente extends Fragment {
     Button btnVerHistorial;
     Button btnProgramarConsulta;
 
-    PacientesModel item;
+    PacientesModel paciente;
 
-    public FragmentDatosPaciente(PacientesModel item) {
+    public FragmentDatosPaciente(PacientesModel paciente) {
         // Required empty public constructor
-        this.item=item;
+        this.paciente=paciente;
     }
 
 
@@ -63,12 +58,12 @@ public class FragmentDatosPaciente extends Fragment {
         btnProgramarConsulta=view.findViewById(R.id.btnProgramarConsulta_fragment_doc_datos_paciente);
 
         //llenar los TextView
-        tvCodigo.setText(item.per_codigo+"");
-        tvNombre.setText(item.pac_nombre);
-        tvFechaN.setText(formatoFecha.format(item.per_fecha_nace));
-        tvCorreo.setText(item.per_correo);
-        tvEstado.setText(item.per_estado);
-        tvDui.setText(item.per_dui);
+        tvCodigo.setText(paciente.per_codigo+"");
+        tvNombre.setText(paciente.pac_nombre);
+        tvFechaN.setText(formatoFecha.format(paciente.per_fecha_nace));
+        tvCorreo.setText(paciente.per_correo);
+        tvEstado.setText(paciente.per_estado);
+        tvDui.setText(paciente.per_dui);
 
         btnVerHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +80,7 @@ public class FragmentDatosPaciente extends Fragment {
                         Toast.makeText(getContext(), "Ver historial", Toast.LENGTH_SHORT).show();
 
                         // Crea el nuevo fragmento
-                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(item.per_codigo);
+                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(paciente.per_codigo);
                         //Crea la transaccion
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
@@ -113,7 +108,7 @@ public class FragmentDatosPaciente extends Fragment {
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Programar consulta", Toast.LENGTH_SHORT).show();
                         //crear y mostrar un Dialog
-                        DialogAgregarCita dialog = new DialogAgregarCita(null);
+                        DialogAgregarCita dialog = new DialogAgregarCita(paciente.per_codigo);
                         dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
                     }
                 }, 100);

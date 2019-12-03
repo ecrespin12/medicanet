@@ -2,10 +2,8 @@ package com.example.medicanet.ui.doctor.fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,17 +17,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.Metodos;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import clasesResponse.ConsultaModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
@@ -39,16 +34,12 @@ import retrofit2.Response;
 
 public class FragmentConsultasProgramadas extends Fragment {
 
-    public static String keyImg = "img";
-    public static String keyCodigo = "codigo";
-    public static String keyNombre = "nombre";
-    public static String keyFecha = "fecha";
-    public static String keyHoras = "hora";
-
+    //VARIABLES PARA EL WS
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<ConsultaModel> resp;
-    ConsultaModel item;
+    ////////////////////////////////////////////////////////////////////////////
+    List<ConsultaModel> listConsulta;
+    ConsultaModel consulta;
 
     EditText edtFecha;
     EditText edtNombrePaciente;
@@ -117,26 +108,18 @@ public class FragmentConsultasProgramadas extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //creando bundle para pasar datos al fragmento
-                        Bundle paqueteDeDatos = new Bundle();
-                        paqueteDeDatos.putInt(keyImg, imagenes[position]);
-                        paqueteDeDatos.putString(keyCodigo, codigos[position]);
-                        paqueteDeDatos.putString(keyNombre, nombres[position]);
-                        paqueteDeDatos.putString(keyFecha,fechas[position]);
-                        paqueteDeDatos.putString(keyHoras,horas[position]);
 
                         // Crea el nuevo fragmento
-                        FragmentDatosConsulta fragmentDatosConsulta = new FragmentDatosConsulta(resp,position);
-                        //Agregamos los argumentos al fragmento
-                        fragmentDatosConsulta.setArguments(paqueteDeDatos);
+                        FragmentDatosConsulta fragmentDatosConsulta = new FragmentDatosConsulta(listConsulta,position);
                         //Crea la transaccion
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
                         transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
+                        //agregar la transaccion a la pila
                         transaction.addToBackStack(null);
-
                         // Commit a la transacción
                         transaction.commit();
+
                     }
                 },200);
             }
@@ -225,24 +208,24 @@ public class FragmentConsultasProgramadas extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        resp = response.body();
-                        Log.d("JTDebug", "Count: " + resp.size());
-                        imagenes = new int[resp.size()];
-                        codigos = new String[resp.size()];
-                        nombres = new String[resp.size()];
-                        fechas = new String[resp.size()];
-                        horas = new String[resp.size()];
+                        listConsulta = response.body();
+                        Log.d("JTDebug", "Count: " + listConsulta.size());
+                        imagenes = new int[listConsulta.size()];
+                        codigos = new String[listConsulta.size()];
+                        nombres = new String[listConsulta.size()];
+                        fechas = new String[listConsulta.size()];
+                        horas = new String[listConsulta.size()];
 
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
                         SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
-                        for (int i=0;i<resp.size();i++) {
-                            item = resp.get(i);
+                        for (int i=0;i<listConsulta.size();i++) {
+                            consulta = listConsulta.get(i);
                             imagenes[i]=R.drawable.medicanet1;
-                            codigos[i] = "Código consulta: "+item.cme_codigo;
-                            nombres[i] = "Paciente: "+item.per_nombre;
-                            fechas[i] = "Fecha: "+formatoFecha.format(item.cme_fecha_hora);
-                            horas[i] = "Hora: "+formatoHora.format(item.cme_fecha_hora);
+                            codigos[i] = "Código consulta: "+consulta.cme_codigo;
+                            nombres[i] = "Paciente: "+consulta.per_nombre;
+                            fechas[i] = "Fecha: "+formatoFecha.format(consulta.cme_fecha_hora);
+                            horas[i] = "Hora: "+formatoHora.format(consulta.cme_fecha_hora);
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), imagenes, codigos, nombres, fechas, horas);
                         lvLista.setAdapter(adaptadorListView);
@@ -253,14 +236,12 @@ public class FragmentConsultasProgramadas extends Fragment {
                         imgRecargar.setVisibility(View.VISIBLE);
                         pgbRecargar.setVisibility(View.INVISIBLE);
                         pgbLista.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {
                     imgRecargar.setVisibility(View.VISIBLE);
                     pgbRecargar.setVisibility(View.INVISIBLE);
                     pgbLista.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -270,7 +251,6 @@ public class FragmentConsultasProgramadas extends Fragment {
                 imgRecargar.setVisibility(View.VISIBLE);
                 pgbRecargar.setVisibility(View.INVISIBLE);
                 pgbLista.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(),"No se pudieron cargar las consultas",Toast.LENGTH_SHORT).show();
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

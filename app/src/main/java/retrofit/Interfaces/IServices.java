@@ -104,5 +104,5 @@ public interface IServices {
 
     @POST("Consulta/agregar")
     @FormUrlEncoded
-    Call<Integer> postAgregarConsulta(@Field("per") int per, @Field("med") int med, @Field("cmd") int cmd, @Field("fec") Date fec);
+    Call<Integer> postAgregarConsulta(@Field("per") int per, @Field("med") int med, @Field("cmd") int cmd, @Field("fec") String fec);
 }

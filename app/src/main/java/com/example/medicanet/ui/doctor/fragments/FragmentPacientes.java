@@ -1,10 +1,8 @@
 package com.example.medicanet.ui.doctor.fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,14 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import clasesResponse.ConsultaModel;
 import clasesResponse.PacientesModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
@@ -32,10 +26,13 @@ import retrofit2.Response;
 
 public class FragmentPacientes extends Fragment {
 
+    //VARIABLES PARA EL WS
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<PacientesModel> resp;
-    PacientesModel item;
+    ////////////////////////////////////////////////////////////////////////////
+
+    List<PacientesModel> listPacientes;
+    PacientesModel paciente;
 
     View view;
     EditText edtCodigoPaciente;
@@ -50,10 +47,6 @@ public class FragmentPacientes extends Fragment {
     String[] arr3;
     String[] arr4;
 
-    public static String keyImg = "img";
-    public static String keyCodigo = "nombre";
-    public static String keyNombre = "descripcion";
-
     public FragmentPacientes() {
         // Required empty public constructor
     }
@@ -62,6 +55,7 @@ public class FragmentPacientes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_doc_pacientes, container, false);
+
         //CODIGO AGREGADO
         edtCodigoPaciente = view.findViewById(R.id.edtCodigoPaciente_fragment_doc_pacientes);
         btnBuscar = view.findViewById(R.id.btnBuscar_fragment_doc_pacientes);
@@ -89,8 +83,8 @@ public class FragmentPacientes extends Fragment {
                     public void run() {
                         //Logica
                         //Crea el nuevo fragmento
-                        item=resp.get(position);
-                        FragmentDatosPaciente fragmentDatosPaciente = new FragmentDatosPaciente(item);
+                        paciente=listPacientes.get(position);
+                        FragmentDatosPaciente fragmentDatosPaciente = new FragmentDatosPaciente(paciente);
                         // Crea la transacción.
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         //remplaza el fragmento en el contenedor
@@ -119,24 +113,24 @@ public class FragmentPacientes extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        resp = response.body();
-                        Log.d("JTDebug", "Count: " + resp.size());
-                        imagenes = new int[resp.size()];
-                        arr1 = new String[resp.size()];
-                        arr2 = new String[resp.size()];
-                        arr3 = new String[resp.size()];
-                        arr4 = new String[resp.size()];
+                        listPacientes = response.body();
+                        Log.d("JTDebug", "Count: " + listPacientes.size());
+                        imagenes = new int[listPacientes.size()];
+                        arr1 = new String[listPacientes.size()];
+                        arr2 = new String[listPacientes.size()];
+                        arr3 = new String[listPacientes.size()];
+                        arr4 = new String[listPacientes.size()];
 
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
                         SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
-                        for (int i=0;i<resp.size();i++) {
-                            item = resp.get(i);
+                        for (int i=0;i<listPacientes.size();i++) {
+                            paciente = listPacientes.get(i);
                             imagenes[i]=R.drawable.paciente;
-                            arr1[i] = "DUI: "+item.per_dui;
-                            arr2[i] = "Nombre: "+item.pac_nombre;
-                            arr3[i] = "Correo: "+item.per_correo;
-                            arr4[i] = "Estado: "+item.per_estado;
+                            arr1[i] = "DUI: "+paciente.per_dui;
+                            arr2[i] = "Nombre: "+paciente.pac_nombre;
+                            arr3[i] = "Correo: "+paciente.per_correo;
+                            arr4[i] = "Estado: "+paciente.per_estado;
                         }
                         adaptadorListView = new AdaptadorListView(getContext(), imagenes, arr1, arr2, arr3, arr4);
                         lvPacientes.setAdapter(adaptadorListView);

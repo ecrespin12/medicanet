@@ -51,7 +51,7 @@ public class Metodos {
         TimePickerDialog timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
                 String horaSelec=hourOfDay+":"+minute;
                 try {
                     Date date = formatter.parse(horaSelec);
