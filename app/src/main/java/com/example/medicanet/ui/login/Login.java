@@ -26,7 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import me.ibrahimsn.particle.ParticleView;
+
 public class Login extends AppCompatActivity {
+
+    private ParticleView particleView;
+
     Button btn_iniciar,btn_salir;
     EditText edtUser, edtPassword;
 
@@ -49,6 +54,20 @@ public class Login extends AppCompatActivity {
         edtUser = findViewById(R.id.edt_login_usuario);
         edtPassword = findViewById(R.id.edt_login_password);
 
+        particleView=findViewById(R.id.particleView_activity_login);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        particleView.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        particleView.pause();
     }
 
     public  void iniciar(final View view){
