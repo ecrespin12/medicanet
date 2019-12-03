@@ -22,6 +22,7 @@ import com.example.medicanet.ui.doctor.fragments.FragmentConsulta;
 import java.util.List;
 import clasesResponse.ConsultaModel;
 import clasesResponse.MedicamentosModel;
+import clasesResponse.RecetaModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -43,6 +44,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     EditText edtCantidad,edtIndicaciones;
     Button btnGuardar;
     TextView tvTituloMedida;
+    TextView tvTituloDialog;
 
     int codigoMedicamento=0;
     int codigoConsulta=0;
@@ -52,12 +54,19 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
     ConsultaModel consultaModel;
     FragmentConsulta fragmentConsulta;
+    RecetaModel receta;
 
-    public DialogAgregarMedicamentoConsulta(ConsultaModel consultaModel, FragmentConsulta fragmentConsulta) {
+    boolean editando;
+
+    public DialogAgregarMedicamentoConsulta(ConsultaModel consultaModel, FragmentConsulta fragmentConsulta, RecetaModel receta) {
         this.consultaModel=consultaModel;
         this.codigoConsulta=consultaModel.cme_codigo;
         this.setCancelable(false);
         this.fragmentConsulta=fragmentConsulta;
+        this.receta=receta;
+        if (receta!=null){
+            editando=true;
+        }
     }
 
 
@@ -74,6 +83,14 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
         edtCantidad = view.findViewById(R.id.edtCantidad_doc_modal_agregar_medicamento);
         edtIndicaciones = view.findViewById(R.id.edtIndicaciones_doc_modal_agregar_medicamento);
         tvTituloMedida = view.findViewById(R.id.tvTituloDeMedida_doc_modal_agregar_medicamento);
+
+        tvTituloDialog = view.findViewById(R.id.tvTitulo_doc_modal_agregar_medicamento_consulta);
+        if (editando){
+            tvTituloDialog.setText("Editar medicamento");
+            btnGuardar.setText("editar medicamento");
+            edtCantidad.setText(receta.mdc_medida);
+            edtIndicaciones.setText(receta.rme_indicaciones);
+        }
 
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
         getMedicamentos();
@@ -157,6 +174,16 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         }
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, null, null);
                         spTipoMedicamento.setAdapter(adaptadorSpinner);
+
+                        if (editando){
+                            for (int i=0 ; i<listMedicamentos.size() ; i++){
+                                medicamento=listMedicamentos.get(i);
+                                if (receta.mdc_codigo==medicamento.mdc_codigo){
+                                    spTipoMedicamento.setSelection(i);
+                                    break;
+                                }
+                            }
+                        }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }

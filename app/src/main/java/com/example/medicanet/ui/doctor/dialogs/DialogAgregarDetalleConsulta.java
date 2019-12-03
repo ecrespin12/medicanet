@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.ui.doctor.fragments.FragmentConsulta;
 import clasesResponse.ConsultaModel;
+import clasesResponse.DatosMedicosModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -29,6 +31,8 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
     Button btnGuardar;
     ImageView btnCerrar;
 
+    TextView tvTitulo;
+
     //VARIABLES DEL WS
     private IServices servicio;
     RetrofitClientInstance ret = new RetrofitClientInstance();
@@ -36,10 +40,17 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
 
     ConsultaModel consulta;
     FragmentConsulta fragmentConsulta;
+    DatosMedicosModel datoMedico;
 
-    public DialogAgregarDetalleConsulta(ConsultaModel consulta, FragmentConsulta fragmentConsulta) {
+    boolean editando=false;
+
+    public DialogAgregarDetalleConsulta(ConsultaModel consulta, FragmentConsulta fragmentConsulta, DatosMedicosModel datoMedico) {
         this.consulta=consulta;
         this.fragmentConsulta=fragmentConsulta;
+        this.datoMedico=datoMedico;
+        if (datoMedico!=null){
+            editando=true;
+        }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +67,14 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
         edtDescripcion=view.findViewById(R.id.edtDescripcion_doc_modal_agregar_detalle_consulta);
         btnGuardar=view.findViewById(R.id.btnGuardar_doc_modal_agregar_detalle_consulta);
         btnCerrar=view.findViewById(R.id.btnCerrar_doc_modal_agregar_detalle);
+
+        tvTitulo=view.findViewById(R.id.tvTitulo_doc_modal_agregar_detalle_consulta);
+        if (editando){
+            tvTitulo.setText("Editar detalle de consulta");
+            btnGuardar.setText("Editar detalle");
+            edtNombre.setText(datoMedico.dcm_nombre);
+            edtDescripcion.setText(datoMedico.dcm_descripcion);
+        }
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override

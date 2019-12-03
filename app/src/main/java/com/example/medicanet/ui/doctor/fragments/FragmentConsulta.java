@@ -3,11 +3,14 @@ package com.example.medicanet.ui.doctor.fragments;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -121,7 +124,7 @@ public class FragmentConsulta extends Fragment {
                         btnDetalles.setBackgroundResource(R.drawable.detalle_consulta_1);
 
                         //Crear y mostrar un Dialog
-                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta(consulta,fragmentConsulta);
+                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta(consulta,fragmentConsulta,null);
                         dialog.show(getFragmentManager(),"dialog_doc_agregar_detalle");
                     }
                 },100);
@@ -137,7 +140,7 @@ public class FragmentConsulta extends Fragment {
                         btnMedicamentos.setBackgroundResource(R.drawable.medicamento_1);
 
                         //Crear y mostrar un Dialog
-                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta(consulta,fragmentConsulta);
+                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta(consulta,fragmentConsulta,null);
                         dialog.show(getFragmentManager(),"dialog_doc_agregar_medicamento");
                     }
                 },100);
@@ -179,6 +182,48 @@ public class FragmentConsulta extends Fragment {
                 imgRecargarMedicamentos.setVisibility(View.GONE);
                 pgbRecargarMedicamentos.setVisibility(View.VISIBLE);
                 getMedicamentos();
+            }
+        });
+
+        //AGREGAR EVENTO CLICKLISTENER AL LISTVIEW
+        lvDetalles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+
+                //Pausa para que haga la transicion, esto para que se note el efecto de Click sobre el listView
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        //logica
+                        datoMedico=listDatosMedicos.get(position);
+                        //Crear y mostrar un Dialog
+                        DialogAgregarDetalleConsulta dialog = new DialogAgregarDetalleConsulta(consulta,fragmentConsulta,datoMedico);
+                        dialog.show(getFragmentManager(),"dialog_doc_agregar_detalle");
+
+                    }
+                },200);
+            }
+        });
+
+        //AGREGAR EVENTO CLICKLISTENER AL LISTVIEW
+        lvMedicamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+
+                //Pausa para que haga la transicion, esto para que se note el efecto de Click sobre el listView
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        //logica
+                        receta=listRecetas.get(position);
+                        //Crear y mostrar un Dialog
+                        DialogAgregarMedicamentoConsulta dialog = new DialogAgregarMedicamentoConsulta(consulta,fragmentConsulta,receta);
+                        dialog.show(getFragmentManager(),"dialog_doc_agregar_medicamento");
+
+                    }
+                },200);
             }
         });
 
