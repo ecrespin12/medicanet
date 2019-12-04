@@ -17,6 +17,8 @@ public class ConsultaModel {
     public String per_dui;
     @SerializedName("per_fecha_nace")
     public Date per_fecha_nace;
+    @SerializedName("med_codigo")
+    public String med_codigo;
     @SerializedName("med_nombre")
     public String med_nombre;
     @SerializedName("med_correo")

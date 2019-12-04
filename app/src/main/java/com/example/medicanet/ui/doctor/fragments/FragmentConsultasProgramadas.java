@@ -1,6 +1,8 @@
 package com.example.medicanet.ui.doctor.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
@@ -40,6 +43,8 @@ public class FragmentConsultasProgramadas extends Fragment {
     ////////////////////////////////////////////////////////////////////////////
     List<ConsultaModel> listConsulta;
     ConsultaModel consulta;
+
+    TextView tvTitulo;
 
     EditText edtFecha;
     EditText edtNombrePaciente;
@@ -80,6 +85,8 @@ public class FragmentConsultasProgramadas extends Fragment {
         pgbRecargar = view.findViewById(R.id.pgbRecargar_fragment_doc_consultas_programadas);
         pgbLista = view.findViewById(R.id.pgbLista_fragment_doc_consultas_programadas);
 
+        tvTitulo = view.findViewById(R.id.tvTitulo_fragment_doc_consultas_programadas);
+
         pgbRecargar.setVisibility(View.INVISIBLE);
 
         imgRecargar.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +96,34 @@ public class FragmentConsultasProgramadas extends Fragment {
                 imgRecargar.setVisibility(View.GONE);
                 pgbRecargar.setVisibility(View.VISIBLE);
                 pgbLista.setVisibility(View.VISIBLE);
-                getConsultas(view,0,1,0);
+                getConsultas(view,0,1,0, 0, edtFecha.getText().toString().trim(),edtNombrePaciente.getText().toString().trim());
+            }
+        });
+
+        tvTitulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tvTitulo.setTextColor(Color.LTGRAY);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvTitulo.setTextColor(Color.BLACK);
+
+                        //logica
+                        // Crea el nuevo fragmento
+                        FragmentConsultasProgramadas fragmentConsultasProgramadas = new FragmentConsultasProgramadas();
+                        //Crea la transaccion
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
+                        transaction.replace(R.id.nav_host_fragment, fragmentConsultasProgramadas);
+                        //agregar la transaccion a la pila
+                        //transaction.addToBackStack(null);
+                        // Commit a la transacción
+                        transaction.commit();
+                    }
+                },100);
             }
         });
 
@@ -97,7 +131,7 @@ public class FragmentConsultasProgramadas extends Fragment {
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
 
         //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
-        getConsultas(view,0,1,0);
+        getConsultas(view,0,1,0, 0, edtFecha.getText().toString().trim(), edtNombrePaciente.getText().toString().trim());
 
         //AGREGAR EVENTO CLICKLISTENER AL LISTVIEW
         lvLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,11 +172,9 @@ public class FragmentConsultasProgramadas extends Fragment {
                         //Codigo para logica del boton
                         Toast.makeText(getContext(), "Buscando", Toast.LENGTH_SHORT).show();
 
-                        //COMENTARIAR AQUI SI SE BUSCA POR NOMBRE Y FECHA
-                        String nom="";//numero inventado xd
-                        nom=edtNombrePaciente.getText().toString();
+                        //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
+                        getConsultas(view,0,1,0, 0, edtFecha.getText().toString().trim(), edtNombrePaciente.getText().toString().trim());
 
-                        //getConsultas(view,0,0,codConsulta);
                     }
                 }, 100);
             }
@@ -158,7 +190,7 @@ public class FragmentConsultasProgramadas extends Fragment {
                         btnFecha.setBackgroundResource(R.drawable.calendario_64_1);
 
                         //logica
-                        Metodos.fecha(getContext(),edtFecha);
+                        fecha(getContext(),edtFecha);
                     }
                 },100);
             }
@@ -168,25 +200,28 @@ public class FragmentConsultasProgramadas extends Fragment {
         return view;
     }
 
-    public void fecha( final EditText edt){
+    public void fecha(final Context context, final EditText edt){
         int dia,mes, anio;
-        String fecha="";
         final Calendar calendario= Calendar.getInstance();
         dia=calendario.get(Calendar.DAY_OF_MONTH);
         mes=calendario.get(Calendar.MONTH);
         anio=calendario.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-                String fechaSelec=dayOfMonth+"-"+(month+1)+"-"+year;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                String fechaSelec=year+"-"+(month+1)+"-"+dayOfMonth;
                 try {
                     Date date = formatter.parse(fechaSelec);
                     System.out.println(date);
                     System.out.println(formatter.format(date));
                     edt.setText(formatter.format(date));
+
+                    //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
+                    getConsultas(view,0,1,0, 0, edtFecha.getText().toString().trim(), edtNombrePaciente.getText().toString().trim());
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -197,9 +232,9 @@ public class FragmentConsultasProgramadas extends Fragment {
     }
 
     //METODO PARA CONSUMIR EL WS
-    private void getConsultas(final View view, int per, int doc, int cod) {
+    private void getConsultas(final View view, int per, int med, int cod, int cmd, String fec, String ntag) {
         Log.d("JTDebug", "Entra Metodo consulta");
-        Call<List<ConsultaModel>> call = servicio.getConsultas(per, doc, cod);
+        Call<List<ConsultaModel>> call = servicio.getConsultas(per, med, cod, cmd, fec, ntag);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<ConsultaModel>>() {
             @Override

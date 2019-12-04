@@ -44,7 +44,7 @@ public interface IServices {
 
     @GET("Consulta/consulta?")
     @NotNull
-    Call<List<ConsultaModel>> getConsultas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
+    Call<List<ConsultaModel>> getConsultas(@Query("per") int per,@Query("med") int med, @Query("cod") int cod, @Query("cmd") int cmd, @Query("fec") String fec, @Query("ntag") String ntag);
 
     @GET("Consulta/detalle?")
     @NotNull
