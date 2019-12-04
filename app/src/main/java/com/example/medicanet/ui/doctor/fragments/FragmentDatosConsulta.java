@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.medicanet.R;
+import com.example.medicanet.ui.doctor.dialogs.DialogAgregarCita;
 import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -33,7 +34,7 @@ public class FragmentDatosConsulta extends Fragment {
     TextView tvHoraConsulta;
 
     Button btnIniciarConsulta;
-    Button btnVerHistorial;
+    Button btnGestionarConsulta;
 
     ConsultaModel consulta;
 
@@ -65,7 +66,7 @@ public class FragmentDatosConsulta extends Fragment {
         tvHoraConsulta=view.findViewById(R.id.tvHoraConsulta_fragment_doc_datos_consulta);
 
         btnIniciarConsulta=view.findViewById(R.id.btnIniciarConsulta_fragment_doc_datos_consulta);
-        btnVerHistorial=view.findViewById(R.id.btnVerHistorial_fragment_doc_datos_consulta);
+        btnGestionarConsulta=view.findViewById(R.id.btnGestionarConsulta_fragment_doc_datos_consulta);
 
         //CARGAR DATOS DE LA CONSULTA SELECCIONADA DESDE EL LISTADO ANTERIOR
         tvDuiPaciente.setText("DUI: "+consulta.per_dui);
@@ -117,38 +118,29 @@ public class FragmentDatosConsulta extends Fragment {
             }
         });
 
-        btnVerHistorial.setOnClickListener(new View.OnClickListener() {
+        btnGestionarConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnVerHistorial.setBackgroundResource(R.drawable.boton_redondeado);
-                btnVerHistorial.setTextColor(Color.WHITE);
+                btnGestionarConsulta.setBackgroundResource(R.drawable.boton_redondeado);
+                btnGestionarConsulta.setTextColor(Color.WHITE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnVerHistorial.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnVerHistorial.setTextColor(Color.BLACK);
+                        btnGestionarConsulta.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnGestionarConsulta.setTextColor(Color.BLACK);
                     }
                 }, 100);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        btnVerHistorial.setBackgroundResource(R.drawable.boton_redondeado_borde);
-                        btnVerHistorial.setTextColor(Color.BLACK);
+                        btnGestionarConsulta.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                        btnGestionarConsulta.setTextColor(Color.BLACK);
 
-                        //AQUI COMIENZA LA LOGICA DE DEL BOTON
-                        Toast.makeText(getContext(), "Ver historial medico", Toast.LENGTH_SHORT).show();
-                        // Crea el nuevo fragmento
-                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(consulta.cme_codper);
-                        //Crea la transaccion
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
-                        transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
-                        //agregar el fragmento a la pila para regresar al anterior
-                        transaction.addToBackStack(null);
+                        //CREANDO NUEVO DIALOG Y ENVIANDOLE TRUE PARA GESTIONAR CONSULTA
+                        DialogAgregarCita agregarCita = new DialogAgregarCita(consulta, null, true);
+                        agregarCita.show(getFragmentManager(),"dialog_doc_agregar_cita");
 
-                        // Commit a la transacción
-                        transaction.commit();
                     }
                 }, 500);
             }

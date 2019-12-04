@@ -107,8 +107,8 @@ public class FragmentConsulta extends Fragment {
                         btnAgregarCita.setBackgroundResource(R.drawable.nueva_consulta_1);
 
                         //crear y mostrar un Dialog
-                        DialogAgregarCita dialog = new DialogAgregarCita(consulta.cme_codper);
-                        dialog.show(getFragmentManager(), "dialog_admin_ejemplo");
+                        DialogAgregarCita dialog = new DialogAgregarCita(consulta,null, false);
+                        dialog.show(getFragmentManager(), "dialog_doc_agregar_cita");
                     }
                 },100);
             }

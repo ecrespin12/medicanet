@@ -87,4 +87,16 @@
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/btnEliminar_doc_modal_agregar_detalle_consulta"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/boton_style_modal"
+        android:clickable="true"
+        android:text="Eliminar"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
 </LinearLayout>

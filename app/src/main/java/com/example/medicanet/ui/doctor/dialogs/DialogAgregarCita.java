@@ -15,12 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.metodos.Metodos;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
+import clasesResponse.ConsultaModel;
+import clasesResponse.PacientesModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -36,8 +40,6 @@ public class DialogAgregarCita extends DialogFragment {
     List<CentroMedicoModel> listCentros;
     CentroMedicoModel centroMedico;
 
-    int codPaciente;
-
     Spinner             spCentro;
 
     EditText            edtFecha;
@@ -46,16 +48,34 @@ public class DialogAgregarCita extends DialogFragment {
     ImageView           btnCerrar;
 
     Button              btnGuardar;
+    Button              btnEliminar;
 
     ImageButton         btnFecha;
     ImageButton         btnHora;
+
+    TextView            tvTituloDialog;
+
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-mm-dd");
+    SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 
     int codigoCentroMedico;
 
     String [] arr1;
 
-    public DialogAgregarCita(int codPaciente) {
-        this.codPaciente=codPaciente;
+    ConsultaModel consulta;
+    PacientesModel paciente;
+    boolean gestionando;
+    int codPer;
+
+    public DialogAgregarCita(ConsultaModel consulta, PacientesModel paciente, boolean gestionando) {
+        this.consulta=consulta;
+        this.paciente=paciente;
+        this.gestionando=gestionando;
+        if (consulta!=null){
+            codPer=consulta.cme_codper;
+        }else{
+            codPer=paciente.per_codigo;
+        }
     }
 
 
@@ -78,11 +98,23 @@ public class DialogAgregarCita extends DialogFragment {
         edtHora=view.findViewById(R.id.edtHora_dialog_doc_agregar_cita);
         btnCerrar=view.findViewById(R.id.imgCerrar_dialog_doc_agregar_cita);
         btnGuardar=view.findViewById(R.id.btnGuardar_doc_modal_agregar_cita);
+        btnEliminar=view.findViewById(R.id.btnEliminar_doc_modal_agregar_cita);
         btnFecha=view.findViewById(R.id.btnFecha_dialog_doc_agregar_cita);
         btnHora=view.findViewById(R.id.btnHora_dialog_doc_agregar_cita);
+        tvTituloDialog=view.findViewById(R.id.tvTitulo_dialog_doc_agregar_cita);
 
         edtHora.setEnabled(false);
         edtFecha.setEnabled(false);
+
+        btnEliminar.setVisibility(View.GONE);
+
+        if (gestionando){
+            btnEliminar.setVisibility(View.VISIBLE);
+            btnGuardar.setText("editar consulta");
+            tvTituloDialog.setText("Gestionar consulta");
+            edtFecha.setText(formatoFecha.format(consulta.cme_fecha_hora));
+            edtHora.setText(formatoHora.format(consulta.cme_fecha_hora));
+        }
 
         getCentros();
 
@@ -145,14 +177,36 @@ public class DialogAgregarCita extends DialogFragment {
                         //logica
 
                         Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
-                        int per = codPaciente;
+                        int per = codPer;
                         int med = 1; // codigo del medico logeado
                         int cmd = codigoCentroMedico;
                         String fecha=edtFecha.getText().toString().trim();
                         String hora=edtHora.getText().toString().trim();
                         String fechaHora = fecha+" "+hora+":00";
 
-                        postAgregarConsulta(per, med, cmd, fechaHora); //LLAMAR AL WS
+                        //LLAMAR AL WS
+                        postAgregarConsulta(per, med, cmd, fechaHora);
+
+                    }
+                },100);
+            }
+        });
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnEliminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnEliminar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnEliminar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnEliminar.setTextColor(Color.WHITE);
+
+                        //logica
+
+                        Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
+
                     }
                 },100);
             }
@@ -202,6 +256,17 @@ public class DialogAgregarCita extends DialogFragment {
                         }
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, null, null, null);
                         spCentro.setAdapter(adaptadorSpinner);
+
+                        if (gestionando){
+                            for (int i=0 ; i<listCentros.size() ; i++){
+                                centroMedico=listCentros.get(i);
+                                if (centroMedico.cmd_codigo==consulta.cmd_codigo){
+                                    spCentro.setSelection(i);
+                                }
+                                break;
+                            }
+                        }
+
                     } else {Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
                 } catch (Exception e) {

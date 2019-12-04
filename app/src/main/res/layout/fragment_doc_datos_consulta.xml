@@ -161,12 +161,12 @@
                 android:textColor="#000000" />
 
             <Button
-                android:id="@+id/btnVerHistorial_fragment_doc_datos_consulta"
+                android:id="@+id/btnGestionarConsulta_fragment_doc_datos_consulta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/boton_redondeado_borde"
-                android:text="Ver Historial Medico del paciente"
+                android:text="Gestionar consulta"
                 android:textColor="#000000" />
 
         </LinearLayout>
