@@ -94,17 +94,18 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
                         btnGuardar.setTextColor(Color.WHITE);
 
                         //logica
+
                         String nom = edtNombre.getText().toString().trim();
                         String dsc = edtDescripcion.getText().toString().trim();
-                        int cme = consulta.cme_codigo;
-                        int codDetalle = datoMedico.dcm_codigo;
 
 
                         if (gestionando){
                             Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
+                            int codDetalle = datoMedico.dcm_codigo;
                             postEditarDetalleConsulta(codDetalle,nom,dsc);
                         }else{
                             Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+                            int cme = consulta.cme_codigo;
                             postAgregarDetalleConsulta(nom,dsc,cme);
                         }
 

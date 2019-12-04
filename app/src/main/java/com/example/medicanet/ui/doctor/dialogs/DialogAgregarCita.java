@@ -18,13 +18,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.medicanet.R;
+import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.metodos.Metodos;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaModel;
+import clasesResponse.DatosMedicosModel;
 import clasesResponse.PacientesModel;
+import clasesResponse.RecetaModel;
 import retrofit.Interfaces.IServices;
 import retrofit.RetrofitClientInstance;
 import retrofit2.Call;
@@ -61,6 +64,12 @@ public class DialogAgregarCita extends DialogFragment {
     int codigoCentroMedico;
 
     String [] arr1;
+    int cantidadDeDetalles;
+    boolean detalles=true;
+    int cantidadDeMedicamentos;
+    boolean medicamentos=true;
+    List<DatosMedicosModel> datosMedicos;
+    List<RecetaModel> listRecetas;
 
     ConsultaModel consulta;
     PacientesModel paciente;
@@ -80,7 +89,7 @@ public class DialogAgregarCita extends DialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_doc_agregar_cita, container, false);
 
@@ -182,7 +191,7 @@ public class DialogAgregarCita extends DialogFragment {
                         int cmd = codigoCentroMedico;
                         String fecha=edtFecha.getText().toString().trim();
                         String hora=edtHora.getText().toString().trim();
-                        String fechaHora = fecha+" "+hora+":00";
+                        String fechaHora = fecha+" "+hora;
 
                         //LLAMAR AL WS
                         if (gestionando){
@@ -204,16 +213,38 @@ public class DialogAgregarCita extends DialogFragment {
             public void onClick(View view) {
                 btnEliminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 btnEliminar.setTextColor(Color.BLACK);
+
+                getDetalles(consulta.cme_codigo);
+                getMedicamentos(consulta.cme_codigo);
+
+
+
+                System.out.println(cantidadDeDetalles);
+                System.out.println(cantidadDeMedicamentos);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         btnEliminar.setBackgroundResource(R.drawable.boton_style_modal);
                         btnEliminar.setTextColor(Color.WHITE);
 
-                        //logica
 
-                        Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
-                        dismiss();
+                        //logica
+                        if (cantidadDeDetalles>0 || detalles==true){
+                            Toast.makeText(getContext(),"No se elimino por que tiene "+cantidadDeDetalles+" detalles agregados",Toast.LENGTH_LONG).show();
+                            System.out.println("CANTIDAD DE DETALLES: "+cantidadDeDetalles);
+                            return;
+                        }
+
+                        if (cantidadDeMedicamentos>0 || medicamentos==true){
+                            Toast.makeText(getContext(),"No se elimino por que tiene "+cantidadDeMedicamentos+" medicamentos agregados",Toast.LENGTH_LONG).show();
+                            System.out.println("CANTIDAD DE MEDICAMENTOS: "+cantidadDeMedicamentos);
+                            return;
+                        }
+
+                        if (cantidadDeDetalles==0 && detalles==false && cantidadDeMedicamentos==0 && medicamentos==false){
+                            Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
+                            postEliminarConsulta(consulta.cme_codigo);
+                        }
 
                     }
                 },100);
@@ -306,7 +337,7 @@ public class DialogAgregarCita extends DialogFragment {
                         Integer resp ;
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp);
-                        if(resp==1){
+                        if(resp>1){
                             Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
                             dismiss();
                         }
@@ -328,4 +359,112 @@ public class DialogAgregarCita extends DialogFragment {
             }
         });
     }
+
+    public void postEliminarConsulta(int cod){
+
+        Log.d("JTDebug", "Entra Metodo postEliminarConsulta");
+        Call<Boolean> call = servicio.postEliminarConsulta(cod);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                        if(resp==false){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getDetalles(int cme) {
+
+        detalles=true;
+        Log.d("JTDebug", "Entra Metodo getDetalles");
+        Call<List<DatosMedicosModel>> call = servicio.getDatosMedicos(0,cme);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<DatosMedicosModel>>() {
+            @Override
+            public void onResponse(Call<List<DatosMedicosModel>> call, Response<List<DatosMedicosModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        datosMedicos = response.body();
+                        cantidadDeDetalles=datosMedicos.size();
+                        if (cantidadDeDetalles==0){
+                            detalles=false;
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DatosMedicosModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getMedicamentos(int cme) {
+        medicamentos=true;
+        Log.d("JTDebug", "Entra Metodo getMedicamentos");
+        Call<List<RecetaModel>> call = servicio.getReceta(cme);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<RecetaModel>>() {
+            @Override
+            public void onResponse(Call<List<RecetaModel>> call, Response<List<RecetaModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        listRecetas = response.body();
+                        cantidadDeMedicamentos=listRecetas.size();
+                        if (cantidadDeMedicamentos==0){
+                            medicamentos=false;
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RecetaModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
 }

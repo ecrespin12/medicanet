@@ -115,9 +115,13 @@ public interface IServices {
     @FormUrlEncoded
     Call<Boolean> postEliminarRecetaConsulta(@Field("mdc") int mdc, @Field("cme") int cme);
 
-    @POST("Consulta/agregar")
+    @POST("Consulta/consulta")
     @FormUrlEncoded
     Call<Integer> postAgregarConsulta(@Field("per") int per, @Field("med") int med, @Field("cmd") int cmd, @Field("fec") String fec);
+
+    @POST("Consulta/del_consulta")
+    @FormUrlEncoded
+    Call<Boolean> postEliminarConsulta(@Field("cod") int cod);
 
     @GET("Persona/persona?")
     @NotNull
