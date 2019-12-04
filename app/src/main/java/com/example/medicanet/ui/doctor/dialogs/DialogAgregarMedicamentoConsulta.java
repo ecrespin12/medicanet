@@ -43,6 +43,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     Spinner spTipoMedicamento;
     EditText edtCantidad,edtIndicaciones;
     Button btnGuardar;
+    Button btnEliminar;
     TextView tvTituloMedida;
     TextView tvTituloDialog;
 
@@ -56,7 +57,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     FragmentConsulta fragmentConsulta;
     RecetaModel receta;
 
-    boolean editando;
+    boolean gestionando;
 
     public DialogAgregarMedicamentoConsulta(ConsultaModel consultaModel, FragmentConsulta fragmentConsulta, RecetaModel receta) {
         this.consultaModel=consultaModel;
@@ -65,7 +66,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
         this.fragmentConsulta=fragmentConsulta;
         this.receta=receta;
         if (receta!=null){
-            editando=true;
+            gestionando=true;
         }
     }
 
@@ -79,15 +80,20 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
         btnCerrar = view.findViewById(R.id.imgCerrar_doc_modal_agregar_medicamento);
         btnGuardar = view.findViewById(R.id.btnGuardar_doc_modal_agregar_medicamento);
+        btnEliminar = view.findViewById(R.id.btnEliminar_doc_modal_agregar_medicamento);
         spTipoMedicamento = view.findViewById(R.id.spTipo_doc_modal_agregar_medicamento);
         edtCantidad = view.findViewById(R.id.edtCantidad_doc_modal_agregar_medicamento);
         edtIndicaciones = view.findViewById(R.id.edtIndicaciones_doc_modal_agregar_medicamento);
         tvTituloMedida = view.findViewById(R.id.tvTituloDeMedida_doc_modal_agregar_medicamento);
 
         tvTituloDialog = view.findViewById(R.id.tvTitulo_doc_modal_agregar_medicamento_consulta);
-        if (editando){
-            tvTituloDialog.setText("Editar medicamento");
+
+        btnEliminar.setVisibility(View.GONE);
+
+        if (gestionando){
+            tvTituloDialog.setText("Gestionar medicamento");
             btnGuardar.setText("editar medicamento");
+            btnEliminar.setVisibility(View.VISIBLE);
             edtCantidad.setText(receta.mdc_medida);
             edtIndicaciones.setText(receta.rme_indicaciones);
         }
@@ -121,14 +127,43 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         btnGuardar.setTextColor(Color.WHITE);
 
                         //logica
+
                         String indicaciones = edtIndicaciones.getText().toString().trim();
                         double cantidad = Double.valueOf(edtCantidad.getText().toString().trim());
-                        postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+
+                        if (gestionando){
+                            Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }else{
+                            Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+                            postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
+                        }
+
                     }
                 },100);
             }
         });
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnEliminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnEliminar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnEliminar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnEliminar.setTextColor(Color.WHITE);
+
+                        //logica
+
+                        Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+                },100);
+            }
+        });
+
 
         btnCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +210,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, arr2, null, null);
                         spTipoMedicamento.setAdapter(adaptadorSpinner);
 
-                        if (editando){
+                        if (gestionando){
                             for (int i=0 ; i<listMedicamentos.size() ; i++){
                                 medicamento=listMedicamentos.get(i);
                                 if (receta.mdc_codigo==medicamento.mdc_codigo){

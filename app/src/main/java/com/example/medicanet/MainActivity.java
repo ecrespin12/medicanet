@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //LINEA PARA QUE SE PUEDAN PONER IMAGENES DE COLORES EN EL NAVIGATION DRAWER
+        navigationView.setItemIconTintList(null);
     }
 
     @Override

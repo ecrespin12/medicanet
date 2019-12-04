@@ -176,7 +176,7 @@ public class DialogAgregarCita extends DialogFragment {
 
                         //logica
 
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+
                         int per = codPer;
                         int med = 1; // codigo del medico logeado
                         int cmd = codigoCentroMedico;
@@ -185,7 +185,14 @@ public class DialogAgregarCita extends DialogFragment {
                         String fechaHora = fecha+" "+hora+":00";
 
                         //LLAMAR AL WS
-                        postAgregarConsulta(per, med, cmd, fechaHora);
+                        if (gestionando){
+                            Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }else{
+                            Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+                            postAgregarConsulta(per, med, cmd, fechaHora);
+                        }
+
 
                     }
                 },100);
@@ -206,6 +213,7 @@ public class DialogAgregarCita extends DialogFragment {
                         //logica
 
                         Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
+                        dismiss();
 
                     }
                 },100);

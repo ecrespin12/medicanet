@@ -29,6 +29,7 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
     EditText edtNombre;
     EditText edtDescripcion;
     Button btnGuardar;
+    Button btnEliminar;
     ImageView btnCerrar;
 
     TextView tvTitulo;
@@ -42,14 +43,14 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
     FragmentConsulta fragmentConsulta;
     DatosMedicosModel datoMedico;
 
-    boolean editando=false;
+    boolean gestionando=false;
 
     public DialogAgregarDetalleConsulta(ConsultaModel consulta, FragmentConsulta fragmentConsulta, DatosMedicosModel datoMedico) {
         this.consulta=consulta;
         this.fragmentConsulta=fragmentConsulta;
         this.datoMedico=datoMedico;
         if (datoMedico!=null){
-            editando=true;
+            gestionando=true;
         }
     }
     @Override
@@ -66,12 +67,17 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
         edtNombre=view.findViewById(R.id.edtNombre_doc_modal_agregar_detalle_consulta);
         edtDescripcion=view.findViewById(R.id.edtDescripcion_doc_modal_agregar_detalle_consulta);
         btnGuardar=view.findViewById(R.id.btnGuardar_doc_modal_agregar_detalle_consulta);
+        btnEliminar=view.findViewById(R.id.btnEliminar_doc_modal_agregar_detalle_consulta);
         btnCerrar=view.findViewById(R.id.btnCerrar_doc_modal_agregar_detalle);
 
         tvTitulo=view.findViewById(R.id.tvTitulo_doc_modal_agregar_detalle_consulta);
-        if (editando){
-            tvTitulo.setText("Editar detalle de consulta");
+
+        btnEliminar.setVisibility(View.GONE);
+
+        if (gestionando){
+            tvTitulo.setText("Gestionar detalle de consulta");
             btnGuardar.setText("Editar detalle");
+            btnEliminar.setVisibility(View.VISIBLE);
             edtNombre.setText(datoMedico.dcm_nombre);
             edtDescripcion.setText(datoMedico.dcm_descripcion);
         }
@@ -91,8 +97,36 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
                         String nom = edtNombre.getText().toString().trim();
                         String dsc = edtDescripcion.getText().toString().trim();
                         int cme = consulta.cme_codigo;
-                        postAgregarDetalleConsulta(nom,dsc,cme);
-                        Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+
+
+                        if (gestionando){
+                            Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }else{
+                            Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
+                            postAgregarDetalleConsulta(nom,dsc,cme);
+                        }
+
+                    }
+                },100);
+            }
+        });
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnEliminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
+                btnEliminar.setTextColor(Color.BLACK);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnEliminar.setBackgroundResource(R.drawable.boton_style_modal);
+                        btnEliminar.setTextColor(Color.WHITE);
+
+                        //logica
+
+                        Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
+                        dismiss();
                     }
                 },100);
             }
