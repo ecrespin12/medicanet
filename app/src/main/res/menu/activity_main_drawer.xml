@@ -52,7 +52,7 @@
         <item
             android:id="@+id/nav_pac_perfil"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/menu_pac_perfil" />
+            android:title="Perfil" />
     </group>
 
     <group

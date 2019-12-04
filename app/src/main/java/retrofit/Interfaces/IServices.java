@@ -14,6 +14,7 @@ import clasesResponse.HistorialModel;
 import clasesResponse.MedicamentosModel;
 import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.PacientesModel;
+import clasesResponse.PerfilPacienteModel;
 import clasesResponse.RecetaModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
@@ -105,4 +106,8 @@ public interface IServices {
     @POST("Consulta/agregar")
     @FormUrlEncoded
     Call<Integer> postAgregarConsulta(@Field("per") int per, @Field("med") int med, @Field("cmd") int cmd, @Field("fec") String fec);
+
+    @GET("Persona/persona?")
+    @NotNull
+    Call<List<PerfilPacienteModel>> getPerfil(@Query("cod") int cod, @Query("nom") String nom, @Query("fec") String fec, @Query("cor") String cor, @Query("est") String est, @Query("dui") String dui);
 }

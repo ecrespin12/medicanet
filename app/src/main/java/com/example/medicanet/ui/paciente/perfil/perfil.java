@@ -63,7 +63,7 @@ public class perfil extends Fragment {
 
     //METODO PARA CONSUMIR EL WS
     private void getPerfil() {
-        Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
+        Log.d("JTDebug", "Entra Metodo getPerfil");
         Call<List<PerfilPacienteModel>> call = servicio.getPerfil(1, "", "", "", "", "");
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<PerfilPacienteModel>>() {
@@ -72,26 +72,19 @@ public class perfil extends Fragment {
                 Log.d("JTDebug", "Entra OnResponse");
                 try {
                     if (response.isSuccessful()) {
-                       /* Log.d("JTDebug", "Entra IsSuccessful");
+                       Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        med_nombre=new String[resp.size()];
-                        mdc_nombre=new String[resp.size()];
-                        mdc_descripcion=new String[resp.size()];
-                        rme_cantidad=new String[resp.size()];
-                        rme_indicaciones=new String[resp.size()];
+                        String arr1[]=new String[resp.size()];
+
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            mdc_descripcion[i] = "Medicina: " +item.mdc_descripcion;
-                            med_nombre[i] = "Paciente: "+item.med_nombre;
-                            mdc_nombre[i] = "Cantidad pendiente: " + item.mdc_nombre;
-                            rme_cantidad[i] = "Indicaciones: "+item.rme_cantidad;
-                            rme_indicaciones[i] = "Indicaciones:"+item.rme_indicaciones;
+                            arr1[i]=item.est;
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, med_nombre, mdc_nombre, mdc_descripcion, rme_cantidad);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, arr1, null, null, null);
                         lv_datos_pac.setAdapter(adaptadorList);
-*/
+
 
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
