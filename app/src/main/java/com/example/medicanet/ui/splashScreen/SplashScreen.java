@@ -15,7 +15,7 @@ import com.example.medicanet.R;
 import com.example.medicanet.ui.login.Login;
 
 public class SplashScreen extends AppCompatActivity {
-    private final int duracion = 1000;
+    private final int duracion = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
