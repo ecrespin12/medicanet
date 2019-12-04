@@ -96,6 +96,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
             btnEliminar.setVisibility(View.VISIBLE);
             edtCantidad.setText(receta.rme_cantidad+"");
             edtIndicaciones.setText(receta.rme_indicaciones);
+            spTipoMedicamento.setEnabled(false);
         }
 
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
