@@ -107,9 +107,13 @@ public interface IServices {
     @NotNull
     Call<List<RecetaModel>> getReceta(@Query("cod") int cod);
 
-    @POST("Receta/agregar")
+    @POST("Receta/receta")
     @FormUrlEncoded
-    Call<Integer> postAgregarReceta(@Field("mdc") int mdc, @Field("cme") int cme, @Field("ind") String ind, @Field("can") double can);
+    Call<Boolean> postAgregarRecetaConsulta(@Field("mdc") int mdc, @Field("cme") int cme, @Field("ind") String ind, @Field("can") double can);
+
+    @POST("Receta/del_receta")
+    @FormUrlEncoded
+    Call<Boolean> postEliminarRecetaConsulta(@Field("mdc") int mdc, @Field("cme") int cme);
 
     @POST("Consulta/agregar")
     @FormUrlEncoded

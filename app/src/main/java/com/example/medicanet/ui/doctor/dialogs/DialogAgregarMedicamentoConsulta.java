@@ -94,7 +94,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
             tvTituloDialog.setText("Gestionar medicamento");
             btnGuardar.setText("editar medicamento");
             btnEliminar.setVisibility(View.VISIBLE);
-            edtCantidad.setText(receta.mdc_medida);
+            edtCantidad.setText(receta.rme_cantidad+"");
             edtIndicaciones.setText(receta.rme_indicaciones);
         }
 
@@ -133,11 +133,12 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
 
                         if (gestionando){
                             Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
-                            dismiss();
                         }else{
                             Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
-                            postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
                         }
+
+                        //El mismo WS determina si se esta insertando o editando
+                        postAgregarMedicamentoConsulta(codigoMedicamento,codigoConsulta,indicaciones,cantidad);
 
                     }
                 },100);
@@ -158,7 +159,7 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                         //logica
 
                         Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
-                        dismiss();
+                        postEliminarMedicamentoConsulta(codigoMedicamento,codigoConsulta);
                     }
                 },100);
             }
@@ -239,24 +240,24 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
     public void postAgregarMedicamentoConsulta(int mdc, int cme,  String ind, double can){
 
         Log.d("JTDebug", "Entra Metodo postAgregarMedicamentoConsulta");
-        Call<Integer> call = servicio.postAgregarReceta(mdc,cme,ind,can);
+        Call<Boolean> call = servicio.postAgregarRecetaConsulta(mdc,cme,ind,can);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 Log.d("JTDebug", "Entra OnResponse");
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        Integer resp ;
+                        Boolean resp ;
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp);
-                        if(resp==1){
+                        if(resp==true){
                             Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
                             fragmentConsulta.getMedicamentos();
                             dismiss();
                         }
-                        if(resp==0){
+                        if(resp==false){
                             Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
                         }
                     } else {
@@ -267,7 +268,46 @@ public class DialogAgregarMedicamentoConsulta extends DialogFragment {
                 }
             }
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postEliminarMedicamentoConsulta(int mdc, int cme){
+
+        Log.d("JTDebug", "Entra Metodo postEliminarMedicamentoConsulta");
+        Call<Boolean> call = servicio.postEliminarRecetaConsulta(mdc,cme);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            fragmentConsulta.getMedicamentos();
+                            dismiss();
+                        }
+                        if(resp==false){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

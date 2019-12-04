@@ -83,7 +83,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/boton_style_modal"
         android:clickable="true"
-        android:text="Guardar"
+        android:text="Guardar detalle"
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
@@ -95,7 +95,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/boton_style_modal"
         android:clickable="true"
-        android:text="Eliminar"
+        android:text="Eliminar detalle"
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
