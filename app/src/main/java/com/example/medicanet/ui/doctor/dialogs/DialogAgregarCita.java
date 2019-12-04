@@ -262,8 +262,8 @@ public class DialogAgregarCita extends DialogFragment {
                                 centroMedico=listCentros.get(i);
                                 if (centroMedico.cmd_codigo==consulta.cmd_codigo){
                                     spCentro.setSelection(i);
+                                    break;
                                 }
-                                break;
                             }
                         }
 

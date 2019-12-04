@@ -32,7 +32,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="105dp"
-                app:srcCompat="@drawable/medicanet1" />
+                app:srcCompat="@drawable/login" />
 
             <EditText
                 android:id="@+id/edt_login_usuario"
