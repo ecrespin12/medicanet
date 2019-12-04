@@ -126,7 +126,7 @@ public class FragmentPacientes extends Fragment {
 
                         for (int i=0;i<listPacientes.size();i++) {
                             paciente = listPacientes.get(i);
-                            imagenes[i]=R.drawable.paciente;
+                            imagenes[i]=R.drawable.paciente3;
                             arr1[i] = "DUI: "+paciente.per_dui;
                             arr2[i] = "Nombre: "+paciente.pac_nombre;
                             arr3[i] = "Correo: "+paciente.per_correo;

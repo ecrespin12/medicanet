@@ -22,11 +22,11 @@
         android:visible="false">
         <item
             android:id="@+id/nav_doc_consultas_programadas"
-            android:icon="@drawable/medicanet1"
+            android:icon="@drawable/consulta"
             android:title="Consultas programadas" />
         <item
             android:id="@+id/nav_doc_pacientes"
-            android:icon="@drawable/paciente"
+            android:icon="@drawable/paciente3"
             android:title="@string/menu_doc_pacientes" />
     </group>
 

@@ -47,7 +47,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/medicanet1"
+            android:src="@drawable/consulta"
             app:layout_constraintBottom_toTopOf="@+id/imageView7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +85,9 @@
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/paciente"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/medicanet1"
             app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

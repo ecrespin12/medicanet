@@ -221,7 +221,7 @@ public class FragmentConsultasProgramadas extends Fragment {
 
                         for (int i=0;i<listConsulta.size();i++) {
                             consulta = listConsulta.get(i);
-                            imagenes[i]=R.drawable.medicanet1;
+                            imagenes[i]=R.drawable.consulta;
                             codigos[i] = "Código consulta: "+consulta.cme_codigo;
                             nombres[i] = "Paciente: "+consulta.per_nombre;
                             fechas[i] = "Fecha: "+formatoFecha.format(consulta.cme_fecha_hora);
