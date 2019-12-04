@@ -1,15 +1,11 @@
 package retrofit;
 
 import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.io.IOException;
-
 import kotlin.jvm.internal.Intrinsics;
 import okhttp3.Credentials;
 import okhttp3.Headers;
