@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.paciente.perfil.perfil">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#343636"
+            android:gravity="center_horizontal"
+            android:text="Perfil Paciente"
+            android:textColor="#FFEBEE"
+            android:textColorHint="#9575CD" />
+
+        <ListView
+            android:id="@+id/lv_datos_pac"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BBDEFB"/>
+
+    </LinearLayout>
+
+</FrameLayout>
