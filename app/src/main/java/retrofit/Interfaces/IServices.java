@@ -95,6 +95,14 @@ public interface IServices {
     @FormUrlEncoded
     Call<Integer> postAgregarDetalleConsulta(@Field("nom") String nom, @Field("dsc") String dsc, @Field("cme") int cme);
 
+    @POST("Consulta/detalle")
+    @FormUrlEncoded
+    Call<Boolean> postEditarDetalleConsulta(@Field("cod") int cod, @Field("nom") String nom, @Field("des") String des);
+
+    @POST("Consulta/del_detalle")
+    @FormUrlEncoded
+    Call<Boolean> postEliminarDetalleConsulta(@Field("cod") int cod);
+
     @GET("Receta/recetasPorConsulta?")
     @NotNull
     Call<List<RecetaModel>> getReceta(@Query("cod") int cod);

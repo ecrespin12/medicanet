@@ -97,11 +97,12 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
                         String nom = edtNombre.getText().toString().trim();
                         String dsc = edtDescripcion.getText().toString().trim();
                         int cme = consulta.cme_codigo;
+                        int codDetalle = datoMedico.dcm_codigo;
 
 
                         if (gestionando){
                             Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
-                            dismiss();
+                            postEditarDetalleConsulta(codDetalle,nom,dsc);
                         }else{
                             Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
                             postAgregarDetalleConsulta(nom,dsc,cme);
@@ -125,8 +126,9 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
 
                         //logica
 
+                        int codDetalle = datoMedico.dcm_codigo;
                         Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
-                        dismiss();
+                        postEliminarDetalleConsulta(codDetalle);
                     }
                 },100);
             }
@@ -185,6 +187,84 @@ public class DialogAgregarDetalleConsulta extends DialogFragment {
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postEditarDetalleConsulta(int cod, String nom,  String des){
+
+        Log.d("JTDebug", "Entra Metodo postEditarDetalleConsulta");
+        Call<Boolean> call = servicio.postEditarDetalleConsulta(cod,nom,des);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Resp: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            fragmentConsulta.getDetalles();
+                            dismiss();
+                        }
+                        if(resp==false){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postEliminarDetalleConsulta(int cod){
+
+        Log.d("JTDebug", "Entra Metodo postEliminarDetalleConsulta");
+        Call<Boolean> call = servicio.postEliminarDetalleConsulta(cod);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Resp: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            fragmentConsulta.getDetalles();
+                            dismiss();
+                        }
+                        if(resp==false){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();
