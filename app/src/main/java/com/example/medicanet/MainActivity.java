@@ -1,7 +1,9 @@
 package com.example.medicanet;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.medicanet.ui.Places;
+import com.example.medicanet.ui.farmacia.fragments.FragmentEntregarMedicamentos;
+import com.example.medicanet.ui.farmacia.fragments.FragmentPendientesEntrega;
 import com.example.medicanet.utils.PreferenceUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -45,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-
+        fab.hide();
         //recupero el rol de usuario
         String user = getIntent().getExtras().getString("user");
-
         if(user.equals("doctor")){
             navigationView.getMenu().setGroupVisible(R.id.group_doctor, true);
         }else if(user.equals("farmacia")){
             navigationView.getMenu().setGroupVisible(R.id.group_farmacia, true);
+            //fab.show();
         }else if(user.equals("paciente")){
             navigationView.getMenu().setGroupVisible(R.id.group_paciente, true);
         }else {
@@ -147,12 +152,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show();
             } else {
                 Resultado = result.getContents();
-            }
+
+        }
             Toast.makeText(this, "Lectura: " + Resultado, Toast.LENGTH_LONG).show();
+
 
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+
 
 }

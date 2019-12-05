@@ -31,9 +31,20 @@ tools:context=".ui.farmacia.fragments.FragmentEntregarMedicamentos">
             android:orientation="horizontal"
             android:padding="15dp">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/ScanQR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:drawable/btn_plus"
+                android:clickable="true"
+                android:src="@android:drawable/ic_menu_camera"
+                app:backgroundTint="@color/design_default_color_primary"
+                app:maxImageSize="40dp" />
+
             <EditText
                 android:id="@+id/edtId_fragment_far_entregar_medicamentos"
-                android:layout_width="wrap_content"
+                android:layout_width="174dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"

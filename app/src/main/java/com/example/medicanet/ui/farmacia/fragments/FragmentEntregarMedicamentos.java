@@ -1,4 +1,5 @@
 package com.example.medicanet.ui.farmacia.fragments;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,10 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.metodos.Metodos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.sql.Date;
 import java.util.List;
@@ -36,7 +41,7 @@ public class FragmentEntregarMedicamentos extends Fragment {
     List<EntregaMedicamentosModel> resp;
     EntregaMedicamentosModel item;
 
-    FloatingActionButton fabBuscar;
+    FloatingActionButton fabBuscar,ScanQR;
     EditText edtDesde, edtHasta;
     public int [] eme;
     private IServices servicio;
@@ -60,6 +65,7 @@ public class FragmentEntregarMedicamentos extends Fragment {
         edtHasta = v.findViewById(R.id.edtHasta_fragment_far_entregar_medicamentos);
 
         fabBuscar = v.findViewById(R.id.fbaBuscar_fragment_far_entregar_medicamentos);
+        ScanQR = v.findViewById(R.id.ScanQR);
         imgHasta = v.findViewById(R.id.imgbHasta_fragment_far_entregar_medicamentos);
         imgDesde = v.findViewById(R.id.imgbDesde_fragment_far_entregar_medicamentos);
         edtId = v.findViewById(R.id.edtId_fragment_far_entregar_medicamentos);
@@ -113,8 +119,24 @@ public class FragmentEntregarMedicamentos extends Fragment {
                 },100);
             }
         });
-
+        ScanQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IniciarScan();
+           }
+        });
         return v;
+    }
+    public void IniciarScan() {
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setPrompt("Codigo QR");
+        integrator.setCameraId(0);
+        integrator.setOrientationLocked(true);
+        integrator.setBeepEnabled(false);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.initiateScan();
+        goToMedicamentoPendiente("1");
     }
 
     public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cod, String fini, String ffin){
@@ -164,5 +186,31 @@ public class FragmentEntregarMedicamentos extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Add your code here
+        Toast.makeText(getActivity(), "Fragment Got it: " + requestCode + ", " + resultCode, Toast.LENGTH_SHORT).show();
+        goToMedicamentoPendiente("1");
+    }
+
+    public void goToMedicamentoPendiente(String Resultado) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Bundle paqueteDeDatos = new Bundle();
+        paqueteDeDatos.putInt("codigo", 0);
+        paqueteDeDatos.putString("codpaciente","1");
+
+        FragmentPendientesEntrega fragmentPedientesEntrega = new FragmentPendientesEntrega();
+
+        fragmentPedientesEntrega.setArguments(paqueteDeDatos);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, fragmentPedientesEntrega);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+},100);
+    }
 
 }
