@@ -1,6 +1,7 @@
 package com.example.medicanet.ui.paciente.perfil;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -9,10 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.util.List;
 
@@ -27,6 +31,7 @@ import retrofit2.Response;
 public class perfil extends Fragment {
     //VARIABLES PARA CONSUMIR EL WS##############################
     RetrofitClientInstance ret = new RetrofitClientInstance();
+    ImageView qrCode;
     private IServices servicio;
     List<PerfilPacienteModel> resp;
     PerfilPacienteModel item;
@@ -56,7 +61,15 @@ public class perfil extends Fragment {
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
         getPerfil();
 
+        String cod = "55"; //aqui solo es de sustituir con lo que se quiere el QR
+        try {
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(cod, BarcodeFormat.QR_CODE, 400, 400);
+            qrCode = view.findViewById(R.id.qrCode);
+            qrCode.setImageBitmap(bitmap);
+        } catch(Exception e) {
 
+        }
 
         return view;
     }
