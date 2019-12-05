@@ -5,9 +5,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -178,11 +180,27 @@ public class Places extends FragmentActivity implements OnMapReadyCallback {
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+
+
+        SharedPreferences obj = PreferenceManager.getDefaultSharedPreferences(this);
+        if (obj.getBoolean("check_box_preference_1", true))
         {
-            Toast.makeText(getApplicationContext(),"NO TIENES PERMISOS DE UBICACION PARA MOSTRAR TU UBICACION ACTUAL",Toast.LENGTH_LONG).show();
-        }else {
-            mMap.setMyLocationEnabled(true);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(getApplicationContext(),"NO TIENES PERMISOS DE UBICACION PARA MOSTRAR TU UBICACION ACTUAL",Toast.LENGTH_LONG).show();
+            }else {
+                mMap.setMyLocationEnabled(true);
+            }
+            String Result = ""+obj.getString("list_preference_2", "");
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            if(Result.equals("S")){mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);}
+            if(Result.equals("T")){mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);}
+            if(Result.equals("H")){mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);}
+
+
+        }else{
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {

@@ -3,12 +3,14 @@ package com.example.medicanet;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import com.example.medicanet.utils.Constants;
 import com.example.medicanet.ui.farmacia.fragments.FragmentEntregarMedicamentos;
 import com.example.medicanet.ui.farmacia.fragments.FragmentPendientesEntrega;
 import com.example.medicanet.utils.PreferenceUtils;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -35,7 +38,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    int color;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        CheckPref();
         fab.hide();
         //recupero el rol de usuario
         String user = getIntent().getExtras().getString("user");
@@ -173,7 +176,26 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         preferences.getString(Constants.KEY_MAP, "");
     }
+    @Override
+    protected void onResume() {
+      CheckPref();
 
+        super.onResume();
+    }
+
+    private void CheckPref() {
+        SharedPreferences obj = PreferenceManager.getDefaultSharedPreferences(this);
+        if (obj.getBoolean("switch_preference_1", true))
+        {
+            color = Color.rgb(38,63,102);
+        }else{
+            color = Color.rgb(250,252,255);
+        }
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+
+        navigationView.setBackgroundColor(color);
+    }
 
 
 }
