@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/cat_pref_name">
+
+    </PreferenceCategory>
+    <ListPreference
+        android:defaultValue="O"
+        android:entries="@array/list_sex"
+        android:entryValues="@array/list_sex_code"
+        android:key="list_preference_1"
+        android:summary="Elija su preferencia sexual para mayor performance en la app"
+        android:title="@string/pref_lista_sex" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_1"
+        android:title="@string/pref_darkmode_name" />
+    <PreferenceCategory android:title="@string/cat_pref_name_2">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="check_box_preference_1"
+            android:summary="@string/pref_sum_geomap"
+            android:title="@string/pref_geomaps_name" />
+        <ListPreference
+            android:defaultValue="N"
+            android:dependency="check_box_preference_1"
+            android:entries="@array/list_maps"
+            android:entryValues="@array/list_maps_code"
+            android:key="list_preference_2"
+            android:summary="@string/pref_map_sum"
+            android:title="@string/pref_maps_name" />
+    </PreferenceCategory>
+</PreferenceScreen>

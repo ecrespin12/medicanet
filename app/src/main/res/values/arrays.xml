@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_sex">
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="list_sex_code">
+        <item>M</item>
+        <item>F</item>
+        <item>O</item>
+    </string-array>
+
+    <string-array name="list_maps">
+        <item>Normal</item>
+        <item>Satelite</item>
+        <item>Tierra</item>
+        <item>Hibrido</item>
+    </string-array>
+
+    <string-array name="list_maps_code">
+        <item>N</item>
+        <item>S</item>
+        <item>T</item>
+        <item>H</item>
+    </string-array>
+</resources>
