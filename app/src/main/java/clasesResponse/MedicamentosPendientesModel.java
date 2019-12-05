@@ -7,10 +7,10 @@ public class MedicamentosPendientesModel {
     public int per_codigo;
     @SerializedName("med_nombre")
     public String med_nombre;
+    @SerializedName("pac_nombre")
+    public String pac_nombre;
     @SerializedName("mdc_nombre")
     public String mdc_nombre;
-    @SerializedName("mdc_descripcion")
-    public String mdc_descripcion;
     @SerializedName("rme_cantidad")
     public String rme_cantidad;
     @SerializedName("rme_indicaciones")

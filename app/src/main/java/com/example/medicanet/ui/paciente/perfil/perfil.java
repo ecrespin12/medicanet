@@ -77,7 +77,7 @@ public class perfil extends Fragment {
     //METODO PARA CONSUMIR EL WS
     private void getPerfil() {
         Log.d("JTDebug", "Entra Metodo getPerfil");
-        Call<List<PerfilPacienteModel>> call = servicio.getPerfil(1, "", "", "", "", "");
+        Call<List<PerfilPacienteModel>> call = servicio.getPerfil(1, null, null , null, null,null);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<PerfilPacienteModel>>() {
             @Override
