@@ -17,12 +17,12 @@
         android:background="@drawable/eliminar1" />
 
     <TextView
-        android:id="@+id/tvTitulo_dialog_doc_agregar_cita"
+        android:id="@+id/tvTitulo_dialog_doc_agregar_historial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="@string/agregar_proxima_cita"
+        android:text="Agregar historial"
         android:textColor="#1a81ad"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -34,12 +34,12 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:gravity="left"
-        android:text="Centro medico"
+        android:text="Tipo de historial"
         android:textSize="18sp" />
 
     <LinearLayout
 
-        android:id="@+id/splinearlayout_dialog_doc_agregar_cita"
+        android:id="@+id/splinearlayout_dialog_doc_agregar_historial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -50,7 +50,7 @@
         android:orientation="vertical">
 
         <Spinner
-            android:id="@+id/spTipo_dialog_doc_agregar_cita"
+            android:id="@+id/spTipo_dialog_doc_agregar_historial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -61,73 +61,20 @@
 
     </LinearLayout>
 
-
-
-
-
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+    <EditText
+        android:id="@+id/edtDescripcion_doc_modal_agregar_historial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:text="Fecha:  "
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/edtFecha_dialog_doc_agregar_cita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
-
-        <ImageButton
-            android:id="@+id/btnFecha_dialog_doc_agregar_cita"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/calendario_64_1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:text="Hora:    "
-            android:textSize="18sp" />
-        <EditText
-            android:id="@+id/edtHora_dialog_doc_agregar_cita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
-
-        <ImageButton
-            android:id="@+id/btnHora_dialog_doc_agregar_cita"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/alarm_celeste" />
-
-    </LinearLayout>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/boton_cuadrado_borde"
+        android:gravity="center_horizontal"
+        android:hint="Agregue una descripción"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:scrollbars="vertical" />
 
     <Button
         android:layout_margin="20dp"
