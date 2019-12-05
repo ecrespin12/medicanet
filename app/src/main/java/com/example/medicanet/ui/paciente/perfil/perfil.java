@@ -38,12 +38,12 @@ public class perfil extends Fragment {
     //###########################################################
     ListView lv_datos_pac;
 
-    String[] cod;
-    String[] nom;
-    String[] fec;
-    String[] cor;
-    String[] est;
-    String[] dui;
+    String[] per_nombre;
+    String[] per_apellido;
+    String[] per_fecha_nace;
+    String[] per_correo;
+    String[] per_estado;
+    String[] per_dui;
 
     public perfil() {
         // Required empty public constructor
@@ -88,14 +88,25 @@ public class perfil extends Fragment {
                        Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
                         Log.d("JTDebug", "Count: " + resp.size());
-                        String arr1[]=new String[resp.size()];
+                        per_nombre=new String[resp.size()];
+                        per_apellido=new String[resp.size()];
+                        per_fecha_nace=new String[resp.size()];
+                        per_correo=new String[resp.size()];
+                        per_estado=new String[resp.size()];
+                        per_dui=new String[resp.size()];
 
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            arr1[i]=item.est;
+                            per_nombre[i] = "Medicina: " +item.per_nombre;
+                            per_apellido[i] = "Medicina: " +item.per_apellido;
+                            per_fecha_nace[i] = "Medicina: " +item.per_fecha_nace;
+                            per_correo[i] = "Medicina: " +item.per_correo;
+                            per_estado[i] = "Medicina: " +item.per_estado;
+                            per_dui[i] = "Medicina: " +item.per_dui;
+
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, arr1, null, null, null);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_apellido, per_fecha_nace, per_correo);
                         lv_datos_pac.setAdapter(adaptadorList);
 
 

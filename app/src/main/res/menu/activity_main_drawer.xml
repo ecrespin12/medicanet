@@ -35,23 +35,23 @@
         android:visible="false">
         <item
             android:id="@+id/nav_pac_citas"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/calendar"
             android:title="@string/menu_pac_citas_medicas" />
         <item
             android:id="@+id/nav_pac_datos_medicos"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/specification"
             android:title="@string/menu_pac_datos_medicos" />
         <item
             android:id="@+id/nav_pac_historial_medico"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/vademecum"
             android:title="@string/menu_pac_historial_medico" />
         <item
             android:id="@+id/nav_pac_medicamentos"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/medicament"
             android:title="@string/menu_pac_medicamentos" />
         <item
             android:id="@+id/nav_pac_perfil"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/user"
             android:title="Perfil" />
     </group>
 
