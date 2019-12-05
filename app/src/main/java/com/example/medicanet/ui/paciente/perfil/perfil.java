@@ -98,12 +98,12 @@ public class perfil extends Fragment {
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            per_nombre[i] = "Medicina: " +item.per_nombre;
-                            per_apellido[i] = "Medicina: " +item.per_apellido;
-                            per_fecha_nace[i] = "Medicina: " +item.per_fecha_nace;
-                            per_correo[i] = "Medicina: " +item.per_correo;
-                            per_estado[i] = "Medicina: " +item.per_estado;
-                            per_dui[i] = "Medicina: " +item.per_dui;
+                            per_nombre[i] = "Nombre : " +item.per_nombre;
+                            per_apellido[i] = "Apellido: " +item.per_apellido;
+                            per_fecha_nace[i] = "Fecha de Nacimiento: " +item.per_fecha_nace;
+                            per_correo[i] = "Correo: " +item.per_correo;
+                            per_estado[i] = "Estado: " +item.per_estado;
+                            per_dui[i] = "DUI: " +item.per_dui;
 
                         }
                         AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_apellido, per_fecha_nace, per_correo);
