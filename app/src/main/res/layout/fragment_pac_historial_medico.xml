@@ -4,42 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/fab_margin"
     tools:context=".ui.paciente.historialMedico.HistorialMedico">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
         android:text="Consultar Paciente">
 
         <TextView
-            android:id="@+id/texv_DatosPaciente"
+            android:id="@+id/tvTitulo_fragment_pac_historial_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#D6D6D6"
-            android:text="HISTORIAL MEDICO"
+            android:text="Historial medico"
             android:textAlignment="center"
             android:textColor="#000000"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/historial_medico" />
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnHistorial_fragment_pac_historial_medico"
+            android:layout_width="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="100dp"
+            android:background="@drawable/historial_medico"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
-        <ListView
-            android:id="@+id/lvHistorialMedico_pac"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#BBDEFB">
+
+            <ProgressBar
+                android:id="@+id/pgbHistorial_fragment_pac_historial_medico"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ListView
+
+                android:id="@+id/lvHistorialMedico_fragment_pac_historial_medico"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="535dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 

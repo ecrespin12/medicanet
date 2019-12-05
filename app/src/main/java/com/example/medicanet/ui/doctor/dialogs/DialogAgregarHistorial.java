@@ -3,7 +3,6 @@ package com.example.medicanet.ui.doctor.dialogs;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,11 +16,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
+
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.metodos.Metodos;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
+
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.DatosMedicosModel;
@@ -34,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DialogAgregarCita extends DialogFragment {
+public class DialogAgregarHistorial extends DialogFragment {
 
     //VARIABLES DE WS
     RetrofitClientInstance ret = new RetrofitClientInstance();
@@ -76,8 +80,7 @@ public class DialogAgregarCita extends DialogFragment {
     boolean gestionando;
     int codPer;
 
-    public DialogAgregarCita(ConsultaModel consulta, PacientesModel paciente, boolean gestionando) {
-        this.consulta=consulta;
+    public DialogAgregarHistorial( PacientesModel paciente, boolean gestionando) {
         this.paciente=paciente;
         this.gestionando=gestionando;
         if (consulta!=null){
