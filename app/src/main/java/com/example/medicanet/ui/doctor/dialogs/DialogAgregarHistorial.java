@@ -22,6 +22,8 @@ import androidx.fragment.app.DialogFragment;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorSpinner;
 import com.example.medicanet.metodos.Metodos;
+import com.example.medicanet.ui.paciente.historialMedico.HistorialMedico;
+import com.example.medicanet.utils.PreferenceUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -30,6 +32,7 @@ import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.DatosMedicosModel;
 import clasesResponse.EntregaMedicamentosModel;
+import clasesResponse.HistorialModel;
 import clasesResponse.PacientesModel;
 import clasesResponse.RecetaModel;
 import clasesResponse.TipoHistorialModel;
@@ -58,21 +61,33 @@ public class DialogAgregarHistorial extends DialogFragment {
     TextView            tvTituloDialog;
 
     EditText            edtDescripcion;
+    EditText            edtFecha;
+    EditText            edtHora;
+
+    TextView            tvFecha;
+    TextView            tvHora;
+
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-mm-dd");
+    SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm");
 
     int codigoTipoHistorial;
 
     String [] arr1;
 
     PacientesModel paciente;
+    HistorialModel historial;
     boolean gestionando;
+    HistorialMedico historialMedico;
 
     public DialogAgregarHistorial() {
 
     }
 
-    public DialogAgregarHistorial( PacientesModel paciente, boolean gestionando) {
+    public DialogAgregarHistorial(PacientesModel paciente, boolean gestionando, HistorialModel historial, HistorialMedico historialMedico) {
         this.paciente=paciente;
         this.gestionando=gestionando;
+        this.historial=historial;
+        this.historialMedico=historialMedico;
     }
 
 
@@ -96,15 +111,45 @@ public class DialogAgregarHistorial extends DialogFragment {
         btnEliminar=view.findViewById(R.id.btnEliminar_doc_modal_agregar_historial);
         tvTituloDialog=view.findViewById(R.id.tvTitulo_dialog_doc_agregar_historial);
         edtDescripcion=view.findViewById(R.id.edtDescripcion_doc_modal_agregar_historial);
+        edtFecha=view.findViewById(R.id.edtFecha_dialog_doc_agregar_historial);
+        tvFecha=view.findViewById(R.id.tvFecha_dialog_doc_agregar_historial);
+        edtHora=view.findViewById(R.id.edthora_dialog_doc_agregar_historial);
+        tvHora=view.findViewById(R.id.tvHora_dialog_doc_agregar_historial);
 
-        btnEliminar.setVisibility(View.GONE);
-
-        if (gestionando){
+        if (gestionando && PreferenceUtils.getRol(getContext()).equals("doctor")){
             btnEliminar.setVisibility(View.VISIBLE);
             btnGuardar.setText("editar historial");
             tvTituloDialog.setText("Gestionar historial");
-        }else {
+            edtHora.setVisibility(View.GONE);
+            edtFecha.setVisibility(View.GONE);
+            tvFecha.setVisibility(View.GONE);
+            tvHora.setVisibility(View.GONE);
+        }
+        if (!gestionando && PreferenceUtils.getRol(getContext()).equals("doctor")){
+            btnEliminar.setVisibility(View.GONE);
+            edtHora.setVisibility(View.GONE);
+            edtFecha.setVisibility(View.GONE);
+            tvFecha.setVisibility(View.GONE);
+            tvHora.setVisibility(View.GONE);
+        }else if(gestionando && !PreferenceUtils.getRol(getContext()).equals("doctor")){
+            btnGuardar.setVisibility(View.INVISIBLE);
+            btnEliminar.setVisibility(View.GONE);
+            spTipo.setEnabled(false);
+            edtDescripcion.setEnabled(false);
+            tvTituloDialog.setText("Información del historial");
 
+            edtHora.setVisibility(View.VISIBLE);
+            edtHora.setEnabled(false);
+            tvHora.setVisibility(View.VISIBLE);
+            edtFecha.setVisibility(View.VISIBLE);
+            edtFecha.setEnabled(false);
+            tvFecha.setVisibility(View.VISIBLE);
+        }
+
+        if (historial!=null){
+            edtDescripcion.setText(historial.hme_descripcion);
+            edtFecha.setText(formatoFecha.format(historial.hme_fecha_crea));
+            edtHora.setText(formatoHora.format(historial.hme_fecha_crea));
         }
 
         getTiposHistorial();
@@ -137,15 +182,16 @@ public class DialogAgregarHistorial extends DialogFragment {
 
 
                         int per = paciente.per_codigo;
-                        int cmd = codigoTipoHistorial;
+                        int thm = codigoTipoHistorial;
+                        String des = edtDescripcion.getText().toString().trim();
 
                         //LLAMAR AL WS
                         if (gestionando){
                             Toast.makeText(getContext(), "Editando...", Toast.LENGTH_SHORT).show();
-                            dismiss();
+                            postEditarHistorial(historial.hme_codigo,per,thm,des);
                         }else{
                             Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
-                            //postAgregarConsulta(per, med, cmd, fechaHora);
+                            postAgregarHistorial(0,per,thm,des);
                         }
 
 
@@ -166,12 +212,9 @@ public class DialogAgregarHistorial extends DialogFragment {
                         btnEliminar.setBackgroundResource(R.drawable.boton_style_modal);
                         btnEliminar.setTextColor(Color.WHITE);
 
-
                         //logica
-                        //En el metodo getDetalles llamare al metodo getMedicamentos
-                        // y en el metodo getMedicamentos llamare al de Eliminar
-
-                        //getDetalles(consulta.cme_codigo);
+                        Toast.makeText(getContext(), "Elimiando...", Toast.LENGTH_SHORT).show();
+                        postEliminarHistorial(historial.hme_codigo);
 
                     }
                 },100);
@@ -196,6 +239,84 @@ public class DialogAgregarHistorial extends DialogFragment {
         });
 
         return view;
+    }
+
+    public void postAgregarHistorial(int cod, int per, int thm, String des){
+
+        Log.d("JTDebug", "Entra Metodo postAgregarHistorial");
+        Call<Integer> call = servicio.postAgregarHistorial(cod,per,thm,des);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Integer resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp>1){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            historialMedico.getHistorial();
+                            dismiss();
+                        }
+                        if(resp==0){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void postEditarHistorial(int cod, int per, int thm, String des){
+
+        Log.d("JTDebug", "Entra Metodo postAgregarHistorial");
+        Call<Boolean> call = servicio.postEditarHistorial(cod,per,thm,des);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        Boolean resp ;
+                        resp = response.body();
+                        Log.d("JTDebug", "Count: " + resp);
+                        if(resp==true){
+                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            historialMedico.getHistorial();
+                            dismiss();
+                        }
+                        if(resp==false){
+                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 
     //METODO PARA CONSUMIR EL WS
@@ -223,15 +344,15 @@ public class DialogAgregarHistorial extends DialogFragment {
                         AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(getContext(), null, arr1, null, null, null);
                         spTipo.setAdapter(adaptadorSpinner);
 
-                        //if (gestionando){
-                          //  for (int i=0 ; i<listTiposHistorial.size() ; i++){
-                            //    centroMedico=listCentros.get(i);
-                              //  if (centroMedico.cmd_codigo==consulta.cmd_codigo){
-                                //    spCentro.setSelection(i);
-                                  //  break;
-                                //}
-                            //}
-                        //}
+                        if (historial!=null){
+                            for (int i=0 ; i<listTiposHistorial.size() ; i++){
+                                tipoHistorial=listTiposHistorial.get(i);
+                                if (tipoHistorial.thm_codigo==historial.hme_codthm){
+                                    spTipo.setSelection(i);
+                                    break;
+                                }
+                            }
+                        }
 
                     } else {Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
@@ -249,48 +370,10 @@ public class DialogAgregarHistorial extends DialogFragment {
         });
     }
 
-    public void postAgregarConsulta(int per, int med, int cmd, String fec){
+    public void postEliminarHistorial(int cod){
 
-        Log.d("JTDebug", "Entra Metodo postAgregarConsulta");
-        Call<Integer> call = servicio.postAgregarConsulta(per,med,cmd,fec);
-        Log.d("JTDebug", "Url: " + ret.BASE_URL);
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.d("JTDebug", "Entra OnResponse");
-                try {
-                    if (response.isSuccessful()) {
-                        Log.d("JTDebug", "Entra IsSuccessful");
-                        Integer resp ;
-                        resp = response.body();
-                        Log.d("JTDebug", "Count: " + resp);
-                        if(resp>1){
-                            Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
-                            dismiss();
-                        }
-                        if(resp==0){
-                            Toast.makeText(getContext(),"Operacion no realizada",Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-                Log.d("JTDebug", "Entra OnFailure");
-                Log.d("JTDebug", "Message: " + t.getMessage());
-                t.printStackTrace();
-            }
-        });
-    }
-
-    public void postEliminarConsulta(int cod){
-
-        Log.d("JTDebug", "Entra Metodo postEliminarConsulta");
-        Call<Boolean> call = servicio.postEliminarConsulta(cod);
+        Log.d("JTDebug", "Entra Metodo postEliminarHistorial");
+        Call<Boolean> call = servicio.postEliminarHistorial(cod);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -304,6 +387,7 @@ public class DialogAgregarHistorial extends DialogFragment {
                         Log.d("JTDebug", "Count: " + resp);
                         if(resp==true){
                             Toast.makeText(getContext(),"Operacion realizada exitosamente",Toast.LENGTH_SHORT).show();
+                            historialMedico.getHistorial();
                             dismiss();
                         }
                         if(resp==false){

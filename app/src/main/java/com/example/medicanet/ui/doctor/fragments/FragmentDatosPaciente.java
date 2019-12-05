@@ -80,7 +80,7 @@ public class FragmentDatosPaciente extends Fragment {
                         Toast.makeText(getContext(), "Ver historial", Toast.LENGTH_SHORT).show();
 
                         // Crea el nuevo fragmento
-                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(paciente, true);
+                        HistorialMedico fragmentDatosConsulta = new HistorialMedico(paciente);
                         //Crea la transaccion
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)

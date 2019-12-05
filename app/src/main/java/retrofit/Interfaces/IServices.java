@@ -58,6 +58,18 @@ public interface IServices {
     @NotNull
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
 
+    @POST("Historial/historial")
+    @FormUrlEncoded
+    Call<Integer> postAgregarHistorial(@Field("cod") int cod, @Field("per") int per, @Field("thm") int thm, @Field("des") String des);
+
+    @POST("Historial/historial")
+    @FormUrlEncoded
+    Call<Boolean> postEditarHistorial(@Field("cod") int cod, @Field("per") int per, @Field("thm") int thm, @Field("des") String des);
+
+    @POST("Historial/del_historial")
+    @FormUrlEncoded
+    Call<Boolean> postEliminarHistorial(@Field("cod") int cod);
+
     @GET("TipoHistorial/tipo_historial?")
     @NotNull
     Call<List<TipoHistorialModel>> getTiposHistorial(@Query("cod") @NotNull int cod, @Query("nom") @NotNull String nom);

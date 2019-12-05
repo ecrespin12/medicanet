@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.example.medicanet.ui.doctor.dialogs.DialogAgregarHistorial;
+import com.example.medicanet.utils.PreferenceUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import clasesResponse.HistorialModel;
@@ -31,8 +33,8 @@ public class HistorialMedico extends Fragment {
     //VARIABLES PARA CONSUMIR EL WS##############################
     RetrofitClientInstance ret = new RetrofitClientInstance();
     private IServices servicio;
-    List<HistorialModel> resp;
-    HistorialModel item;
+    List<HistorialModel> listHistoriales;
+    HistorialModel historial;
     //###########################################################
 
     TextView tvTitulo;
@@ -50,14 +52,14 @@ public class HistorialMedico extends Fragment {
     SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy");
     SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
-    boolean agregar;
+    HistorialMedico historialMedico;
 
     public HistorialMedico() {
         // Required empty public constructor
     }
-    public HistorialMedico(PacientesModel paciente, boolean agregar) {
+    public HistorialMedico(PacientesModel paciente) {
         this.paciente=paciente;
-        this.agregar=agregar;
+        this.historialMedico=this;
     }
 
 
@@ -76,7 +78,7 @@ public class HistorialMedico extends Fragment {
 
         pgbHistorial.setVisibility(View.VISIBLE);
 
-        if (agregar){
+        if (PreferenceUtils.getRol(getContext()).equals("doctor")){
             btnHistorial.setVisibility(View.VISIBLE);
         }else{
             btnHistorial.setVisibility(View.GONE);
@@ -94,16 +96,9 @@ public class HistorialMedico extends Fragment {
                         tvTitulo.setTextColor(Color.BLACK);
 
                         //logica
-                        // Crea el nuevo fragmento
-                        HistorialMedico historialMedico = new HistorialMedico();
-                        //Crea la transaccion
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
-                        transaction.replace(R.id.nav_host_fragment, historialMedico);
-                        //agregar la transaccion a la pila
-                        //transaction.addToBackStack(null);
-                        // Commit a la transacción
-                        transaction.commit();
+                        lvHistorial.setAdapter(null);
+                        pgbHistorial.setVisibility(View.VISIBLE);
+                        getHistorial();
                     }
                 },100);
             }
@@ -119,16 +114,10 @@ public class HistorialMedico extends Fragment {
                     @Override
                     public void run() {
 
+                        historial=listHistoriales.get(position);
                         DialogAgregarHistorial dialogAgregarHistorial;
-                        if (agregar)
-                        {
-                            dialogAgregarHistorial = new DialogAgregarHistorial(paciente, true);
-                        }
-                        else
-                        {
-                            dialogAgregarHistorial = new DialogAgregarHistorial(paciente, false);
-                        }
 
+                        dialogAgregarHistorial = new DialogAgregarHistorial(paciente, true, historial, historialMedico);
                         dialogAgregarHistorial.show(getFragmentManager(),"dialogAgregarHistorial");
 
                     }
@@ -147,7 +136,7 @@ public class HistorialMedico extends Fragment {
                         btnHistorial.setBackgroundResource(R.drawable.historial_medico);
 
                         //Codigo para logica del boton
-                        DialogAgregarHistorial dialogAgregarHistorial = new DialogAgregarHistorial(paciente,false);
+                        DialogAgregarHistorial dialogAgregarHistorial = new DialogAgregarHistorial(paciente,false,null,historialMedico);
                         dialogAgregarHistorial.show(getFragmentManager(),"dialogAgregarHistorial");
 
                         //CARGAR EL LISTVIEW CON EL METODO GETCONSULTAS
@@ -166,7 +155,7 @@ public class HistorialMedico extends Fragment {
         return view;
     }
 
-    private void getHistorial(){
+    public void getHistorial(){
         Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
         int codigoPaciente=1;
         if (paciente!=null){
@@ -181,19 +170,19 @@ public class HistorialMedico extends Fragment {
                 try {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
-                        resp = response.body();
-                        Log.d("JTDebug", "Count: " + resp.size());
-                        arr1=new String[resp.size()];
-                        arr2=new String[resp.size()];
-                        arr3=new String[resp.size()];
-                        arr4=new String[resp.size()];
+                        listHistoriales = response.body();
+                        Log.d("JTDebug", "Count: " + listHistoriales.size());
+                        arr1=new String[listHistoriales.size()];
+                        arr2=new String[listHistoriales.size()];
+                        arr3=new String[listHistoriales.size()];
+                        arr4=new String[listHistoriales.size()];
 
-                        for (int i=0;i<resp.size();i++) {
-                            item = resp.get(i);
-                            arr1[i] = "TITULO: "+item.thm_nombre;
-                            arr2[i] = "DESCRIPCIÓN: " + item.hme_descripcion;
-                            arr3[i] = "FECHA: " +formatoFecha.format(item.hme_fecha_crea);
-                            arr4[i] = "HORA: "+formatoHora.format(item.hme_fecha_crea);
+                        for (int i=0;i<listHistoriales.size();i++) {
+                            historial = listHistoriales.get(i);
+                            arr1[i] = "TITULO: "+historial.thm_nombre;
+                            arr2[i] = "DESCRIPCIÓN: " + historial.hme_descripcion;
+                            arr3[i] = "FECHA: " +formatoFecha.format(historial.hme_fecha_crea);
+                            arr4[i] = "HORA: "+formatoHora.format(historial.hme_fecha_crea);
                         }
                         AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, arr1, arr2, arr3, arr4);
                         lvHistorial.setAdapter(adaptadorList);
