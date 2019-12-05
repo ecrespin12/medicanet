@@ -139,7 +139,7 @@ public interface IServices {
     @FormUrlEncoded
     Call<Boolean> postEliminarConsulta(@Field("cod") int cod);
 
-    @GET("Persona/persona?")
+    @GET("Persona/personas?")
     @NotNull
     Call<List<PerfilPacienteModel>> getPerfil(@Query("cod") int cod, @Query("nom") String nom, @Query("fec") String fec, @Query("cor") String cor, @Query("est") String est, @Query("dui") String dui);
 }

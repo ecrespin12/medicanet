@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.medicanet.R;
 import com.example.medicanet.metodos.AdaptadorListView;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import clasesResponse.PerfilPacienteModel;
@@ -38,12 +40,10 @@ public class perfil extends Fragment {
     //###########################################################
     ListView lv_datos_pac;
 
-    String[] per_nombre;
-    String[] per_apellido;
-    String[] per_fecha_nace;
-    String[] per_correo;
-    String[] per_estado;
-    String[] per_dui;
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-mm-yyyy");
+    SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
+
+    TextView tvNombre,tvCorreo,tvFecha,tvDui;
 
     public perfil() {
         // Required empty public constructor
@@ -55,7 +55,10 @@ public class perfil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-        lv_datos_pac = view.findViewById(R.id.lv_datos_pac);
+        tvCorreo = view.findViewById(R.id.tvCorreo_Fragment_perfil);
+        tvNombre = view.findViewById(R.id.tvNombre_Fragment_perfil);
+        tvFecha = view.findViewById(R.id.tvFecha_Fragment_perfil);
+        tvDui = view.findViewById(R.id.tvDui_Fragment_perfil);
         // Inflate the layout for this fragment
 
         servicio = (IServices) ret.createService(IServices.class, view.getContext().getResources().getString(R.string.token));
@@ -87,29 +90,13 @@ public class perfil extends Fragment {
                     if (response.isSuccessful()) {
                        Log.d("JTDebug", "Entra IsSuccessful");
                         resp = response.body();
+                        PerfilPacienteModel perfil = resp.get(0);
+                        tvNombre.setText("Nombre: "+perfil.per_nombre+" "+perfil.per_apellidos);
+                        tvCorreo.setText("Correo: "+perfil.per_correo);
+                        tvFecha.setText("Fecha N: "+formatoFecha.format(perfil.per_fecha_nace));
+                        tvDui.setText("DUI: "+perfil.per_dui);
+
                         Log.d("JTDebug", "Count: " + resp.size());
-                        per_nombre=new String[resp.size()];
-                        per_apellido=new String[resp.size()];
-                        per_fecha_nace=new String[resp.size()];
-                        per_correo=new String[resp.size()];
-                        per_estado=new String[resp.size()];
-                        per_dui=new String[resp.size()];
-
-
-                        for (int i=0;i<resp.size();i++) {
-                            item = resp.get(i);
-                            per_nombre[i] = "Nombre : " +item.per_nombre;
-                            per_apellido[i] = "Apellido: " +item.per_apellido;
-                            per_fecha_nace[i] = "Fecha de Nacimiento: " +item.per_fecha_nace;
-                            per_correo[i] = "Correo: " +item.per_correo;
-                            per_estado[i] = "Estado: " +item.per_estado;
-                            per_dui[i] = "DUI: " +item.per_dui;
-
-                        }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_apellido, per_fecha_nace, per_correo);
-                        lv_datos_pac.setAdapter(adaptadorList);
-
-
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
                     }
