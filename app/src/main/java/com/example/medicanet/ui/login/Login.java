@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.medicanet.MainActivity;
 import com.example.medicanet.R;
+import com.example.medicanet.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -54,7 +55,23 @@ public class Login extends AppCompatActivity {
         edtUser = findViewById(R.id.edt_login_usuario);
         edtPassword = findViewById(R.id.edt_login_password);
 
-        particleView=findViewById(R.id.particleView_activity_login);
+
+        Log.i("login_", "pre");
+
+        if(PreferenceUtils.getEmail(getApplicationContext()) !=null || PreferenceUtils.getRol(getApplicationContext()) !=null ){
+
+            Log.i("login_", "condicion1");
+            String rolUser= PreferenceUtils.getRol(getApplicationContext()) ;
+            Log.i("login_", rolUser);
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("user", rolUser);
+            startActivity(i);
+            finish();
+        }else{
+            Log.i("login_", "condicion2");
+            particleView=findViewById(R.id.particleView_activity_login);
+
+        }
 
     }
 
@@ -122,7 +139,7 @@ public class Login extends AppCompatActivity {
     public void Ingresar(View v){
 
         final String email = edtUser.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
+        final String password = edtPassword.getText().toString().trim();
 
         //hay que identificarse en firebase auth y si el auth es exitoso buscamos los datos de usuario por keyID
         mAuth.signInWithEmailAndPassword(email, password)
@@ -131,6 +148,11 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Inicio exitoso
+
+                            //guardar preferencias login
+                            PreferenceUtils.GuardarEmail(email, getApplicationContext());
+                            PreferenceUtils.GuardarPassword(password, getApplicationContext());
+
 
                             //objeto usuario que recupera el ID de usuario actual
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -188,6 +210,9 @@ public class Login extends AppCompatActivity {
 
                 //Si el login es correcto enviarlo a la actividad con el rol de user
                 if(authUser==true){
+                    //guardar preferencias de rol
+                    PreferenceUtils.GuardarRol(rol, getApplicationContext());
+
 
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.putExtra("user", rol);
