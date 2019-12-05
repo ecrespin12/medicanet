@@ -35,4 +35,17 @@ public class PreferenceUtils {
         return preferences.getString(Constants.KEY_PASSWORD, null);
     }
 
+
+    public static boolean GuardarRol(String rol, Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = preferences.edit();
+        prefsEditor.putString(Constants.KEY_ROL, rol);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getRol(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(Constants.KEY_ROL, null);
+    }
+
 }

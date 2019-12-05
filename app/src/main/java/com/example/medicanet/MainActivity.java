@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.medicanet.ui.Places;
+import com.example.medicanet.utils.PreferenceUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -122,8 +123,13 @@ public class MainActivity extends AppCompatActivity {
         if (id==R.id.action_ajustes){
             Toast.makeText(getApplicationContext(),"Ajustes...",Toast.LENGTH_SHORT).show();
         }else if(id==R.id.action_salir){
+
+            PreferenceUtils.GuardarPassword(null, this);
+            PreferenceUtils.GuardarEmail(null, this);
+            PreferenceUtils.GuardarRol(null, this);
             Toast.makeText(getApplicationContext(),"Saliendo...",Toast.LENGTH_SHORT).show();
             finishAffinity();
+
         }else if(id==R.id.action_search){
             Toast.makeText(getApplicationContext(),"Abriendo mapa...",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), Places.class);

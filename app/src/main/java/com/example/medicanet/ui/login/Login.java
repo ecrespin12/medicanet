@@ -58,13 +58,13 @@ public class Login extends AppCompatActivity {
 
         Log.i("login_", "pre");
 
-        if(PreferenceUtils.getEmail(getApplicationContext()) !=null ){
-            //Intent intent = new Intent(Login.this, MainActivity.class);
-           // startActivity(intent);
-            Log.i("login_", "condicion1");
+        if(PreferenceUtils.getEmail(getApplicationContext()) !=null || PreferenceUtils.getRol(getApplicationContext()) !=null ){
 
+            Log.i("login_", "condicion1");
+            String rolUser= PreferenceUtils.getRol(getApplicationContext()) ;
+            Log.i("login_", rolUser);
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            i.putExtra("user", "doctor");
+            i.putExtra("user", rolUser);
             startActivity(i);
             finish();
         }else{
@@ -153,6 +153,7 @@ public class Login extends AppCompatActivity {
                             PreferenceUtils.GuardarEmail(email, getApplicationContext());
                             PreferenceUtils.GuardarPassword(password, getApplicationContext());
 
+
                             //objeto usuario que recupera el ID de usuario actual
                             FirebaseUser user = mAuth.getCurrentUser();
                             String idUser = user.getUid();
@@ -209,6 +210,9 @@ public class Login extends AppCompatActivity {
 
                 //Si el login es correcto enviarlo a la actividad con el rol de user
                 if(authUser==true){
+                    //guardar preferencias de rol
+                    PreferenceUtils.GuardarRol(rol, getApplicationContext());
+
 
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.putExtra("user", rol);
