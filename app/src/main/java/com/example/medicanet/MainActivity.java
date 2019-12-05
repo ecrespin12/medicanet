@@ -1,7 +1,9 @@
 package com.example.medicanet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.medicanet.ui.Places;
+import com.example.medicanet.ui.custom_preferencias.CustomPreferencesActivity;
+import com.example.medicanet.utils.Constants;
 import com.example.medicanet.utils.PreferenceUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -122,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         int id=item.getItemId();
         if (id==R.id.action_ajustes){
             Toast.makeText(getApplicationContext(),"Ajustes...",Toast.LENGTH_SHORT).show();
+            Intent pref = new Intent(getApplicationContext(), CustomPreferencesActivity.class);
+            startActivity(pref);
         }else if(id==R.id.action_salir){
 
             PreferenceUtils.GuardarPassword(null, this);
@@ -153,6 +159,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void validarMostrarMap()
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        preferences.getString(Constants.KEY_MAP, "");
     }
 
 }

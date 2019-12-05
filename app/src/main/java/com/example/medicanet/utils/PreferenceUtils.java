@@ -48,4 +48,10 @@ public class PreferenceUtils {
         return preferences.getString(Constants.KEY_ROL, null);
     }
 
+    public static String get(Context context){
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(Constants.KEY_EMAIL, null);
+    }
+
 }

@@ -169,4 +169,13 @@
     <!-- string WS -->
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IkhlbGxvIFdvcmxkISI.VzXeVJOGwyr_R_lWTM2VW1i7B24XlnxiPURkg4YxrWg</string>
     <string name="consultas_programadas">Consultas Programadas</string>
+    <string name="cat_pref_name">Preferencias Medicanet</string>
+    <string name="pref_lista_sex">Género</string>
+    <string name="cat_pref_name_2">Preferencias de Mapas</string>
+    <string name="pref_maps_name">Tipo Mapa</string>
+    <string name="pref_map_sum">Permite cambiar el tipo de mapa para la localizacion.</string>
+    <string name="pref_geo_name">Permitir Geolocalización</string>
+    <string name="pref_geomaps_name">Permitir geolocalización y mapas</string>
+    <string name="pref_darkmode_name">Modo Oscuro</string>
+    <string name="pref_sum_geomap">Decide si das permisos a la app para mostrarte la geolocalizacion y mapas</string>
 </resources>
