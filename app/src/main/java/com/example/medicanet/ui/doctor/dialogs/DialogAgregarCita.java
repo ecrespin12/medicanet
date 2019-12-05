@@ -26,6 +26,7 @@ import java.util.List;
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.ConsultaModel;
 import clasesResponse.DatosMedicosModel;
+import clasesResponse.EntregaMedicamentosModel;
 import clasesResponse.PacientesModel;
 import clasesResponse.RecetaModel;
 import retrofit.Interfaces.IServices;
@@ -64,10 +65,10 @@ public class DialogAgregarCita extends DialogFragment {
     int codigoCentroMedico;
 
     String [] arr1;
-    int cantidadDeDetalles;
-    boolean detalles=true;
-    int cantidadDeMedicamentos;
-    boolean medicamentos=true;
+    //int cantidadDeDetalles;
+    //boolean detalles=true;
+    //int cantidadDeMedicamentos;
+    //boolean medicamentos=true;
     List<DatosMedicosModel> datosMedicos;
     List<RecetaModel> listRecetas;
 
@@ -214,13 +215,6 @@ public class DialogAgregarCita extends DialogFragment {
                 btnEliminar.setBackgroundResource(R.drawable.boton_redondeado_borde);
                 btnEliminar.setTextColor(Color.BLACK);
 
-                getDetalles(consulta.cme_codigo);
-                getMedicamentos(consulta.cme_codigo);
-
-
-
-                System.out.println(cantidadDeDetalles);
-                System.out.println(cantidadDeMedicamentos);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -229,22 +223,10 @@ public class DialogAgregarCita extends DialogFragment {
 
 
                         //logica
-                        if (cantidadDeDetalles>0 || detalles==true){
-                            Toast.makeText(getContext(),"No se elimino por que tiene "+cantidadDeDetalles+" detalles agregados",Toast.LENGTH_LONG).show();
-                            System.out.println("CANTIDAD DE DETALLES: "+cantidadDeDetalles);
-                            return;
-                        }
+                        //En el metodo getDetalles llamare al metodo getMedicamentos
+                        // y en el metodo getMedicamentos llamare al de Eliminar
 
-                        if (cantidadDeMedicamentos>0 || medicamentos==true){
-                            Toast.makeText(getContext(),"No se elimino por que tiene "+cantidadDeMedicamentos+" medicamentos agregados",Toast.LENGTH_LONG).show();
-                            System.out.println("CANTIDAD DE MEDICAMENTOS: "+cantidadDeMedicamentos);
-                            return;
-                        }
-
-                        if (cantidadDeDetalles==0 && detalles==false && cantidadDeMedicamentos==0 && medicamentos==false){
-                            Toast.makeText(getContext(), "Eliminando...", Toast.LENGTH_SHORT).show();
-                            postEliminarConsulta(consulta.cme_codigo);
-                        }
+                        getDetalles(consulta.cme_codigo);
 
                     }
                 },100);
@@ -400,7 +382,6 @@ public class DialogAgregarCita extends DialogFragment {
 
     public void getDetalles(int cme) {
 
-        detalles=true;
         Log.d("JTDebug", "Entra Metodo getDetalles");
         Call<List<DatosMedicosModel>> call = servicio.getDatosMedicos(0,cme);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
@@ -412,9 +393,12 @@ public class DialogAgregarCita extends DialogFragment {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         datosMedicos = response.body();
-                        cantidadDeDetalles=datosMedicos.size();
-                        if (cantidadDeDetalles==0){
-                            detalles=false;
+
+                        if (datosMedicos.size()>0){
+                            Toast.makeText(getContext(),"No se elimino por que tiene "+datosMedicos.size()
+                                    +" detalles agregados",Toast.LENGTH_LONG).show();
+                        }else {
+                            getMedicamentos(consulta.cme_codigo);
                         }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
@@ -434,7 +418,7 @@ public class DialogAgregarCita extends DialogFragment {
     }
 
     public void getMedicamentos(int cme) {
-        medicamentos=true;
+
         Log.d("JTDebug", "Entra Metodo getMedicamentos");
         Call<List<RecetaModel>> call = servicio.getReceta(cme);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
@@ -446,9 +430,11 @@ public class DialogAgregarCita extends DialogFragment {
                     if (response.isSuccessful()) {
                         Log.d("JTDebug", "Entra IsSuccessful");
                         listRecetas = response.body();
-                        cantidadDeMedicamentos=listRecetas.size();
-                        if (cantidadDeMedicamentos==0){
-                            medicamentos=false;
+                        if (listRecetas.size()>0){
+                            Toast.makeText(getContext(),"No se elimino por que tiene "+listRecetas.size()
+                                    +" medicamentos agregados",Toast.LENGTH_LONG).show();
+                        }else {
+                            getEntregaMedicamentos(0,"",0,0,"","",consulta.cme_codigo,"","");
                         }
                     } else {
                         Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
@@ -460,6 +446,43 @@ public class DialogAgregarCita extends DialogFragment {
 
             @Override
             public void onFailure(Call<List<RecetaModel>> call, Throwable t) {
+                Log.d("JTDebug", "Entra OnFailure");
+                Log.d("JTDebug", "Message: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    List<EntregaMedicamentosModel> entregas;
+    public void getEntregaMedicamentos(int far, String est, int per, int med, String ntag, String dtag, int cme, String fini, String ffin){
+        Log.d("JTDebug", "Entra Metodo getEntregaMedicamentosModel");
+        Call<List<EntregaMedicamentosModel>> call = servicio.getEntregaMedicamentos(far,est,per,med,ntag,dtag,cme,fini,ffin);
+        Log.d("JTDebug", "Url: " + ret.BASE_URL);
+        call.enqueue(new Callback<List<EntregaMedicamentosModel>>() {
+            @Override
+            public void onResponse(Call<List<EntregaMedicamentosModel>> call, Response<List<EntregaMedicamentosModel>> response) {
+                Log.d("JTDebug", "Entra OnResponse");
+                try {
+                    if (response.isSuccessful()) {
+                        Log.d("JTDebug", "Entra IsSuccessful");
+                        entregas = response.body();
+
+                        if (entregas.size()>0){
+                            Toast.makeText(getContext(),"No se elimino por que tiene "+entregas.size()
+                                    +" entrega/s registradas",Toast.LENGTH_LONG).show();
+                        }else {
+                            postEliminarConsulta(consulta.cme_codigo);
+                        }
+
+                    } else {
+                        Log.d("JTDebug", "Entra not Successful. Code: " + response.code() + "\nMessage: " + response.message());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<EntregaMedicamentosModel>> call, Throwable t) {
                 Log.d("JTDebug", "Entra OnFailure");
                 Log.d("JTDebug", "Message: " + t.getMessage());
                 t.printStackTrace();

@@ -1,7 +1,6 @@
 package retrofit.Interfaces;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import clasesResponse.CentroMedicoModel;
 import clasesResponse.CitasModel;
