@@ -19,6 +19,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.medicanet.ui.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,14 +36,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Información...",Toast.LENGTH_SHORT).show();
+                IniciarScan();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
 
 
         //recupero el rol de usuario
@@ -90,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
     }
 
+    public void IniciarScan() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setPrompt("Codigo QR");
+        integrator.setCameraId(0);
+        integrator.setOrientationLocked(true);
+        integrator.setBeepEnabled(false);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.initiateScan();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,4 +131,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String Resultado = "";// al final aqui se captura el resultado para que hagan la busqueda
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show();
+            } else {
+                Resultado = result.getContents();
+            }
+            Toast.makeText(this, "Lectura: " + Resultado, Toast.LENGTH_LONG).show();
+
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

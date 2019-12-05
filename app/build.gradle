@@ -57,6 +57,10 @@ dependencies {
 
     //libreria para efecto de particulas
     implementation 'com.github.ibrahimsn98:android-particles:1.7'
+
+    //libreria para lector QR
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.zxing:core:3.2.0'
 }
 repositories {
     mavenCentral()
