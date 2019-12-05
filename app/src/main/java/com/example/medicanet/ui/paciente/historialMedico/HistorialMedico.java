@@ -119,16 +119,17 @@ public class HistorialMedico extends Fragment {
                     @Override
                     public void run() {
 
-                        // Crea el nuevo fragmento
-                        //FragmentDatosConsulta fragmentDatosConsulta = new FragmentDatosConsulta(listConsulta,position);
-                        //Crea la transaccion
-                        //FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        //remplazar el nuevo fragmento en el contenedor principal(nav_host_fragment)
-                        //transaction.replace(R.id.nav_host_fragment, fragmentDatosConsulta);
-                        //agregar la transaccion a la pila
-                        //transaction.addToBackStack(null);
-                        // Commit a la transacción
-                        //transaction.commit();
+                        DialogAgregarHistorial dialogAgregarHistorial;
+                        if (agregar)
+                        {
+                            dialogAgregarHistorial = new DialogAgregarHistorial(paciente, true);
+                        }
+                        else
+                        {
+                            dialogAgregarHistorial = new DialogAgregarHistorial(paciente, false);
+                        }
+
+                        dialogAgregarHistorial.show(getFragmentManager(),"dialogAgregarHistorial");
 
                     }
                 },200);

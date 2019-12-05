@@ -15,6 +15,7 @@ import clasesResponse.MedicamentosPendientesModel;
 import clasesResponse.PacientesModel;
 import clasesResponse.PerfilPacienteModel;
 import clasesResponse.RecetaModel;
+import clasesResponse.TipoHistorialModel;
 import clasesResponse.clItems;
 import clasesResponse.clPrueba;
 import retrofit2.Call;
@@ -56,6 +57,10 @@ public interface IServices {
     @GET("Historial/historial?")
     @NotNull
     Call<List<HistorialModel>> getHistorialPaciente(@Query("per") @NotNull int per);
+
+    @GET("TipoHistorial/tipo_historial?")
+    @NotNull
+    Call<List<TipoHistorialModel>> getTiposHistorial(@Query("cod") @NotNull int cod, @Query("nom") @NotNull String nom);
 
     @GET("Medicamentos/medicamentos_pendientes?")
     @NotNull
