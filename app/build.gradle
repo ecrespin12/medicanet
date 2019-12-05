@@ -61,6 +61,7 @@ dependencies {
     //libreria para lector QR
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.google.zxing:core:3.2.0'
+    compile 'com.inthecheesefactory.thecheeselibrary:stated-fragment:0.9.3'
 }
 repositories {
     mavenCentral()
