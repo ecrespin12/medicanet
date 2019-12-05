@@ -85,7 +85,7 @@ public class dialog_admin_frmDoctor extends DialogFragment {
             final String correo = edtCorreo.getText().toString();
             final String  rol = "doctor";
 
-            final String fecha="03/03/2000";
+
             final Date date = new Date();
             final Date newDate = new Date(date.getTime());
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
@@ -107,7 +107,6 @@ public class dialog_admin_frmDoctor extends DialogFragment {
                                             nombres,
                                             apellidos,
                                             correo,
-                                            fecha,
                                             rol
                                     );
 
