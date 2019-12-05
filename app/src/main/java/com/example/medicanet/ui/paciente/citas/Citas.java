@@ -88,15 +88,15 @@ public class Citas extends Fragment  {
             }
         });
 
-        getHistorial(view);
+        getCitas(view);
         // Inflate the layout for this fragment
         return view;
 
     }
 
-    private void getHistorial(final View view){
+    private void getCitas(final View view){
         Log.d("JTDebug", "Entra Metodo getmedicamentosPendientes");
-        Call<List<CitasModel>> call = servicio.getCitas( 1,0,0);
+        Call<List<CitasModel>> call = servicio.getCitas(1,0,0,0,null,null);
         Log.d("JTDebug", "Url: " + ret.BASE_URL);
         call.enqueue(new Callback<List<CitasModel>>() {
             @Override
@@ -121,17 +121,18 @@ public class Citas extends Fragment  {
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
+                            med_nombre[i] = "Medico: "+item.med_nombre;
+                            med_correo[i] = "Medico Correo: "+item.med_correo;
+                            cmd_nombre[i] = "Centro Nombre: "+item.cmd_nombre;
+                            cme_fecha_hora[i] = "Fecha: "+item.cme_fecha_hora;
                             per_nombre[i] = "Paciente: "+item.per_nombre;
                             per_correo[i] = "Correo: " + item.per_correo;
                             per_dui[i] = "DUI: " +item.per_dui;
                             per_fecha_nace[i] = "Fecha de Nacimiento: "+item.per_fecha_nace;
-                            med_nombre[i] = "Nombre del Medico: "+item.med_nombre;
-                            med_correo[i] = "Medico Correp: "+item.med_correo;
                             cmd_codigo[i] = "Codigo del medico: "+item.cmd_codigo;
-                            cmd_nombre[i] = "Nombre: "+item.cmd_nombre;
                             cmd_latitud[i] = "Latitud: "+item.cmd_latitud;
                             cmd_longitud[i] = "Longitud: "+item.cmd_longitud;
-                            cme_fecha_hora[i] = "Fecha: "+item.cme_fecha_hora;
+
                         }
                         AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, per_nombre, per_correo, per_dui, per_fecha_nace);
                         lvCitasPendientes.setAdapter(adaptadorList);

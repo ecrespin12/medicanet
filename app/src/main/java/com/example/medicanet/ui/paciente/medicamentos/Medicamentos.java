@@ -46,8 +46,8 @@ public class Medicamentos extends Fragment {
 
     String[] per_codigo;
     String[] med_nombre;
+    String[] pac_nombre;
     String[] mdc_nombre;
-    String[] mdc_descripcion;
     String[] rme_cantidad;
     String[] rme_indicaciones;
 
@@ -88,19 +88,19 @@ public class Medicamentos extends Fragment {
                         Log.d("JTDebug", "Count: " + resp.size());
                         med_nombre=new String[resp.size()];
                         mdc_nombre=new String[resp.size()];
-                        mdc_descripcion=new String[resp.size()];
+                        pac_nombre=new String[resp.size()];
                         rme_cantidad=new String[resp.size()];
                         rme_indicaciones=new String[resp.size()];
 
                         for (int i=0;i<resp.size();i++) {
                             item = resp.get(i);
-                            mdc_descripcion[i] = "Medicina: " +item.mdc_descripcion;
-                            med_nombre[i] = "Paciente: "+item.med_nombre;
-                            mdc_nombre[i] = "Cantidad pendiente: " + item.mdc_nombre;
-                            rme_cantidad[i] = "Indicaciones: "+item.rme_cantidad;
-                            rme_indicaciones[i] = "Indicaciones:"+item.rme_indicaciones;
+                            pac_nombre[i] = "Paciente: " +item.pac_nombre;
+                           med_nombre[i] = "Medico: "+item.med_nombre;
+                            mdc_nombre[i] = "Medicina: " + item.mdc_nombre;
+                            rme_cantidad[i] = "Tomar: "+item.rme_cantidad+" "+item.rme_indicaciones;
+                            //rme_indicaciones[i] = "Indicaciones:"+item.rme_indicaciones;
                         }
-                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, med_nombre, mdc_nombre, mdc_descripcion, rme_cantidad);
+                        AdaptadorListView adaptadorList = new AdaptadorListView(getContext(), null, pac_nombre, med_nombre, mdc_nombre, rme_cantidad);
                         lvMedicamentosPendientes.setAdapter(adaptadorList);
 
 

@@ -74,7 +74,7 @@ public interface IServices {
     @NotNull
     Call<List<TipoHistorialModel>> getTiposHistorial(@Query("cod") @NotNull int cod, @Query("nom") @NotNull String nom);
 
-    @GET("Medicamentos/medicamentos_pendientes?")
+    @GET("Medicamentos/medicamentosPaciente?")
     @NotNull
     Call<List<MedicamentosPendientesModel>> getMedicamentosPendientes(@Query("per") int per);
 
@@ -101,7 +101,7 @@ public interface IServices {
 
     @GET("Consulta/consulta?")
     @NotNull
-    Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("doc") int doc, @Query("cod") int cod);
+    Call<List<CitasModel>> getCitas(@Query("per") int per, @Query("med") int med ,@Query("cod") int cod, @Query("cmd") int cmd, @Query("fec") String fec, @Query("ntaq") String ntag);
 
     @GET("Consulta/detalle?")
     @NotNull
