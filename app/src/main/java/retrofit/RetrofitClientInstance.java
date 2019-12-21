@@ -16,7 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
-    public String BASE_URL = "http://3.16.11.92/ws/"; //"http://etps3.000webhostapp.com/ws/";//"http://192.168.43.146/medicanet_ws/"; //http://167.99.116.11/medicanet/api-rest/
+    public String BASE_URL = "http://etps3.000webhostapp.com/ws/";//"http://etps3.000webhostapp.com/ws/";//"http://3.16.11.92/ws/"; //"http://etps3.000webhostapp.com/ws/";//"http://192.168.43.146/medicanet_ws/"; //http://167.99.116.11/medicanet/api-rest/
     private OkHttpClient.Builder httpClient = null;
     private retrofit2.Retrofit.Builder builder = null;
     private Retrofit retrofit2;
